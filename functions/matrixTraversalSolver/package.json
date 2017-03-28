@@ -14,6 +14,7 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "dependencies": {
+    "@google-cloud/debug-agent": "^1.0.0",
     "joi": "^10.3.1"
   }
 }

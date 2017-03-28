@@ -1,3 +1,4 @@
+require('@google-cloud/debug-agent').start();
 const requestBodyValidator = require('./requestBodyValidator');
 const solver = require('./matrixTraversalSolver');
 
