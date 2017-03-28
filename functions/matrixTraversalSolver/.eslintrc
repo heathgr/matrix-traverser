@@ -1,0 +1,29 @@
+{
+  "extends": "eslint-config-airbnb-base",
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "env": {
+    "browser": false,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "semi": [2, "always"],
+    "new-cap": 0,
+    "comma-dangle": [2, "always-multiline"],
+    "no-console": 0,
+    "func-names": [2, "never"],
+    "no-constant-condition": 0,
+    "max-len": [
+      1,
+      {
+        "code": 120,
+        "ignoreTemplateLiterals": true,
+        "ignoreStrings": true,
+        "ignoreUrls": true,
+        "ignoreRegExpLiterals": true,
+      }
+    ],
+  }
+}
