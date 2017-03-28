@@ -182,10 +182,3 @@ const traverseMatrix = (matrix, columnCount) => {
 };
 
 module.exports = traverseMatrix;
-
-/*
-const solution = traverseMatrix([8, 1, 2, 3, 4, 5, 6, 6, 6, 7, 7, 7, 1, 2, 3, 0, 2, 1, 3, 8, 12, 0, 3, 3], 4);
-
-console.log('solution: ');
-console.log(solution);
-*/

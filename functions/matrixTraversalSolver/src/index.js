@@ -1,13 +1,11 @@
 const requestBodyValidator = require('./requestBodyValidator');
+const solver = require('./matrixTraversalSolver');
 
 const matrixTraversalSolver = (req, res) => {
-  console.log('==========================================');
-  console.log('starting!!!');
   const contentType = req.get('content-type');
-  const requestMethod = req.method;
-  const body = req.body;
+  const { method, body } = req;
 
-  if (requestMethod !== 'POST') {
+  if (method !== 'POST') {
     res.status(405).send('Requests must use the POST method.');
     return;
   }
@@ -16,7 +14,7 @@ const matrixTraversalSolver = (req, res) => {
     return;
   }
 
-  const isValid = requestBodyValidator(req.body);
+  const isValid = requestBodyValidator(body);
 
   if (isValid.error) {
     const errorMessage = isValid.error.details.reduce(
@@ -27,7 +25,17 @@ const matrixTraversalSolver = (req, res) => {
     return;
   }
 
-  res.status(200).send();
+  const { matrix, columnCount } = body;
+  const isMatrixLengthValid = (matrix.length / columnCount) % 1 === 0;
+
+  if (!isMatrixLengthValid) {
+    res.status(400).send('Invalid Matrix.  The Matrix length must be a multiple of the column count.');
+    return;
+  }
+
+  const result = solver(matrix, columnCount);
+
+  res.status(200).send(result);
 };
 
 exports.matrixTraversalSolver = matrixTraversalSolver;
