@@ -1,0 +1,16 @@
+import { expect } from 'chai';
+import root from '../../src/reducers/root';
+import someAction from '../../src/actions/someAction';
+
+describe('root reducer', () => {
+  it('should correctly handle some action', () => {
+    const testPayload = 'some payload';
+    const testAction = someAction(testPayload);
+    const testState = root({}, { SOME_ACTION });
+    const expectedState = {
+      someParam: testPayload,
+    };
+
+    expect(testState).to.deep.equal(expectedState);
+  });
+});

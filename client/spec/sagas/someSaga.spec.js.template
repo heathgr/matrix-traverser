@@ -1,0 +1,12 @@
+import 'babel-polyfill';
+import { expect } from 'chai';
+import someSaga from '../../src/sagas/someSaga';
+
+describe('some saga', () => {
+  it('should produce some value', () => {
+    const someGen = someSaga();
+    const expectedValue = 'some value';
+
+    expect(someGen.next().value).to.deep.equal(expectedValue);
+  });
+});

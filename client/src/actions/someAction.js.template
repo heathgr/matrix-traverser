@@ -1,0 +1,8 @@
+import { SOME_ACTION } from '../constants/actionTypes';
+
+const someAction = data => ({
+  type: SOME_ACTION,
+  data,
+});
+
+export default someAction;
