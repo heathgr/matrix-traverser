@@ -45,5 +45,5 @@
     "webpack-dev-server": "^2.4.1"
   },
   "author": "Grant Heath",
-  "license": "ISC"
+  "license": "MIT"
 }
