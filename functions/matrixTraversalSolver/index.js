@@ -1,6 +1,6 @@
 require('@google-cloud/debug-agent').start();
-const requestBodyValidator = require('./requestBodyValidator');
-const solver = require('./matrixTraversalSolver');
+const requestBodyValidator = require('./src/requestBodyValidator');
+const solver = require('./src/matrixTraversalSolver');
 
 const matrixTraversalSolver = (req, res) => {
   const contentType = req.get('content-type');
