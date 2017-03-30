@@ -1,5 +1,3 @@
-/** @module traverseMatrix */
-
 /**
  * @typedef {Object} cells
  *
@@ -30,6 +28,8 @@
  * @property {matrix} matrix - The matrix that was traversed.
  * @property {number[][]} solutions - The solution(s) to the matrix traversal. An individual solution will be array of indecies referencing cells in the matrix property.
  */
+
+/** @module traverseMatrix */
 
 /**
  * Normalizes the matrix data to make it easier to process.

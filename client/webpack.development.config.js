@@ -8,7 +8,7 @@ const devServerPort = 3000;
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    `webpack-dev-server/client?http://localhost:devServerPort`,
+    `webpack-dev-server/client?http://localhost:${devServerPort}`,
     'webpack/hot/only-dev-server',
     'babel-polyfill',
     './src/index.js',

@@ -1,18 +1,21 @@
 {
-  "name": "matrix-traversal-endpoint",
+  "name": "matrix-traversal-solver",
   "version": "0.0.1",
   "description": "the endpoint for the matrix traversal algorithm",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "scripts/deploy.sh"
+    "deploy": "scripts/deploy.sh",
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "author": "Grant Heath",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^3.18.0",
     "eslint-config-airbnb-base": "^11.1.2",
-    "eslint-plugin-import": "^2.2.0"
+    "eslint-plugin-import": "^2.2.0",
+    "jsdoc": "^3.4.3",
+    "minami": "^1.1.1"
   },
   "dependencies": {
     "@google-cloud/debug-agent": "^1.0.0",
