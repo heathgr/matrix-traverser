@@ -1,3 +1,5 @@
+const normalizeMatrix = require('./helpers/normalizeMatrix');
+
 /**
  * @typedef {Object} cells
  *
@@ -29,25 +31,7 @@
  * @property {number[][]} solutions - The solution(s) to the matrix traversal. An individual solution will be array of indecies referencing cells in the matrix property.
  */
 
-/** @module traverseMatrix */
-
-/**
- * Normalizes the matrix data to make it easier to process.
- * @param {number[]} matrix - An array of integers that defines the matrix cells. The length of the array should be a multiple of the columnCount parameter.
- * @param {number} columnCount - An integer defining the number of columns in the matrix.
- * @returns {matrix}
- */
-const normalizeMatrix = (matrix, columnCount) => ({
-  columnCount,
-  rowCount: matrix.length / columnCount,
-  cells: matrix.map(
-    (cell, i) => ({
-      column: i % columnCount,
-      row: Math.floor(i / columnCount),
-      value: cell,
-    })
-  ),
-});
+/** @module matrixTraversalSolver */
 
 /**
  * Initializes the path objects.  Initially, there is one path per matrix cell.
@@ -132,21 +116,14 @@ const iteratePath = (path, matrix) => {
   return newPaths;
 };
 
-/**
- * Finds a solution to the provided matrix.
- * @exports traverseMatrix
- * @param {number[]} matrix - An array of integers defining the matrix.  The length of the array should be a muliple of the columnCount parameter.
- * @param {number} columnCount - An integer defining the number of columns in the matrix.
- * @returns {solution} - The solution to the matrix traversal.
- */
-const traverseMatrix = (matrix, columnCount) => {
+const matrixTraversalSolver = ({ matrix, columnCount }) => {
   const normalizedMatrix = normalizeMatrix(matrix, columnCount);
   let paths = initializePaths(normalizedMatrix, columnCount);
   let completedPaths = [];
-  let maxCompltedLength = 0;
+  let maxCompletedLength = 0;
 
   while (paths.length > 0) {
-    let newMaxCompletedLength = maxCompltedLength;
+    let newMaxCompletedLength = maxCompletedLength;
 
     paths = paths
       .map(
@@ -173,7 +150,7 @@ const traverseMatrix = (matrix, columnCount) => {
     );
     // filter out completed paths
     paths = paths.filter(path => !path.isComplete);
-    maxCompltedLength = newMaxCompletedLength;
+    maxCompletedLength = newMaxCompletedLength;
   }
   return {
     matrix: normalizedMatrix,
@@ -181,4 +158,10 @@ const traverseMatrix = (matrix, columnCount) => {
   };
 };
 
-module.exports = traverseMatrix;
+/**
+ * Finds a solution to the provided matrix.
+ * @param {number[]} matrix - An array of integers defining the matrix.  The length of the array should be a muliple of the columnCount parameter.
+ * @param {number} columnCount - An integer defining the number of columns in the matrix.
+ * @returns {solution} - The solution to the matrix traversal.
+ */
+module.exports = matrixTraversalSolver;

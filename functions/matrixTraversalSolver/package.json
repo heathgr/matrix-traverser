@@ -4,18 +4,21 @@
   "description": "the endpoint for the matrix traversal algorithm",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/_mocha --recursive spec/**/*.spec.js",
     "deploy": "scripts/deploy.sh",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "author": "Grant Heath",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^3.18.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-plugin-import": "^2.2.0",
     "jsdoc": "^3.4.3",
-    "minami": "^1.1.1"
+    "minami": "^1.1.1",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
   },
   "dependencies": {
     "@google-cloud/debug-agent": "^1.0.0",

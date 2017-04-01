@@ -23,6 +23,7 @@
         "ignoreStrings": true,
         "ignoreUrls": true,
         "ignoreRegExpLiterals": true,
+        "ignoreComments": true,
       }
     ],
   }

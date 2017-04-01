@@ -1,8 +1,13 @@
 /** @module index */
 
 require('@google-cloud/debug-agent').start();
-const requestBodyValidator = require('./src/requestBodyValidator');
+const requestValidator = require('./src/requestValidator');
 const solver = require('./src/matrixTraversalSolver');
+const {
+  BAD_METHOD,
+  BAD_CONTENT_TYPE,
+  INVALID_REQUEST_SCHEMA,
+} = require('./src/constants/errorMessages');
 
 /**
  * A google cloud function that calculates a traversal path through the submitted matrix.
@@ -17,38 +22,26 @@ const solver = require('./src/matrixTraversalSolver');
  * @return {null}
  */
 const matrixTraversalSolver = (req, res) => {
-  const contentType = req.get('content-type');
+  const contentType = req.get('content-type');;;
   const { method, body } = req;
 
   if (method !== 'POST') {
-    res.status(405).send('Requests must use the POST method.');
+    res.status(405).send(BAD_METHOD);
     return;
   }
   if (contentType !== 'application/json') {
-    res.status(400).send('Request content type must be "application/json".');
+    res.status(400).send(BAD_CONTENT_TYPE);
     return;
   }
 
-  const isValid = requestBodyValidator(body);
+  const validationError = requestValidator(body);
 
-  if (isValid.error) {
-    const errorMessage = isValid.error.details.reduce(
-      (prev, current) => `${prev}${current.message}\n`,
-      ''
-    );
-    res.status(400).send(errorMessage);
+  if (validationError) {
+    res.status(400).send(`${INVALID_REQUEST_SCHEMA}${validationError}`);
     return;
   }
 
-  const { matrix, columnCount } = body;
-  const isMatrixLengthValid = (matrix.length / columnCount) % 1 === 0;
-
-  if (!isMatrixLengthValid) {
-    res.status(400).send('Invalid Matrix.  The Matrix length must be a multiple of the column count.');
-    return;
-  }
-
-  const result = solver(matrix, columnCount);
+  const result = solver(body);
 
   res.status(200).json(result);
 };
