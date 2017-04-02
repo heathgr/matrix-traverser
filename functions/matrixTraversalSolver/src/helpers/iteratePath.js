@@ -1,3 +1,5 @@
+/** @module iteratePath */
+
 const getCellNeighbors = require('./getCellNeighbors');
 
 const iteratePath = (path, matrix) => {
@@ -33,6 +35,5 @@ const iteratePath = (path, matrix) => {
  * @param {path} path The path to be iterated.
  * @param {matrix} matrix The matrix object that will be traversed.
  * @return {path[]} The result of the iteration.
- *
  */
 module.exports = iteratePath;

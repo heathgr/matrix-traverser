@@ -1,8 +1,8 @@
+/** @module matrixTraversalSolver */
+
 const normalizeMatrix = require('./helpers/normalizeMatrix');
 const initializePaths = require('./helpers/initializePaths');
 const iteratePath = require('./helpers/iteratePath');
-
-/** @module matrixTraversalSolver */
 
 const matrixTraversalSolver = (simpleMatrix) => {
   const normalizedMatrix = normalizeMatrix(simpleMatrix);

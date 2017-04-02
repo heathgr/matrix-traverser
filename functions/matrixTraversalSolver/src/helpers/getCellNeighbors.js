@@ -1,3 +1,5 @@
+/** @module getCellNeighbors */
+
 const getCellNeighbors = (index, matrix) => {
   const cell = matrix.cells[index];
   const { rowCount, columnCount } = matrix;

@@ -1,3 +1,5 @@
+/** @module initializePaths */
+
 const initializePaths = matrix => matrix.cells.map(
   (cell, i) => ({
     cells: [i],

@@ -1,3 +1,5 @@
+/** @module normalizeMatrix */
+
 const normalizeMatrix = ({ cells, columnCount }) => ({
   columnCount,
   rowCount: cells.length / columnCount,

@@ -47,18 +47,6 @@ const {
   INVALID_REQUEST_SCHEMA,
 } = require('./src/constants/errorMessages');
 
-/**
- * @description A google cloud function that calculates a traversal path through the submitted matrix.
- * @param  {Object} req - Cloud Function request.  This script is expecting a request the meet the following criteria:
- * - The request must use the http POST method.
- * - The request must be a type of applicaiton/json.
- * - The request body must have a type of "simpleMatrix".
- * - The "matrix" property must be an aray of integers.
- * - The length of the "matrix" array must be a multiple of the "columnCount" property.
- * - The "columnCount" property must be an integer that is greater than one.
- * @param  {Object} res - Cloud Function response.  The response contains a JSON object of type {@link solution}.
- * @return {undefined}
- */
 const matrixTraversalSolver = (req, res) => {
   const contentType = req.get('content-type');
   const { method, body } = req;
@@ -84,4 +72,16 @@ const matrixTraversalSolver = (req, res) => {
   res.status(200).json(result);
 };
 
+/**
+ * @description A google cloud function that calculates a traversal path through the submitted matrix.
+ * @param  {Object} req - Cloud Function request.  This script is expecting a request the meet the following criteria:
+ * - The request must use the http POST method.
+ * - The request must be a type of applicaiton/json.
+ * - The request body must have a type of "simpleMatrix".
+ * - The "matrix" property must be an aray of integers.
+ * - The length of the "matrix" array must be a multiple of the "columnCount" property.
+ * - The "columnCount" property must be an integer that is greater than one.
+ * @param  {Object} res - Cloud Function response.  The response contains a JSON object of type {@link solution}.
+ * @return {undefined}
+ */
 exports.matrixTraversalSolver = matrixTraversalSolver;
