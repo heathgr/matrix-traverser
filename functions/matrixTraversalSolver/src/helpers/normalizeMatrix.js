@@ -1,13 +1,7 @@
-/**
- * Normalizes the matrix data to make it easier to process.
- * @param {number[]} matrix - An array of integers that defines the matrix cells. The length of the array should be a multiple of the columnCount parameter.
- * @param {number} columnCount - An integer defining the number of columns in the matrix.
- * @returns {matrix}
- */
-const normalizeMatrix = (matrix, columnCount) => ({
+const normalizeMatrix = ({ cells, columnCount }) => ({
   columnCount,
-  rowCount: matrix.length / columnCount,
-  cells: matrix.map(
+  rowCount: cells.length / columnCount,
+  cells: cells.map(
     (cell, i) => ({
       column: i % columnCount,
       row: Math.floor(i / columnCount),
@@ -16,4 +10,9 @@ const normalizeMatrix = (matrix, columnCount) => ({
   ),
 });
 
+/**
+ * Normalizes the matrix data to make it easier to process.
+ * @param {simpleMatrix} simpleMatrix - The matrix that is to be normalized.
+ * @returns {matrix}
+ */
 module.exports = normalizeMatrix;

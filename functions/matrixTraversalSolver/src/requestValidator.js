@@ -10,7 +10,7 @@ const { INVALID_MATRIX_LENGTH } = require('./constants/errorMessages');
  * @type {Object}
  */
 const requestSchema = Joi.object().keys({
-  matrix: Joi
+  cells: Joi
     .array()
     .items(
       Joi.number().integer()
@@ -31,8 +31,8 @@ const requestValidator = (body) => {
   let error = validation.error === null ? null : validation.error.details[0].message;
 
   if (!error) {
-    const { matrix, columnCount } = body;
-    const isMatrixLengthValid = (matrix.length / columnCount) % 1 === 0;
+    const { cells, columnCount } = body;
+    const isMatrixLengthValid = (cells.length / columnCount) % 1 === 0;
 
     if (!isMatrixLengthValid) error = INVALID_MATRIX_LENGTH;
   }
