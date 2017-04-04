@@ -10,7 +10,6 @@ module.exports = {
     'react-hot-loader/patch',
     `webpack-dev-server/client?http://localhost:${devServerPort}`,
     'webpack/hot/only-dev-server',
-    'babel-polyfill',
     './src/index.js',
   ],
   resolve: {
@@ -21,7 +20,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   devServer: {
     hot: true,
     https: false,
