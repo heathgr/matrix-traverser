@@ -3,3 +3,4 @@ coverage
 *.log
 /dist/bundle.js
 .chrome_user_data
+docs

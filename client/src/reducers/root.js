@@ -16,4 +16,9 @@ const root = (state = initialState, action) => {
   }
 };
 
+/**
+ * The root reducer for the app state.
+ * @param {object} state - Optional, the app state.
+ * @param {object} action - The action that will be performed on the app state.
+ */
 export default root;

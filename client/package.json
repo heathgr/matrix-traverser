@@ -11,7 +11,8 @@
     "checkup": "scripts/checkup.sh",
     "build": "scripts/build.sh",
     "chrome": "nohup /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222 --new-window 'http://localhost:3000' --user-data-dir=.chrome_user_data/ > /dev/null &",
-    "remove-templates": "find . -name '*.template' -delete"
+    "remove-templates": "find . -name '*.template' -delete",
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "dependencies": {
     "axios": "^0.16.0",
@@ -43,7 +44,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
+    "jsdoc": "^3.4.3",
     "jsdom": "^9.11.0",
+    "minami": "^1.1.1",
     "mocha": "^3.2.0",
     "react-addons-test-utils": "^15.4.2",
     "sinon": "^1.17.7",

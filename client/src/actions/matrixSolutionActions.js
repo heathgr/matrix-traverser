@@ -4,6 +4,8 @@ import {
   GOT_MATRIX_SOLUTION,
 } from '../constants/actionTypes';
 
+/** @module actions/matrixSolutionActions */
+
 /**
  * An action creator that creates a REQUEST_MATRIX_SOLUTION action.
  * Gets dispatched at application start and when the user modifies a matrix.
