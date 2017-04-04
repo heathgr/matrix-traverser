@@ -1,4 +1,5 @@
 /* eslint global-require: 0 */
+/** @module index */
 
 import React from 'react';
 import ReactDOM from 'react-dom';

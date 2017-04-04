@@ -3,9 +3,6 @@
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-/**
- * The main/root component
- */
 const Main = ({ matrix }) => (
   <div>
     <div>{'Welcome to the main component :)'}</div>
@@ -15,9 +12,11 @@ const Main = ({ matrix }) => (
 );
 
 Main.propTypes = {
-  /** A matrix property */
+  /** A matrix property. */
   matrix: ImmutablePropTypes.mapContains({
+    /** The matrix cells. */
     cells: ImmutablePropTypes.listOf(PropTypes.number).isRequired,
+    /** Column Count */
     columnCount: PropTypes.number.isRequired,
   }).isRequired,
 };

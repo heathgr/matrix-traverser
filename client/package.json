@@ -1,5 +1,5 @@
 {
-  "name": "matrix-traversal",
+  "name": "matrix-traversal-client",
   "version": "0.0.1",
   "description": "An app the calculates the best path to traverse a matrix.",
   "main": "src/index.js",
@@ -12,7 +12,7 @@
     "build": "scripts/build.sh",
     "chrome": "nohup /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222 --new-window 'http://localhost:3000' --user-data-dir=.chrome_user_data/ > /dev/null &",
     "remove-templates": "find . -name '*.template' -delete",
-    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose --pedantic"
   },
   "dependencies": {
     "axios": "^0.16.0",
