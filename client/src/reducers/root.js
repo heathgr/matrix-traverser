@@ -1,11 +1,11 @@
 // import { SOME_ACTION } from '../constants/actionTypes';
-import { Map, fromJS } from 'immutable';
+import { Map, List } from 'immutable';
 
-const initialState = fromJS({
-  matrix: {
-    cells: [3, 9, 5, 7],
+const initialState = Map({
+  matrix: Map({
+    cells: List([0, 6, 2, 1, 9, 2]),
     columnCount: 2,
-  },
+  }),
 });
 
 const root = (state = initialState, action) => {
