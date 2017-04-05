@@ -3,20 +3,28 @@
 import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
+import MatrixCell from './MatrixCell';
+
 const Main = ({ matrix }) => (
   <div>
     <div>{'Welcome to the main component :)'}</div>
-    <div>{matrix.get('cells').size}</div>
+    <div>{'This is the matrix:'}</div>
+    <div>
+      {
+        matrix.get('cells').map(
+          value => (
+            <MatrixCell value={value} />
+          )
+        )
+      }
+    </div>
     <div>{'nooice!!!'}</div>
   </div>
 );
 
 Main.propTypes = {
-  /** A matrix property. */
   matrix: ImmutablePropTypes.mapContains({
-    /** The matrix cells. */
     cells: ImmutablePropTypes.listOf(PropTypes.number).isRequired,
-    /** Column Count */
     columnCount: PropTypes.number.isRequired,
   }).isRequired,
 };

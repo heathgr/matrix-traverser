@@ -1,6 +1,5 @@
 /** @module sagas/start */
 
-import 'babel-polyfill';
 import { fork, put } from 'redux-saga/effects';
 import handleRequestMatrixSolution from './handleRequestMatrixSolution';
 import { requestMatrixSolution } from '../actions/matrixSolutionActions';

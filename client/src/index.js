@@ -1,5 +1,13 @@
 /* eslint global-require: 0 */
-/** @module index */
+/**
+ * index.js is the entry point for the app.  It performs the following actions:
+ * - It sets up hot reloading. // TODO make sure this only happens on dev builds.
+ * - It creates the redux store and applies the saga middleware
+ * - It makes sure that the store gets passed to react.
+ * - It executes the start saga.
+ * - It renders the root react element.
+ * @module _index
+ * */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
