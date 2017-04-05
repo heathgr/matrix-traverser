@@ -15,7 +15,7 @@ import { AppContainer } from 'react-hot-loader';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import MainContainer from './containers/MainContainer';
+import Main from './components/Main';
 import root from './reducers/root';
 import start from './sagas/start';
 
@@ -42,7 +42,7 @@ function render(Component) {
 
 window.onload = () => {
   sagaMiddleWare.run(start);
-  render(MainContainer);
+  render(Main);
 };
 
 // Hot Module Replacement API
