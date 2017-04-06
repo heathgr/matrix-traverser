@@ -47,9 +47,9 @@ window.onload = () => {
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./containers/MainContainer', () => {
-    const NewMainContainer = require('./containers/MainContainer').default;
+  module.hot.accept('./components/Main', () => {
+    const NewMain = require('./components/Main').default;
 
-    render(NewMainContainer);
+    render(NewMain);
   });
 }
