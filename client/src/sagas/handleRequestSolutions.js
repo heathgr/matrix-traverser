@@ -5,15 +5,13 @@ import { REQUEST_SOLUTIONS, GOT_SOLUTIONs, FAILED_TO_GET_SOLUTIONs } from '../co
 
 const getSolutions = function* () {
   try {
-    console.log('get solution');
     yield put(gotSolutions('stuff'));
-  } catch (error){
+  } catch (error) {
     yield put(failedToGetSolutions('it did not work....', error));
   }
 };
 
 const handleRequesSolutions = function* () {
-  console.log('handeling request stuff...');
   yield takeLatest(REQUEST_SOLUTIONS, getSolutions);
 };
 

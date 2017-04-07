@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Pure from '../helpers/components/Pure';
 
 const MatrixCell = ({ column, row, value }) => (
   <div style={{ position: 'absolute', left: column * 50, top: row * 50 }}>
@@ -12,4 +13,6 @@ MatrixCell.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default MatrixCell;
+
+export default Pure(MatrixCell);
+

@@ -25,5 +25,5 @@ describe('Matrix Reducer', () => {
     const testState = matrix(undefined, { type: 'test' });
 
     expect(is(testState, initialMatrix)).to.equal(true);
-  })
+  });
 });

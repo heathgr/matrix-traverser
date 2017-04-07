@@ -46,7 +46,7 @@ const matrix = (state = initialMatrix, action) => {
     case SET_MATRIX_CELL: {
       const cells = state.get('cells');
       const updateIndex = cells.findKey(
-        (value) => value.get('row') === action.cell.row && value.get('column') === action.cell.column
+        value => value.get('row') === action.cell.row && value.get('column') === action.cell.column
       );
       const newCells = cells.set(updateIndex, Map(action.cell));
 
