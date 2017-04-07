@@ -1,9 +1,11 @@
 /* eslint react/prefer-stateless-function: 0 */
 
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 import { is } from 'immutable';
 
-const PureImmutable = Composed => class extends PureComponent {
+// TODO use hoist-non-react-statics?
+
+const PureImmutable = () => Composed => class extends PureComponent {
   shouldComponentUpdate(nextProps, nextState) {
     const checkStates = this.updateOnStates || Object.keys(nextState || {});
     const checkProps = this.updateOnProps || Object.keys(nextProps);

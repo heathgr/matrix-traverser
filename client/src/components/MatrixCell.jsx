@@ -14,5 +14,5 @@ MatrixCell.propTypes = {
 };
 
 
-export default PureImmutable(MatrixCell);
+export default PureImmutable()(MatrixCell);
 
