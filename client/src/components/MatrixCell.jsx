@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Pure from '../helpers/components/Pure';
+import PureImmutable from '../helpers/components/PureImmutable';
 
 const MatrixCell = ({ column, row, value }) => (
   <div style={{ position: 'absolute', left: column * 50, top: row * 50 }}>
@@ -14,5 +14,5 @@ MatrixCell.propTypes = {
 };
 
 
-export default Pure(MatrixCell);
+export default PureImmutable(MatrixCell);
 
