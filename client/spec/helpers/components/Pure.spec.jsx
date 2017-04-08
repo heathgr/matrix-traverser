@@ -49,8 +49,6 @@ describe('The Pure render higher order component.', () => {
     expect(testWrapper).to.contain(<div>one: 1 two: 2 three: 3</div>);
   });
   it('Should only call the render function if its props have changed.', () => {
-    // NOTE: if this test failes it might be because pure rendering has been enabled for functional components (As of React 15.4 this is not the case).
-    // If this happens, using a Pure higher order component might not be neccessary.
     const TestComposed = Pure()(TestComponent);
     const renderSpy = spy(TestComposed.prototype, 'render');
     const composedWrapper = mount(<TestComposed numbers={deepProps1} />);

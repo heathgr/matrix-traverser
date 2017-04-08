@@ -7,12 +7,15 @@ import { is } from 'immutable';
 
 const PureImmutable = () => Composed => class extends PureComponent {
   shouldComponentUpdate(nextProps, nextState) {
-    const checkStates = this.updateOnStates || Object.keys(nextState || {});
-    const checkProps = this.updateOnProps || Object.keys(nextProps);
+    const nextStateKeys = Object.keys(nextState || {});
+    const nextPropKeys = Object.keys(nextProps || {});
     const state = this.state || {};
- 
-    return !checkStates.every((s) => is(nextState[s], state[s]))
-      || !checkProps.every((p) => is(nextProps[p], this.props[p]));
+
+    return !nextStateKeys.every(
+      key => is(nextState[key], state[key])
+    ) || !nextPropKeys.every(
+      key => is(nextProps[key], this.props[key])
+    );
   }
   render() {
     return <Composed {...this.props} />;
