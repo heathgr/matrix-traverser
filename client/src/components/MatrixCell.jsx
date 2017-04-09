@@ -1,16 +1,23 @@
 import React, { PropTypes } from 'react';
-import PureImmutable from '../helpers/components/PureImmutable';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import PureImmutable from '../helpers/hocs/PureImmutable';
 
-const MatrixCell = ({ column, row, value }) => (
-  <div style={{ position: 'absolute', left: column * 50, top: row * 50 }}>
+const MatrixCell = ({ cell }) => {
+  const row = cell.get('row');
+  const column = cell.get('column');
+  const value = cell.get('value');
+
+  return (<div style={{ position: 'absolute', left: column * 50, top: row * 50 }}>
     {value}
-  </div>
-);
+  </div>);
+};
 
 MatrixCell.propTypes = {
-  column: PropTypes.number.isRequired,
-  row: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  cell: ImmutablePropTypes.mapContains({
+    column: PropTypes.number.isRequired,
+    row: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 

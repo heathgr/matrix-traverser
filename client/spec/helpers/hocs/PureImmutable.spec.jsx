@@ -6,7 +6,7 @@ import React, { PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 
-import Pure from '../../../src/helpers/components/PureImmutable';
+import Pure from '../../../src/helpers/hocs/PureImmutable';
 
 const deepProps1 = Map({
   one: Map({ number: 1 }),

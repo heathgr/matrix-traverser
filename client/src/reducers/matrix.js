@@ -5,9 +5,9 @@ import { SET_MATRIX, SET_MATRIX_CELL } from '../constants/actionTypes';
 export const initialMatrix = Map({
   cells: List([
     Map({
-      row: 0,
-      column: 0,
       value: 2,
+      column: 0,
+      row: 0,
     }),
     Map({
       row: 0,
@@ -20,8 +20,8 @@ export const initialMatrix = Map({
       value: 4,
     }),
     Map({
-      row: 1,
       column: 1,
+      row: 1,
       value: 9,
     }),
     Map({
@@ -30,9 +30,9 @@ export const initialMatrix = Map({
       value: 3,
     }),
     Map({
+      value: 8,
       row: 2,
       column: 1,
-      value: 8,
     }),
   ]),
   columnCount: 2,
@@ -57,6 +57,12 @@ const matrix = (state = initialMatrix, action) => {
     }
   }
 };
+
+/**
+ * Selector the matrix state.
+ * @param {objct} state - The matrix state.
+ */
+export const getMatrix = state => state;
 
 /**
  * The reducer that handles the matrix state.  The matrix is an immutable map that contains two keys:

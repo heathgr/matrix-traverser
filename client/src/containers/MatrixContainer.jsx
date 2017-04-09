@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { getMatrix } from '../reducers/root';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import MatrixCell from '../components/MatrixCell';
 
@@ -8,9 +9,7 @@ const Matrix = ({ matrix }) => (<div>
     matrix.get('cells').map(
       cell => (<MatrixCell
         key={cell.hashCode()}
-        column={cell.get('column')}
-        row={cell.get('row')}
-        value={cell.get('value')}
+        cell={cell}
       />)
     )
   }
@@ -30,8 +29,7 @@ Matrix.propTypes = {
 };
 
 const stateToProps = state => ({
-  matrix: state.matrix,
-  solutions: state.solutions,
+  matrix: getMatrix(state),
 });
 
 const MatrixContainer = connect(stateToProps)(Matrix);
