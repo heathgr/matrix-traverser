@@ -47,15 +47,13 @@ const {
 } = require('./src/constants/errorMessages');
 
 const matrixTraversalSolver = (req, res) => {
-  const contentType = req.get('content-type');
   const { method, body } = req;
 
+  req.accepts('application/json');
+
+  console.log('method', method);
   if (method !== 'POST') {
     res.status(405).send(BAD_METHOD);
-    return;
-  }
-  if (contentType !== 'application/json') {
-    res.status(400).send(BAD_CONTENT_TYPE);
     return;
   }
 
