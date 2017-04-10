@@ -1,21 +1,4 @@
 /**
- * @typedef {Object} cells
- *
- * @property {number} column An integer referencing the column the cell is on.
- * @property {number} row An integer referencing the row the cell is on.
- * @property {number} value An integer referencing the value of the cell.
- */
-
-/**
- * @typedef {Object} matrix
- *
- * @static
- * @property {number} columnCount - An integer referencing the number of columns in the matrix.
- * @property {number} rowCount - An integer referencing the number of rows in the matrix.
- * @property {cells[]} cells - An array of matrix cells.
- */
-
-/**
  * @typedef {Object} path
  *
  * @property {number[]} cells - An array of integers that defines a path.  Each array element is the index of a cell in a matrix object.
@@ -29,7 +12,7 @@
  */
 
 /**
- *  @typedef {object} simpleMatrix
+ *  @typedef {object} matrix
  *
  * @property {number[]} cells - An array of integers.  The length of the array must be a multiple of the "columnCount" property.
  * @property {number} columnCount - The number of columns in the array.
@@ -83,7 +66,7 @@ const matrixTraversalSolver = (req, res) => {
  * @param  {Object} req - Cloud Function request.  This script is expecting a request the meet the following criteria:
  * - The request must use the http POST method.
  * - The request must be a type of applicaiton/json.
- * - The request body must have a type of "simpleMatrix".
+ * - The request body must have a type of "matrix".
  * - The "matrix" property must be an aray of integers.
  * - The length of the "matrix" array must be a multiple of the "columnCount" property.
  * - The "columnCount" property must be an integer that is greater than one.

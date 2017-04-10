@@ -1,12 +1,11 @@
 /** @module matrixTraversalSolver */
 
-const normalizeMatrix = require('./helpers/normalizeMatrix');
 const initializePaths = require('./helpers/initializePaths');
 const iteratePath = require('./helpers/iteratePath');
 
-const matrixTraversalSolver = (simpleMatrix) => {
-  const normalizedMatrix = normalizeMatrix(simpleMatrix);
-  let paths = initializePaths(normalizedMatrix);
+const matrixTraversalSolver = (matrix) => {
+  // const normalizedMatrix = normalizeMatrix(simpleMatrix);
+  let paths = initializePaths(matrix);
   let completedPaths = [];
   let maxCompletedLength = 0;
 
@@ -15,7 +14,7 @@ const matrixTraversalSolver = (simpleMatrix) => {
 
     paths = paths
       .map(
-        path => iteratePath(path, normalizedMatrix)
+        path => iteratePath(path, matrix)
       )
       // iterate paths returns an array, so the paths array needs to be flattened
       .reduce(
@@ -45,7 +44,7 @@ const matrixTraversalSolver = (simpleMatrix) => {
 
 /**
  * Finds a solution to the provided matrix.
- * @param {simpleMatrix} - The matrix to be evaluated.
+ * @param {matrix} - The matrix to be evaluated.
  * @returns {solution} - The solution to the matrix traversal.
  */
 module.exports = matrixTraversalSolver;

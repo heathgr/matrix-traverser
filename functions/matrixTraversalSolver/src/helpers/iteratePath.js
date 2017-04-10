@@ -4,12 +4,12 @@ const getCellNeighbors = require('./getCellNeighbors');
 
 const iteratePath = (path, matrix) => {
   const lastCell = path.cells[path.cells.length - 1];
-  const lastCellValue = matrix.cells[lastCell].value;
+  const lastCellValue = matrix.cells[lastCell];
   const neighborCells = getCellNeighbors(lastCell, matrix)
     // determines if neighboring cells are traversable
     .filter(
       (neighbor) => {
-        const neighborCellValue = matrix.cells[neighbor].value;
+        const neighborCellValue = matrix.cells[neighbor];
 
         // the neighbor is not traversable if it's value is less than the current cell
         // the neighbor is not traversable it is already in the path
