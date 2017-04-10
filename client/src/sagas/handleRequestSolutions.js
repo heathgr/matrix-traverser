@@ -8,16 +8,13 @@ const getSolutions = function* () {
   try {
     const matrix = yield select(getSimpleMatrix);
     console.log('saga matrix', matrix);
-    const solutions = yield axios(
-      {
-        method: 'POST',
-        url: 'http://localhost:8010/matrix-traversal/us-central1/matrixTraversalSolver',
-        headers: { 'content-type': 'application/json' },
-        data: matrix,
-      }
+    const solutions = yield axios.post(
+      'http://localhost:8010/matrix-traversal/us-central1/matrixTraversalSolver',
+      matrix,
+      { headers: { 'content-type': 'application/json' } },
     );
-    console.log('solutions', solutions);
-    yield put(gotSolutions('stuff'));
+    console.log('solutions', solutions.data);
+    yield put(gotSolutions(solutions.data));
   } catch (error) {
     yield put(failedToGetSolutions('it did not work....', error));
   }

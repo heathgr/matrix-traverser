@@ -1,10 +1,15 @@
 /** @module reducers/matrix */
 import { List } from 'immutable';
+import { GOT_SOLUTIONS } from '../constants/actionTypes';
 
 const initialSolutions = List([]);
 
 const solutions = (state = initialSolutions, action) => {
   switch (action.type) {
+    case GOT_SOLUTIONS: {
+      console.log('got solutions', action.solutions);
+      return List(action.solutions);
+    }
     default: {
       return state;
     }

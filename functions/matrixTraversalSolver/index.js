@@ -38,15 +38,16 @@
 /** @module index */
 
 require('@google-cloud/debug-agent').start();
+const cors = require('cors');
 const requestValidator = require('./src/requestValidator');
 const solver = require('./src/matrixTraversalSolver');
 const {
   BAD_METHOD,
-  BAD_CONTENT_TYPE,
+  BAD_CONTENT_TYPE, // TODO get rid of bad content type
   INVALID_REQUEST_SCHEMA,
 } = require('./src/constants/errorMessages');
 
-const matrixTraversalSolver = (req, res) => {
+const requestHandler = (req, res) => {
   const { method, body } = req;
 
   req.accepts('application/json');
@@ -67,6 +68,14 @@ const matrixTraversalSolver = (req, res) => {
   const result = solver(body);
 
   res.status(200).json(result);
+};
+
+const corsHandler = cors(); // TODO make this more secure
+
+const matrixTraversalSolver = (req, res) => {
+  corsHandler(req, res, () => {
+    requestHandler(req, res);
+  });
 };
 
 /**

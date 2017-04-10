@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@google-cloud/debug-agent": "^1.0.0",
+    "cors": "^2.8.3",
     "joi": "^10.3.1"
   }
 }
