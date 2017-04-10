@@ -40,10 +40,7 @@ const matrixTraversalSolver = (simpleMatrix) => {
     paths = paths.filter(path => !path.isComplete);
     maxCompletedLength = newMaxCompletedLength;
   }
-  return {
-    matrix: normalizedMatrix,
-    solutions: completedPaths.map(path => path.cells),
-  };
+  return completedPaths.map(path => path.cells);
 };
 
 /**

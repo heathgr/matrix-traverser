@@ -25,7 +25,6 @@
 /**
  * @typedef {Object} solution
  *
- * @property {matrix} matrix - The matrix that was traversed.
  * @property {number[][]} solutions - The solution(s) to the matrix traversal. An individual solution will be array of indecies referencing cells in the matrix property.
  */
 
