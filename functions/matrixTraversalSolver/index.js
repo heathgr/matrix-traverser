@@ -35,7 +35,6 @@ const requestHandler = (req, res) => {
 
   req.accepts('application/json');
 
-  console.log('method', method);
   if (method !== 'POST') {
     res.status(405).send(BAD_METHOD);
     return;
