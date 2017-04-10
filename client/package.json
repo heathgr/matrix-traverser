@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server --config webpack.development.config.js",
-    "lint": "node_modules/.bin/eslint ./src ./spec; exit 0;",
+    "lint": "node_modules/.bin/eslint --ext .jsx --ext .js ./src ./spec; exit 0;",
     "test": "scripts/test.sh",
     "test:coverage": "scripts/testCoverage.sh",
     "checkup": "scripts/checkup.sh",

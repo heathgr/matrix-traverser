@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getMatrix } from '../reducers/root';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import { getMatrix } from '../reducers/root';
 import MatrixCell from '../components/MatrixCell';
 
 const Matrix = ({ matrix }) => (<div>
