@@ -52,6 +52,7 @@
     "redux-saga-tester": "^1.0.204",
     "sinon": "^1.17.7",
     "webpack": "^2.2.1",
+    "webpack-build-notifier": "^0.1.13",
     "webpack-dev-server": "^2.4.1"
   },
   "author": "Grant Heath",

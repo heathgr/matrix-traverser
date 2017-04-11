@@ -2,6 +2,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
 const devServerPort = 3000;
 
@@ -42,5 +43,6 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new WebpackBuildNotifierPlugin({ successSound: false }),
   ],
 };

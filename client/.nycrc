@@ -5,5 +5,9 @@
   ],
   "extension": [
     ".jsx"
+  ],
+  "reporter": [
+    "text",
+    "html"
   ]
 }
