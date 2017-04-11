@@ -13,16 +13,11 @@ import testMatrixSolution from '../testData/testMatrixSolution.json';
 
 describe('Solutions Actions', () => {
   it('Should create a "requestSolutions" action.', () => {
-    const matrix = {
-      cells: [0, 4, 12, 3],
-      columnCount: 2,
-    };
     const expectedAction = {
       type: REQUEST_SOLUTIONS,
-      matrix,
     };
 
-    expect(requestSolutions(matrix)).to.deep.equal(expectedAction);
+    expect(requestSolutions()).to.deep.equal(expectedAction);
   });
 
   it('Should create a "failedToGetSolutions" action.', () => {

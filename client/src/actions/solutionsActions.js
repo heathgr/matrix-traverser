@@ -12,9 +12,8 @@ import {
  * This action triggers an HTTP request to the matrix solver.
  * @param {simpleMatrix} matrix - A simple matrix that will be submitted to matrix solver API to get evaluated.
  */
-export const requestSolutions = matrix => ({
+export const requestSolutions = () => ({
   type: REQUEST_SOLUTIONS,
-  matrix,
 });
 
 /**
