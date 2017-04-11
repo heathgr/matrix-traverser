@@ -1,5 +1,3 @@
-// TODO this module is not used anymore and will go away
-
 /** @module normalizeMatrix */
 
 const normalizeMatrix = ({ cells, columnCount }) => ({
