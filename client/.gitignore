@@ -3,4 +3,5 @@ coverage
 *.log
 /dist/bundle.js
 .chrome_user_data
+.nyc_output
 docs

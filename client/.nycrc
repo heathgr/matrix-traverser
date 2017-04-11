@@ -1,0 +1,9 @@
+{
+  "exclude": [
+    "**/spec/**",
+    "jsdom.config.js"
+  ],
+  "extension": [
+    ".jsx"
+  ]
+}
