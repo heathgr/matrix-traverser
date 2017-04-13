@@ -1,15 +1,24 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import glamorous from 'glamorous';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
-const MatrixCell = ({ cell }) => {
+const MatrixCell = ({ cell, cellSize }) => {
   const row = cell.get('row');
   const column = cell.get('column');
   const value = cell.get('value');
+  const Wrapper = glamorous.div({
+    width: cellSize,
+    height: cellSize,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  });
 
-  return (<div>
+  return (<Wrapper>
     {value}
-  </div>);
+  </Wrapper>);
 };
 
 MatrixCell.propTypes = {
@@ -18,6 +27,7 @@ MatrixCell.propTypes = {
     row: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
   }).isRequired,
+  cellSize: PropTypes.number.isRequired,
 };
 
 

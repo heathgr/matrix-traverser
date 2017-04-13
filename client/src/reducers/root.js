@@ -28,7 +28,9 @@ export const getSimpleMatrix = createSelector(
     cells => cells.map(
       cell => cell.get('value')
     ),
-  ).toJS(),
+  )
+  .delete('rowCount')
+  .toJS(),
 );
 
 /**

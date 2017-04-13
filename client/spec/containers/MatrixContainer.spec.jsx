@@ -14,7 +14,7 @@ const testStore = createStore(
 );
 
 describe('<MatrixContainer />', () => {
-  chai.use(chaiEnzyme());
+  // chai.use(chaiEnzyme());
 
   it('Should contain the correct number of matrix cell objects', () => {
     const componentWrapper = mount(

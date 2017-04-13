@@ -30,6 +30,8 @@ const store = createStore(
   )
 );
 
+delete AppContainer.prototype.unstable_handleError;
+
 function render(Component) {
   ReactDOM.render(
     <AppContainer>

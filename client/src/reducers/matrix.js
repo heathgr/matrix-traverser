@@ -36,6 +36,7 @@ export const initialMatrix = Map({
     }),
   ]),
   columnCount: 2,
+  rowCount: 3,
 });
 
 const matrix = (state = initialMatrix, action) => {

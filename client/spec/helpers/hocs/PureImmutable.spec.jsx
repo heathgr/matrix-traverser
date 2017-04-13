@@ -2,7 +2,8 @@ import chai, { expect } from 'chai';
 import { spy } from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import { mount } from 'enzyme';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Map } from 'immutable';
 
