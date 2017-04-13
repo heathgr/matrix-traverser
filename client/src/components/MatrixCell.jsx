@@ -7,7 +7,7 @@ const MatrixCell = ({ cell }) => {
   const column = cell.get('column');
   const value = cell.get('value');
 
-  return (<div style={{ position: 'absolute', left: column * 50, top: row * 50 }}>
+  return (<div>
     {value}
   </div>);
 };

@@ -3,9 +3,19 @@
 import React from 'react';
 import MatrixContainer from '../containers/MatrixContainer';
 
+const MainStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+}
+
 const Main = () => (
-  <div>
+  <div style={MainStyle}>
+    <div>
+      <div>Title</div>
+      <div>Sub Title</div> 
+    </div>
     <MatrixContainer />
+    <div>footer</div>
   </div>
 );
 
