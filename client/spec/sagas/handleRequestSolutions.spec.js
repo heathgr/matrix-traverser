@@ -20,24 +20,24 @@ describe('Handle Request Solutions Saga', () => {
   });
 
   it('Should retrieve a solution from the Matrix Traversal Solver service.', () => {
-    stub(selectors, 'getSimpleMatrix', () => testMatrix);
+    stub(selectors, 'getMatrix', () => testMatrix);
     stub(axios, 'post', () => ({ data: testMatrixSolution }));
     sagaTester.dispatch(requestSolutions());
     expect(sagaTester.getLatestCalledAction()).to.deep.equal(gotSolutions(testMatrixSolution));
-    selectors.getSimpleMatrix.restore();
+    selectors.getMatrix.restore();
     axios.post.restore();
   });
 
   it('Should dispatch a failed to get solutions action if there is an error.', () => {
     const testError = new Error('It did not work.');
 
-    stub(selectors, 'getSimpleMatrix', () => testMatrix);
+    stub(selectors, 'getMatrix', () => testMatrix);
     stub(axios, 'post', () => {
       throw testError;
     });
     sagaTester.dispatch(requestSolutions());
     expect(sagaTester.getLatestCalledAction()).to.deep.equal(failedToGetSolutions(testError));
-    selectors.getSimpleMatrix.restore();
+    selectors.getMatrix.restore();
     axios.post.restore();
   });
 });

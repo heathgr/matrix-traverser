@@ -5,11 +5,10 @@ export const setMatrix = matrix => ({
   matrix,
 });
 
-export const setMatrixCell = (row, column, value) => ({
+export const setMatrixCell = (index, value) => ({
   type: SET_MATRIX_CELL,
   cell: {
-    row,
-    column,
+    index,
     value,
   },
 });

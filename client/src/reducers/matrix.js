@@ -3,38 +3,7 @@ import { Map, List } from 'immutable';
 import { SET_MATRIX, SET_MATRIX_CELL } from '../constants/actionTypes';
 
 export const initialMatrix = Map({
-  cells: List([
-    Map({
-      value: 2,
-      column: 0,
-      row: 0,
-    }),
-    Map({
-      row: 0,
-      column: 1,
-      value: 7,
-    }),
-    Map({
-      row: 1,
-      column: 0,
-      value: 4,
-    }),
-    Map({
-      column: 1,
-      row: 1,
-      value: 9,
-    }),
-    Map({
-      row: 2,
-      column: 0,
-      value: 3,
-    }),
-    Map({
-      value: 8,
-      row: 2,
-      column: 1,
-    }),
-  ]),
+  cells: List([2, 7, 4, 9, 3, 8]),
   columnCount: 2,
   rowCount: 3,
 });
@@ -45,11 +14,7 @@ const matrix = (state = initialMatrix, action) => {
       return action.matrix;
     }
     case SET_MATRIX_CELL: {
-      const cells = state.get('cells');
-      const updateIndex = cells.findKey(
-        value => value.get('row') === action.cell.row && value.get('column') === action.cell.column
-      );
-      const newCells = cells.set(updateIndex, Map(action.cell));
+      const newCells = state.get('cells').set(action.cell.index, action.cell.value);
 
       return state.set('cells', newCells);
     }

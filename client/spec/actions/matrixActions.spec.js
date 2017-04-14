@@ -18,12 +18,11 @@ describe('Matrix Actions', () => {
     const expectedAction = {
       type: SET_MATRIX_CELL,
       cell: {
-        row: 0,
-        column: 3,
+        index: 5,
         value: 12,
       },
     };
-    const testAction = setMatrixCell(0, 3, 12);
+    const testAction = setMatrixCell(5, 12);
 
     expect(testAction).to.deep.equal(expectedAction);
   });

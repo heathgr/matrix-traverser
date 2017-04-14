@@ -14,7 +14,7 @@ describe('Matrix Reducer', () => {
   });
 
   it('should correctly handle a SET_MATRIX_CELL action.', () => {
-    const testAction = setMatrixCell(1, 1, 72);
+    const testAction = setMatrixCell(3, 72);
     const testState = matrix(testMatrix, testAction);
     const expectedState = testMatrixWithModifiedCell;
 

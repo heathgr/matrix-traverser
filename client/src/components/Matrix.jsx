@@ -43,13 +43,7 @@ Matrix.propTypes = {
   height: PropTypes.number.isRequired,
   cellSize: PropTypes.number.isRequired,
   matrix: ImmutablePropTypes.mapContains({
-    cells: ImmutablePropTypes.listOf(
-      ImmutablePropTypes.mapContains({
-        column: PropTypes.number.isRequired,
-        row: PropTypes.number.isRequired,
-        value: PropTypes.number.isRequired,
-      }).isRequired
-    ).isRequired,
+    cells: ImmutablePropTypes.listOf(PropTypes.number).isRequired,
     columnCount: PropTypes.number.isRequired,
   }).isRequired,
 };
