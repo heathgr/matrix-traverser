@@ -10,14 +10,29 @@ const Matrix = ({ width, height, cellSize, matrix }) => {
     width,
     height,
     display: 'flex',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
     background: 'palegoldenrod',
   });
+  const MatrixRow = glamorous.div({
+    display: 'flex',
+    flexDirection: 'row',
+  })
+  const columnCount = matrix.get('columnCount');
+
+  // <MatrixCell cell={cell} cellSize={cellSize} />
 
   return (<Wrapper>
     {
-      matrix.get('cells').map(
-        cell => <MatrixCell cell={cell} cellSize={cellSize} />
+      matrix.get('cells').groupBy(
+        (cell, key) => Math.floor(key / columnCount)
+      ).entrySeq().map(
+        ([row, cells]) => <MatrixRow key={row}>
+          {
+            cells.entrySeq().map(
+              ([column, cell]) => <MatrixCell key={`${row}-${column}`} cell={cell} cellSize={cellSize}/>
+            )
+          }
+        </MatrixRow>
       )
     }
   </Wrapper>);
