@@ -24,6 +24,7 @@ export const testMatrix = Map({
     }),
   ]),
   columnCount: 2,
+  rowCount: 2,
 });
 
 export const testMatrixWithModifiedCell = Map({
@@ -50,4 +51,5 @@ export const testMatrixWithModifiedCell = Map({
     }),
   ]),
   columnCount: 2,
+  rowCount: 2,
 });
