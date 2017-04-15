@@ -3,11 +3,9 @@
 import React, { PureComponent } from 'react';
 import { is } from 'immutable';
 
-// TODO use hoist-non-react-statics?
-
 const PureImmutable = () => Composed => class Pure extends PureComponent {
-  shouldComponentUpdate(nextProps, nextState) {
-    const nextPropKeys = Object.keys(nextProps || {});
+  shouldComponentUpdate(nextProps) {
+    const nextPropKeys = Object.keys(nextProps);
 
     return !nextPropKeys.every(
       key => is(nextProps[key], this.props[key])

@@ -44,7 +44,7 @@ TestComponent.propTypes = {
 describe('The Pure render higher order component.', () => {
   chai.use(chaiEnzyme());
 
-  it('Should compose the provided component into a PureComponent.', () => {
+  it('Should compose the provided component and return a PureComponent.', () => {
     const testWrapper = mount(<TestComposedComponent numbers={deepProps1} />);
 
     expect(testWrapper).to.contain(<div>one: 1 two: 2 three: 3</div>);

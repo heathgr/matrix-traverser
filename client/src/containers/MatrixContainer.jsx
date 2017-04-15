@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { getMatrix } from '../reducers/root';
+import { getMatrix, getSolutions } from '../reducers/root';
 import Matrix from '../components/Matrix';
 
 const Container = ({ matrix }) => {
@@ -43,6 +43,7 @@ Container.propTypes = {
 
 const stateToProps = state => ({
   matrix: getMatrix(state),
+  solutions: getSolutions(state),
 });
 
 const MatrixContainer = connect(stateToProps)(Container);

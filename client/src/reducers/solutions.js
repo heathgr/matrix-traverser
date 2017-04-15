@@ -2,7 +2,7 @@
 import { List } from 'immutable';
 import { GOT_SOLUTIONS } from '../constants/actionTypes';
 
-const initialSolutions = List([]);
+export const initialSolutions = List([]);
 
 const solutions = (state = initialSolutions, action) => {
   switch (action.type) {
@@ -14,6 +14,12 @@ const solutions = (state = initialSolutions, action) => {
     }
   }
 };
+
+/**
+ * Selector the matrix state.
+ * @param {objct} state - The matrix state.
+ */
+export const getSolutions = state => state;
 
 /**
  * The reducer that handles the solutions state.  Solutions is an immutable list of integers.  These integers corespond to cells on /matrix/cells.
