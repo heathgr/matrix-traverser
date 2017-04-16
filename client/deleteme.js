@@ -1,6 +1,6 @@
 #!user/bin/env node
 
-const bezierFromPoints = (points, tension = 3) => {
+const bezierFromPoints = (points, tension = 4) => {
   let pathData = `M${points[0].x},${points[0].y}`;
 
   for (let i = 0; i < points.length - 1; i += 1) {
@@ -53,14 +53,11 @@ const bezierFromPoints = (points, tension = 3) => {
 };
 
 const result = bezierFromPoints([
-  { x: 100, y: 0 },
-  { x: 0, y: 100 },
-  { x: 100, y: 200 },
-  { x: 100, y: 100 },
-  { x: 200, y: 100 },
-  { x: 200, y: 0 },
-  { x: 100, y: 0 },
-  { x: 0, y: 0 },
+  { x: 1, y: 0 },
+  { x: 0, y: 1 },
+  { x: 1, y: 2 },
+  { x: 1, y: 1 },
+  { x: 2, y: 1 },
 ]);
 
 console.log(`result: ${result}`);
