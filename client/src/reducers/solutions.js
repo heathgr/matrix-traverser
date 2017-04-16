@@ -7,7 +7,11 @@ export const initialSolutions = List([]);
 const solutions = (state = initialSolutions, action) => {
   switch (action.type) {
     case GOT_SOLUTIONS: {
-      return List(action.solutions);
+      return List(
+        action.solutions.map(
+          solution => List(solution)
+        )
+      );
     }
     default: {
       return state;
