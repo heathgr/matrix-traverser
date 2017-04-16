@@ -1,5 +1,5 @@
 import glamorous from 'glamorous';
-import Measure from 'react-measure';
+import ContainerDimensions from 'react-container-dimensions';
 import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,7 +16,7 @@ const Container = ({ matrix }) => {
     alignItems: 'center',
   });
 
-  return (<Measure>
+  return (<ContainerDimensions>
     {
       ({ width, height }) => {
         const rowCount = matrix.get('rowCount');
@@ -31,7 +31,7 @@ const Container = ({ matrix }) => {
         </MatrixWrapper>);
       }
     }
-  </Measure>);
+  </ContainerDimensions>);
 };
 
 Container.propTypes = {
