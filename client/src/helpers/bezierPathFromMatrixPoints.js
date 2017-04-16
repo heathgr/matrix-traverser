@@ -1,3 +1,9 @@
+/**
+ * Takes an array of point objects (matrix points) and returns data that will be used to render an SVG path.
+ * This function is essentialy a catmul-rom spline to bezier spline converter.  It is adapted from a routine by Nate Vack, https://gist.github.com/njvack/6925609.
+ * @param {array} points - An array of point objects.  The shape of a point object is: {x: integer, y: integer }.
+ * @param {number} tension - The tension of the path.  Higher values will produce a curve that is closer to a straight line.
+ */
 const bezierPathFromMatrixPoints = (points, tension = 3) => {
   const bezierCurves = [points[0]];
 
