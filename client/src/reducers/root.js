@@ -1,7 +1,6 @@
 /** @module reducers/root */
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
-import { fromJS } from 'immutable';
 import matrix, * as fromMatrix from './matrix';
 import solutions, * as fromSolutions from './solutions';
 import calcMatrixCellPosition from '../helpers/calcMatrixCellPosition';
@@ -34,7 +33,7 @@ export const getSolutionPathsData = createSelector(
       )
     );
     const solutionPathsData = solutionsPoints.map(
-      solution => fromJS(bezierPathFromMatrixPoints(solution.toJS(), 4))
+      solution => bezierPathFromMatrixPoints(solution, 4)
     );
     return solutionPathsData;
   }

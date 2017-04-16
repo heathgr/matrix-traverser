@@ -1,10 +1,12 @@
+import { Map } from 'immutable';
+
 /**
  * Calculates the x,y position of a matrix cell.
- * @param {integer} cellIndex - The index of a cell in the 'cells' array.
+ * @param {integer} cellIndex - The index of a cell in the 'cells' list.
  * @param {integer} columnCount - The number of columns in the matrix.
- * @returns {object} - The position of a cell in the following format: { x: x value, y: y value}.
+ * @returns {map} - The position of a cell as a map in the following format: { x: x value, y: y value}.
  */
-const calcMatrixCellPosition = (cellIndex, columnCount) => ({
+const calcMatrixCellPosition = (cellIndex, columnCount) => Map({
   x: cellIndex % columnCount,
   y: Math.floor(cellIndex / columnCount),
 });

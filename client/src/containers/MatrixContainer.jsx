@@ -43,7 +43,7 @@ Container.propTypes = {
 
 const stateToProps = state => ({
   matrix: getMatrix(state),
-  solutions: getSolutions(state),
+  // solutions: getSolutions(state),
 });
 
 const MatrixContainer = connect(stateToProps)(Container);

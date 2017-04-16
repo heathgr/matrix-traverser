@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { is, Map } from 'immutable';
 import calcMatrixPosition from '../../src/helpers/calcMatrixCellPosition';
 
 describe('Calculate Matrix Cell Position Helper.', () => {
@@ -8,7 +9,7 @@ describe('Calculate Matrix Cell Position Helper.', () => {
     const test1 = calcMatrixPosition(2, testColumnCount);
     const test2 = calcMatrixPosition(4, testColumnCount);
 
-    expect(test1).to.deep.equal({ x: 2, y: 0 });
-    expect(test2).to.deep.equal({ x: 1, y: 1 });
+    expect(is(test1, Map({ x: 2, y: 0 }))).to.equal(true);
+    expect(is(test2, Map({ x: 1, y: 1 }))).to.equal(true);
   });
 });
