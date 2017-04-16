@@ -16,10 +16,8 @@ const Matrix = ({ width, height, cellSize, matrix }) => {
   const MatrixRow = glamorous.div({
     display: 'flex',
     flexDirection: 'row',
-  })
+  });
   const columnCount = matrix.get('columnCount');
-
-  // <MatrixCell cell={cell} cellSize={cellSize} />
 
   return (<Wrapper>
     {
@@ -29,7 +27,7 @@ const Matrix = ({ width, height, cellSize, matrix }) => {
         ([row, cells]) => <MatrixRow key={row}>
           {
             cells.entrySeq().map(
-              ([column, cell]) => <MatrixCell key={`${row}-${column}`} cell={cell} cellSize={cellSize}/>
+              ([column, cell]) => <MatrixCell key={`${row}-${column}`} cell={cell} cellSize={cellSize} />
             )
           }
         </MatrixRow>

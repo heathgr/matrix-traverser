@@ -1,7 +1,6 @@
 import React from 'react';
 import glamorous from 'glamorous';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const MatrixCell = ({ cell, cellSize }) => {
