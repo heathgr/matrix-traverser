@@ -1,6 +1,10 @@
 import { expect } from 'chai';
-import { is } from 'immutable';
-import root, { getMatrix, getSolutions } from '../../src/reducers/root';
+import { is, fromJS } from 'immutable';
+import root, {
+  getMatrix,
+  getSolutions,
+  getSolutionPathsData,
+} from '../../src/reducers/root';
 import { initialMatrix } from '../../src/reducers/matrix';
 import { initialSolutions } from '../../src/reducers/solutions';
 
@@ -27,5 +31,28 @@ describe('Root Reducer', () => {
     expect(
       is(getSolutions(state), initialSolutions)
     ).to.equal(true);
+  });
+
+  it('Should have a solutions path data selector.', () => {
+    const testState = {
+      matrix: fromJS({
+        cells: [1, 2, 3, 4],
+        columnCount: 2,
+        rowCount: 2,
+      }),
+      solutions: fromJS([
+        [0, 1, 2, 3],
+      ]),
+    };
+    const expectedResult = fromJS([
+      [
+        { x: 0, y: 0 },
+        [{ x: 0.25, y: 0 }, { x: 1, y: -0.25 }, { x: 1, y: 0 }],
+        [{ x: 1, y: 0.25 }, { x: 0, y: 0.75 }, { x: 0, y: 1 }],
+        [{ x: 0, y: 1.25 }, { x: 0.75, y: 1 }, { x: 1, y: 1 }],
+      ],
+    ]);
+    const result = getSolutionPathsData(testState);
+    expect(is(result, expectedResult)).to.equal(true);
   });
 });
