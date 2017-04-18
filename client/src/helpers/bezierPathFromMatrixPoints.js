@@ -10,7 +10,9 @@ import { List, Map } from 'immutable';
  * The rest of the list is filled with lists of three point maps used to define cubic bezier curves.
  */
 const bezierPathFromMatrixPoints = (points, tension = 3) => {
-  let bezierCurves = List([points.get(0)]);
+  let bezierCurves = List([
+    List([points.get(0)]),
+  ]);
 
   for (let i = 0; i < points.size - 1; i += 1) {
     let rSeg = List([]);

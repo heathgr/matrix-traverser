@@ -27,14 +27,14 @@ export const getSolutionPathsData = createSelector(
   [getMatrix, getSolutions],
   (matrixState, solutionsState) => {
     const columnCount = matrixState.get('columnCount');
-    const solutionsPoints = solutionsState.map(
+    const solutionPoints = solutionsState.map(
       (solution) => {
         return solution.map(
           cellIndex => calcMatrixCellPosition(cellIndex, columnCount)
         )
       }
     );
-    const solutionPathsData = solutionsPoints.map(
+    const solutionPathsData = solutionPoints.map(
       solution => bezierPathFromMatrixPoints(solution, 4)
     );
     return solutionPathsData;

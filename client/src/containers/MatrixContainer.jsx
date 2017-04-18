@@ -6,9 +6,10 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { getMatrix, getSolutionPathsData } from '../reducers/root';
 import Matrix from '../components/Matrix';
+import SolutionPaths from '../components/SolutionPaths';
 
-const Container = ({ matrix }) => {
-  const MatrixWrapper = glamorous.div({
+const Container = ({ matrix, solutionPathsData }) => {
+  const FlexFullWidthHeight = glamorous.div({
     width: '100%',
     height: '100%',
     display: 'flex',
@@ -25,10 +26,31 @@ const Container = ({ matrix }) => {
           height / rowCount,
           width / columnCount
         );
+        const matrixWidth = columnCount * cellSize;
+        const matrixHeight = rowCount * cellSize;
+        const MatrixBox = glamorous.div({
+          width: matrixWidth,
+          height: matrixHeight,
+          background: 'palegoldenrod',
+          position: 'relative',
+        });
 
-        return (<MatrixWrapper>
-          <Matrix width={columnCount * cellSize} height={rowCount * cellSize} cellSize={cellSize} matrix={matrix} />
-        </MatrixWrapper>);
+        return (<FlexFullWidthHeight>
+          <MatrixBox>
+            <SolutionPaths
+              width={matrixWidth}
+              height={matrixHeight}
+              cellSize={cellSize}
+              solutionPathsData={solutionPathsData}
+            />
+            <Matrix
+              width={matrixWidth}
+              height={matrixHeight}
+              cellSize={cellSize}
+              matrix={matrix}
+            />
+          </MatrixBox>
+        </FlexFullWidthHeight>);
       }
     }
   </ContainerDimensions>);
@@ -39,11 +61,14 @@ Container.propTypes = {
     cells: ImmutablePropTypes.listOf(PropTypes.number).isRequired,
     columnCount: PropTypes.number.isRequired,
   }).isRequired,
+  solutionPathsData: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.list,
+  ).isRequired,
 };
 
 const stateToProps = state => ({
   matrix: getMatrix(state),
-  solutionsPaths: getSolutionPathsData(state),
+  solutionPathsData: getSolutionPathsData(state),
 });
 
 const MatrixContainer = connect(stateToProps)(Container);

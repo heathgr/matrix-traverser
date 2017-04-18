@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { is, List, fromJS } from 'immutable';
+import { is, fromJS } from 'immutable';
 import solutions, { getSolutions } from '../../src/reducers/solutions';
 import { gotSolutions } from '../../src/actions/solutionsActions';
 

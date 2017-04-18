@@ -13,7 +13,9 @@ describe('The Bezier Points From Matrix Points helper.', () => {
       { x: 2, y: 1 },
     ]);
     const expectedResult = fromJS([
-      { x: 1, y: 0 },
+      [
+        { x: 1, y: 0 },
+      ],
       [
         { x: 0.75, y: 0.25 },
         { x: 0, y: 0.5 },

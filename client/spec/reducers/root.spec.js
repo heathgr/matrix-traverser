@@ -46,7 +46,7 @@ describe('Root Reducer', () => {
     };
     const expectedResult = fromJS([
       [
-        { x: 0, y: 0 },
+        [{ x: 0, y: 0 }],
         [{ x: 0.25, y: 0 }, { x: 1, y: -0.25 }, { x: 1, y: 0 }],
         [{ x: 1, y: 0.25 }, { x: 0, y: 0.75 }, { x: 0, y: 1 }],
         [{ x: 0, y: 1.25 }, { x: 0.75, y: 1 }, { x: 1, y: 1 }],
