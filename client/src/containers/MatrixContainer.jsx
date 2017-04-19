@@ -1,12 +1,14 @@
 import glamorous from 'glamorous';
 import ContainerDimensions from 'react-container-dimensions';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { getMatrix, getSolutionPathsData } from '../reducers/root';
 import Matrix from '../components/Matrix';
 import SolutionPaths from '../components/SolutionPaths';
+import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const Container = ({ matrix, solutionPathsData }) => {
   const FlexFullWidthHeight = glamorous.div({
@@ -71,6 +73,6 @@ const stateToProps = state => ({
   solutionPathsData: getSolutionPathsData(state),
 });
 
-const MatrixContainer = connect(stateToProps)(Container);
+const MatrixContainer = compose(connect(stateToProps), PureImmutable())(Container);
 
 export default MatrixContainer;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import glamourous from 'glamorous';
 import ImutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
+import SolutionPath from './SolutionPath';
 
 const SolutionPaths = ({ solutionPathsData, width, height, cellSize }) => {
   const Wrapper = glamourous.svg({
@@ -25,7 +26,7 @@ const SolutionPaths = ({ solutionPathsData, width, height, cellSize }) => {
           (segment, i) => (i === 0 ? `M${segment}` : `C${segment}`)
         ).join(' ')
       ).map(
-        pathData => <path d={pathData} />
+        (pathData, i) => <SolutionPath key={i} pathData={pathData} />
       )
     }
   </Wrapper>);
