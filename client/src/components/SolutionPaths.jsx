@@ -13,6 +13,7 @@ const SolutionPaths = ({ solutionPathsData, width, height, cellSize }) => {
     stroke: 'tomato',
     strokeWidth: 2,
     position: 'absolute',
+    top: 0,
   });
 
   return (<Wrapper>

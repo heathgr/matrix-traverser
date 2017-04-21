@@ -1,13 +1,12 @@
 import glamorous from 'glamorous';
-import ContainerDimensions from 'react-container-dimensions';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { getMatrix, getSolutionPathsData } from '../reducers/root';
-import Matrix from '../components/Matrix';
-import SolutionPaths from '../components/SolutionPaths';
+import { getMatrix, getSolutionPathsData, getSolutions } from '../reducers/root';
+import MatrixResizer from '../components/MatrixResizer';
+import SolutionsList from '../components/SolutionsList';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const Container = ({ matrix, solutionPathsData }) => {
@@ -15,47 +14,29 @@ const Container = ({ matrix, solutionPathsData }) => {
     width: '100%',
     height: '100%',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   });
 
-  return (<ContainerDimensions>
-    {
-      ({ width, height }) => {
-        const rowCount = matrix.get('rowCount');
-        const columnCount = matrix.get('columnCount');
-        const cellSize = Math.min(
-          height / rowCount,
-          width / columnCount
-        );
-        const matrixWidth = columnCount * cellSize;
-        const matrixHeight = rowCount * cellSize;
-        const MatrixBox = glamorous.div({
-          width: matrixWidth,
-          height: matrixHeight,
-          background: 'palegoldenrod',
-          position: 'relative',
-        });
+  const MatrixWrapper = glamorous.div({
+    display: 'flex',
+    background: 'aqua',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  });
 
-        return (<FlexFullWidthHeight>
-          <MatrixBox>
-            <SolutionPaths
-              width={matrixWidth}
-              height={matrixHeight}
-              cellSize={cellSize}
-              solutionPathsData={solutionPathsData}
-            />
-            <Matrix
-              width={matrixWidth}
-              height={matrixHeight}
-              cellSize={cellSize}
-              matrix={matrix}
-            />
-          </MatrixBox>
-        </FlexFullWidthHeight>);
-      }
-    }
-  </ContainerDimensions>);
+  return (
+    <FlexFullWidthHeight>
+      <MatrixWrapper>
+        <MatrixResizer matrix={matrix} solutionPathsData={solutionPathsData} />
+      </MatrixWrapper>
+      <SolutionsList />
+    </FlexFullWidthHeight>
+  );
 };
 
 Container.propTypes = {
@@ -70,6 +51,7 @@ Container.propTypes = {
 
 const stateToProps = state => ({
   matrix: getMatrix(state),
+  solutions: getSolutions(state),
   solutionPathsData: getSolutionPathsData(state),
 });
 
