@@ -1,4 +1,5 @@
 /* eslint global-require: 0 */
+/* eslint no-underscore-dangle: 0 */
 /**
  * index.js is the entry point for the app.  It performs the following actions:
  * - It sets up hot reloading. // TODO make sure this only happens on dev builds.
@@ -22,11 +23,11 @@ import start from './sagas/start';
 
 const sagaMiddleWare = createSagaMiddleware();
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   root,
-  compose(
+  composeEnhancers(
     applyMiddleware(sagaMiddleWare),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 );
 

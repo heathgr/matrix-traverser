@@ -1,17 +1,52 @@
 /** @module reducers/matrix */
-import { List } from 'immutable';
-import { GOT_SOLUTIONS } from '../constants/actionTypes';
+import { List, Map } from 'immutable';
+import {
+  GOT_SOLUTIONS,
+  SET_ACTIVE_SOLUTION,
+  SET_NEXT_ACTIVE_SOLUTION,
+  SET_PREVIOUS_ACTIVE_SOLUTION,
+} from '../constants/actionTypes';
 
-export const initialSolutions = List([]);
+export const initialSolutions = Map({
+  data: List([]),
+  activeSolution: 0,
+  previewSolution: null,
+});
 
 const solutions = (state = initialSolutions, action) => {
   switch (action.type) {
     case GOT_SOLUTIONS: {
-      return List(
-        action.solutions.map(
-          solution => List(solution)
-        )
-      );
+      return Map({
+        data: List(
+          action.solutions.map(
+            solution => List(solution)
+          )
+        ),
+        activeSolution: 0,
+        previewSolution: null,
+      });
+    }
+    case SET_ACTIVE_SOLUTION: {
+      const solutionCount = state.get('data').size;
+      const nextActiveSolution = action.solution % solutionCount;
+
+      return state.set('activeSolution', nextActiveSolution);
+    }
+    case SET_NEXT_ACTIVE_SOLUTION: {
+      const currentActiveSolution = state.get('activeSolution');
+      const solutionCount = state.get('data').size;
+      const remainder = (currentActiveSolution + 1) % solutionCount;
+      const nextActiveSolution = remainder < 0 ? solutionCount + remainder : remainder;
+
+      return state.set('activeSolution', nextActiveSolution);
+    }
+    case SET_PREVIOUS_ACTIVE_SOLUTION: {
+      const currentActiveSolution = state.get('activeSolution');
+      const solutionCount = state.get('data').size;
+      const remainder = (currentActiveSolution - 1) % solutionCount;
+      const nextActiveSolution = remainder < 0 ? solutionCount + remainder : remainder;
+
+      return state.set('activeSolution', nextActiveSolution);
     }
     default: {
       return state;
@@ -23,7 +58,8 @@ const solutions = (state = initialSolutions, action) => {
  * Selector the matrix state.
  * @param {objct} state - The matrix state.
  */
-export const getSolutions = state => state;
+export const getSolutions = state => state.get('data');
+export const getActiveSolution = state => state.get('activeSolution');
 
 /**
  * The reducer that handles the solutions state.  Solutions is an immutable list of integers.  These integers corespond to cells on /matrix/cells.

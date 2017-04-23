@@ -16,9 +16,11 @@ describe('<SolutionPaths />', () => {
       columnCount: 2,
       rowCount: 2,
     }),
-    solutions: fromJS([
-      [0, 1, 2, 3],
-    ]),
+    solutions: fromJS({
+      data: [
+        [0, 1, 2, 3],
+      ],
+    }),
   };
 
   const testPathsData = getSolutionPathsData(testState);

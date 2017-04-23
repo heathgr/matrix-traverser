@@ -2,6 +2,9 @@ import {
   REQUEST_SOLUTIONS,
   FAILED_TO_GET_SOLUTIONS,
   GOT_SOLUTIONS,
+  SET_ACTIVE_SOLUTION,
+  SET_NEXT_ACTIVE_SOLUTION,
+  SET_PREVIOUS_ACTIVE_SOLUTION,
 } from '../constants/actionTypes';
 
 /** @module actions/solutionsActions */
@@ -34,4 +37,17 @@ export const failedToGetSolutions = error => ({
 export const gotSolutions = solutions => ({
   type: GOT_SOLUTIONS,
   solutions,
+});
+
+export const setActiveSolution = solution => ({
+  type: SET_ACTIVE_SOLUTION,
+  solution,
+});
+
+export const setNextActiveSolution = () => ({
+  type: SET_NEXT_ACTIVE_SOLUTION,
+});
+
+export const setPreviousActiveSolution = () => ({
+  type: SET_PREVIOUS_ACTIVE_SOLUTION,
 });

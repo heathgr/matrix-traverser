@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { is, fromJS } from 'immutable';
 import root, {
+  getActiveSolution,
   getMatrix,
   getSolutions,
   getSolutionPathsData,
@@ -29,7 +30,13 @@ describe('Root Reducer', () => {
 
   it('Should have a solutions selector.', () => {
     expect(
-      is(getSolutions(state), initialSolutions)
+      is(getSolutions(state), initialSolutions.get('data'))
+    ).to.equal(true);
+  });
+
+  it('Should have an acive solutions selector.', () => {
+    expect(
+      is(getActiveSolution(state), 0)
     ).to.equal(true);
   });
 
@@ -40,9 +47,11 @@ describe('Root Reducer', () => {
         columnCount: 2,
         rowCount: 2,
       }),
-      solutions: fromJS([
-        [0, 1, 2, 3],
-      ]),
+      solutions: fromJS({
+        data: [
+          [0, 1, 2, 3],
+        ],
+      }),
     };
     const expectedResult = fromJS([
       [

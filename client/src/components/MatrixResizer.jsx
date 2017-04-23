@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
 import ContainerDimensions from 'react-container-dimensions';
 import Matrix from '../components/Matrix';
 import SolutionPaths from '../components/SolutionPaths';
 
-const MatrixResizer = ({ matrix, solutionPathsData }) => {
-  return (<ContainerDimensions>
+const MatrixResizer = ({ matrix, solutionPathsData }) => (
+  <ContainerDimensions>
     {
       ({ width, height }) => {
         const rowCount = matrix.get('rowCount');
@@ -39,20 +41,17 @@ const MatrixResizer = ({ matrix, solutionPathsData }) => {
         </MatrixBox>);
       }
     }
-  </ContainerDimensions>);
+  </ContainerDimensions>
+);
+
+MatrixResizer.propTypes = {
+  matrix: ImmutablePropTypes.mapContains({
+    cells: ImmutablePropTypes.listOf(PropTypes.number).isRequired,
+    columnCount: PropTypes.number.isRequired,
+  }).isRequired,
+  solutionPathsData: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.list
+  ).isRequired,
 };
 
 export default MatrixResizer;
-
-/*
-const MatrixBox = glamorous.div({
-  width: matrixWidth,
-  height: matrixHeight,
-  background: 'palegoldenrod',
-  position: 'relative',
-  flex: 1,
-});
-
-
-
-*/

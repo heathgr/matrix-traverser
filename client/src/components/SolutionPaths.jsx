@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import glamourous from 'glamorous';
-import ImutablePropTypes from 'react-immutable-proptypes';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import SolutionPath from './SolutionPath';
 
@@ -37,8 +37,8 @@ SolutionPaths.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   cellSize: PropTypes.number.isRequired,
-  solutionPathsData: ImutablePropTypes.listOf(
-    ImutablePropTypes.list
+  solutionPathsData: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.list
   ).isRequired,
 };
 

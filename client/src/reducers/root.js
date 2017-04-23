@@ -23,6 +23,8 @@ export const getMatrix = state => fromMatrix.getMatrix(state.matrix);
  */
 export const getSolutions = state => fromSolutions.getSolutions(state.solutions);
 
+export const getActiveSolution = state => fromSolutions.getActiveSolution(state.solutions);
+
 export const getSolutionPathsData = createSelector(
   [getMatrix, getSolutions],
   (matrixState, solutionsState) => {
