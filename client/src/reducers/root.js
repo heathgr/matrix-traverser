@@ -22,8 +22,8 @@ export const getMatrix = state => fromMatrix.getMatrix(state.matrix);
  * @param {Object} state - The application state.
  */
 export const getSolutions = state => fromSolutions.getSolutions(state.solutions);
-
 export const getActiveSolution = state => fromSolutions.getActiveSolution(state.solutions);
+export const getPreviewSolution = state => fromSolutions.getPreviewSolution(state.solutions);
 
 export const getSolutionPathsData = createSelector(
   [getMatrix, getSolutions],

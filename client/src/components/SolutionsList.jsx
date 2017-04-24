@@ -17,17 +17,41 @@ const SolutionsList = ({
     height: '20%',
     maxHeight: 50,
     background: 'tomato',
+    color: 'white',
     flex: '0 0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  });
+  const FlexRow = glamorous.div({
+    display: 'flex',
+    flexDirection: 'row',
   });
 
   return (<Wrapper>
-    <div>{`Viewing solution ${activeSolution + 1} of ${solutions.size}`}</div>
-    <button onClick={() => onPreviousSolutionClicked()}>Prev</button>
-    <button onClick={() => onNextSolutionClicked()}>Next</button>
+    <FlexRow>
+      <button onClick={() => onPreviousSolutionClicked()}>Prev</button>
+      <div>{`Viewing solution ${activeSolution + 1} of ${solutions.size}`}</div>
+      <button onClick={() => onNextSolutionClicked()}>Next</button>
+    </FlexRow>
+    <FlexRow>
+      {
+        solutions.map(
+          (solution, i) => <div>{`${i === activeSolution ? '*' : i + 1}`}</div>
+        )
+      }
+    </FlexRow>
   </Wrapper>);
 };
 
 SolutionsList.propTypes = {
+  activeSolution: PropTypes.number.isRequired,
+  solutions: ImmutablePropTypes.listOf(
+    ImmutablePropTypes.listOf(
+      PropTypes.number
+    )
+  ).isRequired,
   onSolutionClicked: PropTypes.func.isRequired,
   onNextSolutionClicked: PropTypes.func.isRequired,
   onPreviousSolutionClicked: PropTypes.func.isRequired,

@@ -11,6 +11,8 @@ const Matrix = ({ width, height, cellSize, matrix }) => {
     height,
     display: 'flex',
     flexDirection: 'column',
+    position: 'absolute',
+    pointerEvents: 'none',
   });
   const MatrixRow = glamorous.div({
     display: 'flex',

@@ -13,14 +13,23 @@ describe('<SolutionList />', () => {
   const solutionClickedSpy = spy();
   const nextSolutionClickedSpy = spy();
   const prevSolutionClickedSpy = spy();
+  const solutionHoverSpy = spy();
+
+  const testSolution = List([
+    List([7, 3, 9, 5]),
+    List([7, 3, 9, 6]),
+    List([7, 3, 8, 5]),
+    List([7, 3, 8, 6]),
+  ]);
 
   const testWrapper = mount(
     <SolutionList
-      solutions={List([7, 3, 9, 5])}
+      solutions={testSolution}
       activeSolution={1}
       onSolutionClicked={solutionClickedSpy}
       onNextSolutionClicked={nextSolutionClickedSpy}
       onPreviousSolutionClicked={prevSolutionClickedSpy}
+      onSolutionHover={solutionHoverSpy}
     />
   );
 

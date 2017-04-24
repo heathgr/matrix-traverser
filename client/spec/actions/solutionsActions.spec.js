@@ -6,6 +6,7 @@ import {
   setActiveSolution,
   setNextActiveSolution,
   setPreviousActiveSolution,
+  setPreviewSolution,
 } from '../../src/actions/solutionsActions';
 import {
   REQUEST_SOLUTIONS,
@@ -14,6 +15,7 @@ import {
   SET_ACTIVE_SOLUTION,
   SET_NEXT_ACTIVE_SOLUTION,
   SET_PREVIOUS_ACTIVE_SOLUTION,
+  SET_PREVIEW_SOLUTION,
 } from '../../src/constants/actionTypes';
 import testMatrixSolution from '../testData/testMatrixSolution.json';
 
@@ -68,5 +70,14 @@ describe('Solutions Actions', () => {
     };
 
     expect(setPreviousActiveSolution()).to.deep.equal(expectedAction);
+  });
+
+  it('Should create a "setPreviewSolution" action.', () => {
+    const expectedAction = {
+      type: SET_PREVIEW_SOLUTION,
+      solution: 2,
+    };
+
+    expect(setPreviewSolution(2)).to.deep.equal(expectedAction);
   });
 });

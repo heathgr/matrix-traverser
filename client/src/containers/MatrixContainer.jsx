@@ -9,6 +9,7 @@ import {
   getSolutionPathsData,
   getSolutions,
   getActiveSolution,
+  getPreviewSolution,
 } from '../reducers/root';
 import MatrixResizer from '../components/MatrixResizer';
 import SolutionsList from '../components/SolutionsList';
@@ -17,16 +18,19 @@ import {
   setActiveSolution,
   setNextActiveSolution,
   setPreviousActiveSolution,
+  setPreviewSolution,
 } from '../actions/solutionsActions';
 
 const Container = ({
   matrix,
   solutions,
   activeSolution,
+  previewSolution,
   solutionPathsData,
   onSolutionClicked,
   onNextSolutionClicked,
   onPreviousSolutionClicked,
+  onSolutionHover,
 }) => {
   const FlexFullWidthHeight = glamorous.div({
     width: '100%',
@@ -54,6 +58,10 @@ const Container = ({
           {...{
             matrix,
             solutionPathsData,
+            activeSolution,
+            previewSolution,
+            onSolutionClicked,
+            onSolutionHover,
           }}
         />
       </MatrixWrapper>
@@ -61,13 +69,19 @@ const Container = ({
         {...{
           solutions,
           activeSolution,
+          previewSolution,
           onSolutionClicked,
           onNextSolutionClicked,
           onPreviousSolutionClicked,
+          onSolutionHover,
         }}
       />
     </FlexFullWidthHeight>
   );
+};
+
+Container.defaultProps = {
+  previewSolution: null,
 };
 
 Container.propTypes = {
@@ -84,15 +98,18 @@ Container.propTypes = {
     )
   ).isRequired,
   activeSolution: PropTypes.number.isRequired,
+  previewSolution: PropTypes.number,
   onSolutionClicked: PropTypes.func.isRequired,
   onNextSolutionClicked: PropTypes.func.isRequired,
   onPreviousSolutionClicked: PropTypes.func.isRequired,
+  onSolutionHover: PropTypes.func.isRequired,
 };
 
 const stateToProps = state => ({
   matrix: getMatrix(state),
   solutions: getSolutions(state),
   activeSolution: getActiveSolution(state),
+  previewSolution: getPreviewSolution(state),
   solutionPathsData: getSolutionPathsData(state),
 });
 
@@ -100,6 +117,7 @@ const dispatchToProps = dispatch => ({
   onSolutionClicked: (solution) => { dispatch(setActiveSolution(solution)); },
   onNextSolutionClicked: () => { dispatch(setNextActiveSolution()); },
   onPreviousSolutionClicked: () => { dispatch(setPreviousActiveSolution()); },
+  onSolutionHover: (solution) => { dispatch(setPreviewSolution(solution)); },
 });
 const MatrixContainer = compose(
   connect(

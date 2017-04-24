@@ -6,7 +6,14 @@ import ContainerDimensions from 'react-container-dimensions';
 import Matrix from '../components/Matrix';
 import SolutionPaths from '../components/SolutionPaths';
 
-const MatrixResizer = ({ matrix, solutionPathsData }) => (
+const MatrixResizer = ({
+  matrix,
+  solutionPathsData,
+  activeSolution,
+  previewSolution,
+  onSolutionClicked,
+  onSolutionHover,
+}) => (
   <ContainerDimensions>
     {
       ({ width, height }) => {
@@ -26,23 +33,31 @@ const MatrixResizer = ({ matrix, solutionPathsData }) => (
         });
 
         return (<MatrixBox>
+          <SolutionPaths
+            width={matrixWidth}
+            height={matrixHeight}
+            cellSize={cellSize}
+            solutionPathsData={solutionPathsData}
+            activeSolution={activeSolution}
+            previewSolution={previewSolution}
+            onSolutionClicked={onSolutionClicked}
+            onSolutionHover={onSolutionHover}
+          />
           <Matrix
             width={matrixWidth}
             height={matrixHeight}
             cellSize={cellSize}
             matrix={matrix}
           />
-          <SolutionPaths
-            width={matrixWidth}
-            height={matrixHeight}
-            cellSize={cellSize}
-            solutionPathsData={solutionPathsData}
-          />
         </MatrixBox>);
       }
     }
   </ContainerDimensions>
 );
+
+MatrixResizer.defaultProps = {
+  previewSolution: null,
+};
 
 MatrixResizer.propTypes = {
   matrix: ImmutablePropTypes.mapContains({
@@ -52,6 +67,10 @@ MatrixResizer.propTypes = {
   solutionPathsData: ImmutablePropTypes.listOf(
     ImmutablePropTypes.list
   ).isRequired,
+  activeSolution: PropTypes.number.isRequired,
+  previewSolution: PropTypes.number,
+  onSolutionClicked: PropTypes.func.isRequired,
+  onSolutionHover: PropTypes.func.isRequired,
 };
 
 export default MatrixResizer;

@@ -1,11 +1,16 @@
 import { expect } from 'chai';
 import { is, fromJS } from 'immutable';
-import solutions, {getSolutions, getActiveSolution } from '../../src/reducers/solutions';
+import solutions, {
+  getSolutions,
+  getActiveSolution,
+  getPreviewSolution,
+} from '../../src/reducers/solutions';
 import {
   gotSolutions,
   setActiveSolution,
   setNextActiveSolution,
   setPreviousActiveSolution,
+  setPreviewSolution,
 } from '../../src/actions/solutionsActions';
 
 describe('Solutions Reducer', () => {
@@ -47,6 +52,14 @@ describe('Solutions Reducer', () => {
     expect(is(expectedState, testState)).to.equal(true);
   });
 
+  it('Should correctly handle a SET_PREVIEW_SOLUTION action', () => {
+    const testAction = setPreviewSolution(3);
+    const testState = solutions(testSolutions, testAction);
+    const expectedState = testSolutions.set('previewSolution', 0);
+
+    expect(is(expectedState, testState)).to.equal(true);
+  });
+
   it('Should have a solutions selector.', () => {
     expect(
       is(getSolutions(testSolutions), testSolutions.get('data'))
@@ -56,6 +69,12 @@ describe('Solutions Reducer', () => {
   it('Should have an active solution selector.', () => {
     expect(
       is(getActiveSolution(testSolutions), 0)
+    ).to.equal(true);
+  });
+
+  it('Should have a preview solution selector.', () => {
+    expect(
+      is(getPreviewSolution(testSolutions), null)
     ).to.equal(true);
   });
 });

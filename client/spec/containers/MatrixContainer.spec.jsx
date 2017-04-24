@@ -35,17 +35,27 @@ describe('<MatrixContainer />', () => {
   });
 
   it('Should render a <SolutionPaths /> component with correct props passed from the app state.', () => {
-    expect(componentWrapper).to.contain(
-      <SolutionPaths width={0} height={0} cellSize={0} solutionPathsData={initialSolutions.get('data')} />
-    );
+    const solutionPathsWrapper = componentWrapper.find(SolutionPaths);
+
+    expect(componentWrapper).to.have.exactly(1).descendants(SolutionPaths);
+    expect(solutionPathsWrapper).to.have.prop('width');
+    expect(solutionPathsWrapper).to.have.prop('height');
+    expect(solutionPathsWrapper).to.have.prop('cellSize');
+    expect(solutionPathsWrapper).to.have.prop('solutionPathsData');
+    expect(solutionPathsWrapper).to.have.prop('activeSolution');
+    expect(solutionPathsWrapper).to.have.prop('onSolutionClicked');
+    expect(solutionPathsWrapper).to.have.prop('onSolutionHover');
   });
 
   it('Should render a <SolutionsList /> component with correct props passed from the app state.', () => {
+    const solutionsListWrapper = componentWrapper.find(SolutionsList);
+
     expect(componentWrapper).to.have.exactly(1).descendants(SolutionsList);
-    expect(componentWrapper.find(SolutionsList)).to.have.prop('solutions');
-    expect(componentWrapper.find(SolutionsList)).to.have.prop('activeSolution');
-    expect(componentWrapper.find(SolutionsList)).to.have.prop('onSolutionClicked');
-    expect(componentWrapper.find(SolutionsList)).to.have.prop('onNextSolutionClicked');
-    expect(componentWrapper.find(SolutionsList)).to.have.prop('onPreviousSolutionClicked');
+    expect(solutionsListWrapper).to.have.prop('solutions');
+    expect(solutionsListWrapper).to.have.prop('activeSolution');
+    expect(solutionsListWrapper).to.have.prop('onSolutionClicked');
+    expect(solutionsListWrapper).to.have.prop('onNextSolutionClicked');
+    expect(solutionsListWrapper).to.have.prop('onPreviousSolutionClicked');
+    expect(solutionsListWrapper).to.have.prop('onSolutionHover');
   });
 });

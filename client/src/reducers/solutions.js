@@ -5,6 +5,7 @@ import {
   SET_ACTIVE_SOLUTION,
   SET_NEXT_ACTIVE_SOLUTION,
   SET_PREVIOUS_ACTIVE_SOLUTION,
+  SET_PREVIEW_SOLUTION,
 } from '../constants/actionTypes';
 
 export const initialSolutions = Map({
@@ -48,6 +49,12 @@ const solutions = (state = initialSolutions, action) => {
 
       return state.set('activeSolution', nextActiveSolution);
     }
+    case SET_PREVIEW_SOLUTION: {
+      const solutionCount = state.get('data').size;
+      const nextPreviewSolution = action.solution % solutionCount;
+
+      return state.set('previewSolution', nextPreviewSolution);
+    }
     default: {
       return state;
     }
@@ -60,6 +67,7 @@ const solutions = (state = initialSolutions, action) => {
  */
 export const getSolutions = state => state.get('data');
 export const getActiveSolution = state => state.get('activeSolution');
+export const getPreviewSolution = state => state.get('previewSolution');
 
 /**
  * The reducer that handles the solutions state.  Solutions is an immutable list of integers.  These integers corespond to cells on /matrix/cells.

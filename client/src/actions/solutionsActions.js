@@ -5,6 +5,7 @@ import {
   SET_ACTIVE_SOLUTION,
   SET_NEXT_ACTIVE_SOLUTION,
   SET_PREVIOUS_ACTIVE_SOLUTION,
+  SET_PREVIEW_SOLUTION,
 } from '../constants/actionTypes';
 
 /** @module actions/solutionsActions */
@@ -50,4 +51,9 @@ export const setNextActiveSolution = () => ({
 
 export const setPreviousActiveSolution = () => ({
   type: SET_PREVIOUS_ACTIVE_SOLUTION,
+});
+
+export const setPreviewSolution = solution => ({
+  type: SET_PREVIEW_SOLUTION,
+  solution,
 });

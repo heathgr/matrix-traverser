@@ -24,7 +24,17 @@ describe('<SolutionPaths />', () => {
   };
 
   const testPathsData = getSolutionPathsData(testState);
-  const testWrapper = mount(<SolutionPaths solutionPathsData={testPathsData} width={100} height={100} cellSize={50} />);
+  const testWrapper = mount(
+    <SolutionPaths
+      solutionPathsData={testPathsData}
+      width={100}
+      height={100}
+      cellSize={50}
+      activeSolution={1}
+      onSolutionClicked={() => null}
+      onSolutionHover={() => null}
+    />
+  );
 
   it('Should render the correct number of <SolutionPath /> components.', () => {
     expect(testWrapper).to.have.exactly(1).descendants(SolutionPath);
