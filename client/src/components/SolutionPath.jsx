@@ -4,17 +4,20 @@ import PropTypes from 'prop-types';
 const SolutionPath = ({
   pathData,
   isActive,
+  isPreview,
   onSolutionClicked,
   onSolutionHover,
   id,
 }) => {
   const pathStyle = {
     fill: 'none',
-    stroke: isActive ? 'white' : 'tomato',
-    strokeWidth: isActive ? 8 : 4,
+    stroke: isActive ? 'white' : isPreview ? 'steelblue' : 'tomato',
+    strokeWidth: (isActive || isPreview) ? 8 : 4,
     cursor: 'pointer',
+    transition: '3s',
   };
 
+  console.log('solution path rendering');
   return (
     <path
       d={pathData}
@@ -29,6 +32,7 @@ const SolutionPath = ({
 SolutionPath.propTypes = {
   pathData: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
+  isPreview: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
   onSolutionClicked: PropTypes.func.isRequired,
   onSolutionHover: PropTypes.func.isRequired,

@@ -5,6 +5,7 @@ import glamorous from 'glamorous';
 import ContainerDimensions from 'react-container-dimensions';
 import Matrix from '../components/Matrix';
 import SolutionPaths from '../components/SolutionPaths';
+import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const MatrixResizer = ({
   matrix,
@@ -32,6 +33,7 @@ const MatrixResizer = ({
           position: 'relative',
         });
 
+        console.log('rendering matrix resizer');
         return (<MatrixBox>
           <SolutionPaths
             width={matrixWidth}
@@ -73,4 +75,4 @@ MatrixResizer.propTypes = {
   onSolutionHover: PropTypes.func.isRequired,
 };
 
-export default MatrixResizer;
+export default PureImmutable()(MatrixResizer);

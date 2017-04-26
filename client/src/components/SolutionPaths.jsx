@@ -12,6 +12,7 @@ const SolutionPaths = ({
   height,
   cellSize,
   activeSolution,
+  previewSolution,
   onSolutionClicked,
   onSolutionHover,
 }) => {
@@ -33,39 +34,38 @@ const SolutionPaths = ({
         (segment, j) => (j === 0 ? `M${segment}` : `C${segment}`)
       ).join(' '),
     })
-  );
-  const activeSolutionPathData = resizedSolutionPathsData.get(activeSolution);
-  const inactiveSolutionPathsData = resizedSolutionPathsData.filter(
-    ({ id }) => id !== activeSolution
+  ).sort(
+    (a, b) => {
+      if (a.id === activeSolution) {
+        return 1;
+      } else if (a.id === previewSolution && b.id !== activeSolution) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
   );
 
   return (<Wrapper>
     {
-      inactiveSolutionPathsData.map(
+      resizedSolutionPathsData.map(
         ({ id, data }) => <SolutionPath
           key={id}
           id={id}
           pathData={data}
-          isActive={false}
+          isActive={id === activeSolution}
+          isPreview={id === previewSolution}
           onSolutionClicked={onSolutionClicked}
           onSolutionHover={onSolutionHover}
         />
       )
-    }
-    {
-      activeSolutionPathData && <SolutionPath
-        id={activeSolution}
-        pathData={activeSolutionPathData.data}
-        isActive
-        onSolutionClicked={onSolutionClicked}
-        onSolutionHover={onSolutionHover}
-      />
     }
   </Wrapper>);
 };
 
 SolutionPaths.defaultProps = {
   activeSolution: null,
+  previewSolution: null,
   solutionPathsData: List([]),
 };
 
@@ -77,6 +77,7 @@ SolutionPaths.propTypes = {
     ImmutablePropTypes.list
   ),
   activeSolution: PropTypes.number,
+  previewSolution: PropTypes.number,
   onSolutionClicked: PropTypes.func.isRequired,
   onSolutionHover: PropTypes.func.isRequired,
 };

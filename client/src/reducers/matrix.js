@@ -3,8 +3,8 @@ import { Map, List } from 'immutable';
 import { SET_MATRIX, SET_MATRIX_CELL } from '../constants/actionTypes';
 
 export const initialMatrix = Map({
-  cells: List([2, 7, 4, 9, 3, 8]),
-  columnCount: 2,
+  cells: List([2, 1, 3, 9, 3, 8, 2, 1, 5]),
+  columnCount: 3,
   rowCount: 3,
 });
 

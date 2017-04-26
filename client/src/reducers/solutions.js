@@ -50,6 +50,8 @@ const solutions = (state = initialSolutions, action) => {
       return state.set('activeSolution', nextActiveSolution);
     }
     case SET_PREVIEW_SOLUTION: {
+      if (action.solution === null) return state.set('previewSolution', null);
+
       const solutionCount = state.get('data').size;
       const nextPreviewSolution = action.solution % solutionCount;
 

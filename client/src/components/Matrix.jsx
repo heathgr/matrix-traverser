@@ -20,6 +20,7 @@ const Matrix = ({ width, height, cellSize, matrix }) => {
   });
   const columnCount = matrix.get('columnCount');
 
+  console.log('rendering Matrix');
   return (<Wrapper>
     {
       matrix.get('cells').groupBy(

@@ -36,6 +36,7 @@ describe('<SolutionList />', () => {
   it('Should display text indicating the number of solutions and current active solution.', () => {
     expect(testWrapper).to.contain.text('Viewing solution 2 of 4');
   });
+
   it('Should display buttons for selecting the next or previous solution.', () => {
     const buttons = testWrapper.find('button');
 
@@ -47,5 +48,7 @@ describe('<SolutionList />', () => {
     expect(prevSolutionClickedSpy.calledOnce).to.equal(true);
   });
 
-  xit('Should display a series of buttons for selecting a specfic solution.');
+  it('Should display a series of buttons for selecting a specfic solution.', () => {
+    
+  });
 });
