@@ -33,7 +33,6 @@ const MatrixResizer = ({
           position: 'relative',
         });
 
-        console.log('rendering matrix resizer');
         return (<MatrixBox>
           <SolutionPaths
             width={matrixWidth}

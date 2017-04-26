@@ -17,7 +17,6 @@ const SolutionPath = ({
     transition: '3s',
   };
 
-  console.log('solution path rendering');
   return (
     <path
       d={pathData}
