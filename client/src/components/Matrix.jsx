@@ -47,4 +47,4 @@ Matrix.propTypes = {
   }).isRequired,
 };
 
-export default PureImmutable()(Matrix);
+export default Matrix;

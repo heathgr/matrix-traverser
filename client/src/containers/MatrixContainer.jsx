@@ -1,7 +1,7 @@
 import glamorous from 'glamorous';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import {
@@ -21,64 +21,79 @@ import {
   setPreviewSolution,
 } from '../actions/solutionsActions';
 
-const Container = ({
-  matrix,
-  solutions,
-  activeSolution,
-  previewSolution,
-  solutionPathsData,
-  onSolutionClicked,
-  onNextSolutionClicked,
-  onPreviousSolutionClicked,
-  onSolutionHover,
-}) => {
-  const FlexFullWidthHeight = glamorous.div({
+const FlexFullWidthHeight = ({ children }) => (
+  <div style={{
     width: '100%',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-  });
+  }}>
+    {
+      children
+    }
+  </div>
+);
 
-  const MatrixWrapper = glamorous.div({
-    display: 'flex',
-    background: 'aqua',
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  });
+class Container extends Component {
 
-  return (
-    <FlexFullWidthHeight>
-      <MatrixWrapper>
-        <MatrixResizer
+  componentDidMount() {
+    console.log('matrix container did mount...');
+  }
+
+  render() {
+    const {
+      matrix,
+      solutions,
+      activeSolution,
+      previewSolution,
+      solutionPathsData,
+      onSolutionClicked,
+      onNextSolutionClicked,
+      onPreviousSolutionClicked,
+      onSolutionHover,
+    } = this.props;
+
+    const matrixWrapperStyle = {
+      display: 'flex',
+      background: 'aqua',
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
+    };
+
+    return (
+      <FlexFullWidthHeight>
+        <div style={matrixWrapperStyle}>
+          <MatrixResizer
+            {...{
+              matrix,
+              solutionPathsData,
+              activeSolution,
+              previewSolution,
+              onSolutionClicked,
+              onSolutionHover,
+            }}
+          />
+        </div>
+        <SolutionsList
           {...{
-            matrix,
-            solutionPathsData,
+            solutions,
             activeSolution,
             previewSolution,
             onSolutionClicked,
+            onNextSolutionClicked,
+            onPreviousSolutionClicked,
             onSolutionHover,
           }}
         />
-      </MatrixWrapper>
-      <SolutionsList
-        {...{
-          solutions,
-          activeSolution,
-          previewSolution,
-          onSolutionClicked,
-          onNextSolutionClicked,
-          onPreviousSolutionClicked,
-          onSolutionHover,
-        }}
-      />
-    </FlexFullWidthHeight>
-  );
-};
+      </FlexFullWidthHeight>
+    );
+  }
+}
 
 Container.defaultProps = {
   previewSolution: null,

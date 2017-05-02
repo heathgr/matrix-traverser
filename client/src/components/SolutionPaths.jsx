@@ -1,67 +1,72 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import glamourous from 'glamorous';
+import glamorous from 'glamorous';
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
+import SolutionPathsInteractionHandler from './SolutionPathsInteractionHandler';
 import SolutionPath from './SolutionPath';
 
-const SolutionPaths = ({
-  solutionPathsData,
-  width,
-  height,
-  cellSize,
-  activeSolution,
-  previewSolution,
-  onSolutionClicked,
-  onSolutionHover,
-}) => {
-  const Wrapper = glamourous.svg({
-    width,
-    height,
-    position: 'absolute',
-    top: 0,
-  });
+class SolutionPaths extends Component {
+  componentDidMount() {
+    console.log('Solution Paths Mounted...');
+  }
 
-  const resizedSolutionPathsData = solutionPathsData.map(
-    (pathData, i) => ({
-      id: i,
-      data: pathData.map(
+  render() {
+    const {
+      solutionPathsData,
+      width,
+      height,
+      cellSize,
+      activeSolution,
+      previewSolution,
+      onSolutionClicked,
+      onSolutionHover,
+    } = this.props;
+
+    const wrapperStyle = {
+      width,
+      height,
+      position: 'absolute',
+      top: 0,
+    };
+
+    const resizedSolutionPathsData = solutionPathsData.map(
+      pathData => pathData.map(
         segment => segment.map(
           point => `${(point.get('x') * cellSize) + (cellSize * 0.5)},${(point.get('y') * cellSize) + (cellSize * 0.5)}`
         ).join(' ')
       ).map(
         (segment, j) => (j === 0 ? `M${segment}` : `C${segment}`)
-      ).join(' '),
-    })
-  ).sort(
-    (a, b) => {
-      if (a.id === activeSolution) {
-        return 1;
-      } else if (a.id === previewSolution && b.id !== activeSolution) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-  );
+      ).join(' ')
+    );
 
-  return (<Wrapper>
-    {
-      resizedSolutionPathsData.map(
-        ({ id, data }) => <SolutionPath
-          key={id}
-          id={id}
-          pathData={data}
-          isActive={id === activeSolution}
-          isPreview={id === previewSolution}
-          onSolutionClicked={onSolutionClicked}
-          onSolutionHover={onSolutionHover}
-        />
-      )
-    }
-  </Wrapper>);
-};
+    return (<div style={wrapperStyle}>
+      <SolutionPathsInteractionHandler
+        width={width}
+        height={height}
+        solutionPathsData={resizedSolutionPathsData}
+        onSolutionClicked={onSolutionClicked}
+        onSolutionHover={onSolutionHover}
+      />
+      {
+        resizedSolutionPathsData.map(
+          (pathData, id) => <SolutionPath
+            key={id}
+            id={id}
+            width={width}
+            height={height}
+            pathData={pathData}
+            isActive={id === activeSolution}
+            isPreview={id === previewSolution}
+            onSolutionClicked={onSolutionClicked}
+            onSolutionHover={onSolutionHover}
+          />
+        )
+      }
+    </div>);
+  }
+}
 
 SolutionPaths.defaultProps = {
   activeSolution: null,
@@ -82,4 +87,4 @@ SolutionPaths.propTypes = {
   onSolutionHover: PropTypes.func.isRequired,
 };
 
-export default PureImmutable()(SolutionPaths);
+export default SolutionPaths;

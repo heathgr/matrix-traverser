@@ -38,7 +38,7 @@ const SolutionsList = ({
     <FlexRow>
       {
         solutions.map(
-          (solution, i) => <div>{`${i === activeSolution ? '*' : i + 1}`}</div>
+          (solution, i) => <div key={i}>{`${i === activeSolution ? '*' : i + 1}`}</div>
         )
       }
     </FlexRow>

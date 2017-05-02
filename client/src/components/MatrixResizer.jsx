@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import glamorous from 'glamorous';
@@ -7,54 +7,65 @@ import Matrix from '../components/Matrix';
 import SolutionPaths from '../components/SolutionPaths';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
-const MatrixResizer = ({
-  matrix,
-  solutionPathsData,
-  activeSolution,
-  previewSolution,
-  onSolutionClicked,
-  onSolutionHover,
-}) => (
-  <ContainerDimensions>
-    {
-      ({ width, height }) => {
-        const rowCount = matrix.get('rowCount');
-        const columnCount = matrix.get('columnCount');
-        const cellSize = Math.min(
-          height / rowCount,
-          width / columnCount
-        );
-        const matrixWidth = columnCount * cellSize;
-        const matrixHeight = rowCount * cellSize;
-        const MatrixBox = glamorous.div({
-          width: matrixWidth,
-          height: matrixHeight,
-          background: 'palegoldenrod',
-          position: 'relative',
-        });
+class MatrixResizer extends Component {
 
-        return (<MatrixBox>
-          <SolutionPaths
-            width={matrixWidth}
-            height={matrixHeight}
-            cellSize={cellSize}
-            solutionPathsData={solutionPathsData}
-            activeSolution={activeSolution}
-            previewSolution={previewSolution}
-            onSolutionClicked={onSolutionClicked}
-            onSolutionHover={onSolutionHover}
-          />
-          <Matrix
-            width={matrixWidth}
-            height={matrixHeight}
-            cellSize={cellSize}
-            matrix={matrix}
-          />
-        </MatrixBox>);
-      }
-    }
-  </ContainerDimensions>
-);
+  componentDidMount() {
+    console.log('matrix resizer did mount...');
+  }
+
+  render() {
+    const {
+      matrix,
+      solutionPathsData,
+      activeSolution,
+      previewSolution,
+      onSolutionClicked,
+      onSolutionHover,
+    } = this.props;
+
+    return (
+      <ContainerDimensions>
+        {
+          ({ width, height }) => {
+            const rowCount = matrix.get('rowCount');
+            const columnCount = matrix.get('columnCount');
+            const cellSize = Math.min(
+              height / rowCount,
+              width / columnCount
+            );
+            const matrixWidth = columnCount * cellSize;
+            const matrixHeight = rowCount * cellSize;
+            const matrixBoxStyle = {
+              width: matrixWidth,
+              height: matrixHeight,
+              background: 'palegoldenrod',
+              position: 'relative',
+            };
+
+            return (<div style={matrixBoxStyle}>
+              <SolutionPaths
+                width={matrixWidth}
+                height={matrixHeight}
+                cellSize={cellSize}
+                solutionPathsData={solutionPathsData}
+                activeSolution={activeSolution}
+                previewSolution={previewSolution}
+                onSolutionClicked={onSolutionClicked}
+                onSolutionHover={onSolutionHover}
+              />
+              <Matrix
+                width={matrixWidth}
+                height={matrixHeight}
+                cellSize={cellSize}
+                matrix={matrix}
+              />
+            </div>);
+          }
+        }
+      </ContainerDimensions>
+    );
+  }
+}
 
 MatrixResizer.defaultProps = {
   previewSolution: null,
@@ -74,4 +85,4 @@ MatrixResizer.propTypes = {
   onSolutionHover: PropTypes.func.isRequired,
 };
 
-export default PureImmutable()(MatrixResizer);
+export default MatrixResizer;

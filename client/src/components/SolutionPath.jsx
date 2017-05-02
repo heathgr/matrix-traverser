@@ -1,40 +1,86 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import glamorous from 'glamorous';
 
-const SolutionPath = ({
-  pathData,
-  isActive,
-  isPreview,
-  onSolutionClicked,
-  onSolutionHover,
-  id,
-}) => {
-  const pathStyle = {
-    fill: 'none',
-    stroke: isActive ? 'white' : isPreview ? 'steelblue' : 'tomato',
-    strokeWidth: (isActive || isPreview) ? 8 : 4,
-    cursor: 'pointer',
-    transition: '3s',
-  };
+class SolutionPath extends Component {
 
-  return (
-    <path
-      d={pathData}
-      style={pathStyle}
-      onClick={() => onSolutionClicked(id)}
-      onMouseEnter={() => onSolutionHover(id)}
-      onMouseLeave={() => onSolutionHover(null)}
-    />
-  );
-};
+  componentDidMount() {
+    console.log('Path data: ', this.props.pathData);
+    console.log(this.pathRef.getTotalLength());
+    console.log();
+  }
+
+  pathRef = null;
+
+  render() {
+    const {
+      width,
+      height,
+      pathData,
+      isActive,
+      isPreview,
+      id,
+    } = this.props;
+
+    const strokeWidth = () => {
+      if (isActive) {
+        return 10;
+      } else if (isPreview) {
+        return 8;
+      }
+      return 6;
+    };
+
+    const strokeColor = () => {
+      if (isActive) {
+        return 'white';
+      } else if (isPreview) {
+        return 'tomato';
+      }
+      return 'steelblue';
+    };
+
+    const zIndex = () => {
+      if (isActive) {
+        return 2;
+      } else if (isPreview) {
+        return 1;
+      }
+      return 0;
+    };
+
+    const wrapperStyle = {
+      width,
+      height,
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      fill: 'none',
+      stroke: strokeColor(),
+      strokeWidth: strokeWidth(),
+      zIndex: zIndex(),
+      transition: '0.5s',
+    };
+
+    return (
+      <svg style={wrapperStyle}>
+        <path
+          d={pathData}
+          onClick={() => onSolutionClicked(id)}
+          ref={(input) => { this.pathRef = input; }}
+        />
+      </svg>
+    );
+  }
+}
 
 SolutionPath.propTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
   pathData: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   isPreview: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
-  onSolutionClicked: PropTypes.func.isRequired,
-  onSolutionHover: PropTypes.func.isRequired,
 };
 
 export default SolutionPath;
