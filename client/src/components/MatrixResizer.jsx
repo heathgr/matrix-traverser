@@ -42,6 +42,8 @@ class MatrixResizer extends Component {
               position: 'relative',
             };
 
+            console.log('wh: ', width, height);
+
             return (<div style={matrixBoxStyle}>
               <SolutionPaths
                 width={matrixWidth}

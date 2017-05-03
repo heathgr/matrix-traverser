@@ -4,13 +4,24 @@ import glamorous from 'glamorous';
 
 class SolutionPath extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { offset: 0 };
+  }
+
   componentDidMount() {
-    console.log('Path data: ', this.props.pathData);
-    console.log(this.pathRef.getTotalLength());
-    console.log();
+    this.animatePathOffset = this.animatePathOffset.bind(this);
+    this.animatePathOffset();
   }
 
   pathRef = null;
+
+  animatePathOffset() {
+    if (this.pathRef) {
+      this.setState({ offset: (-performance.now()) * 0.025 });
+    }
+    window.requestAnimationFrame(this.animatePathOffset);
+  }
 
   render() {
     const {
@@ -23,19 +34,15 @@ class SolutionPath extends Component {
     } = this.props;
 
     const strokeWidth = () => {
-      if (isActive) {
-        return 10;
-      } else if (isPreview) {
-        return 8;
+      if (isActive || isPreview) {
+        return 6;
       }
-      return 6;
+      return 3;
     };
 
     const strokeColor = () => {
       if (isActive) {
         return 'white';
-      } else if (isPreview) {
-        return 'tomato';
       }
       return 'steelblue';
     };
@@ -58,8 +65,11 @@ class SolutionPath extends Component {
       fill: 'none',
       stroke: strokeColor(),
       strokeWidth: strokeWidth(),
+      strokeDasharray: '0px 8px',
+      strokeLinecap: 'round',
+      strokeDashoffset: this.state.offset,
       zIndex: zIndex(),
-      transition: '0.5s',
+      transition: 'stroke-width 0.5s, stroke 0.5s',
     };
 
     return (

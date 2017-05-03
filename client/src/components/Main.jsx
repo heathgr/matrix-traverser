@@ -29,11 +29,9 @@ const Main = () => {
   });
 
   return (<Wrapper>
-    <Header>Header</Header>
     <Body>
       <MatrixContainer />
     </Body>
-    <Footer>Footer</Footer>
   </Wrapper>);
 };
 
