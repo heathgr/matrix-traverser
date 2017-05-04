@@ -48,7 +48,6 @@ describe('<SolutionList />', () => {
     expect(prevSolutionClickedSpy.calledOnce).to.equal(true);
   });
 
-  it('Should display a series of buttons for selecting a specfic solution.', () => {
-    
+  xit('Should display a series of buttons for selecting a specfic solution.', () => {
   });
 });

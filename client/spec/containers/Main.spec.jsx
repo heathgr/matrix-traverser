@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import React from 'react';
 
-import MatrixContainer from '../../src/containers/MatrixContainer';
+import Main from '../../src/containers/Main';
 import Matrix from '../../src/components/Matrix';
 import SolutionPaths from '../../src/components/SolutionPaths';
 import SolutionsList from '../../src/components/SolutionsList';
@@ -19,12 +19,12 @@ const testStore = createStore(
   })
 );
 
-describe('<MatrixContainer />', () => {
+describe('<Main />', () => {
   chai.use(chaiEnzyme());
 
   const componentWrapper = mount(
     <Provider store={testStore}>
-      <MatrixContainer />
+      <Main />
     </Provider>
   );
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
 
 class SolutionPath extends Component {
 
@@ -10,16 +9,13 @@ class SolutionPath extends Component {
   }
 
   componentDidMount() {
+    console.log('performance', performance);
     this.animatePathOffset = this.animatePathOffset.bind(this);
     this.animatePathOffset();
   }
 
-  pathRef = null;
-
   animatePathOffset() {
-    if (this.pathRef) {
-      this.setState({ offset: (-performance.now()) * 0.025 });
-    }
+    this.setState({ offset: (-performance.now()) * 0.025 });
     window.requestAnimationFrame(this.animatePathOffset);
   }
 
@@ -30,7 +26,6 @@ class SolutionPath extends Component {
       pathData,
       isActive,
       isPreview,
-      id,
     } = this.props;
 
     const strokeWidth = () => {
@@ -74,11 +69,7 @@ class SolutionPath extends Component {
 
     return (
       <svg style={wrapperStyle}>
-        <path
-          d={pathData}
-          onClick={() => onSolutionClicked(id)}
-          ref={(input) => { this.pathRef = input; }}
-        />
+        <path d={pathData} />
       </svg>
     );
   }
@@ -90,7 +81,6 @@ SolutionPath.propTypes = {
   pathData: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   isPreview: PropTypes.bool.isRequired,
-  id: PropTypes.number.isRequired,
 };
 
 export default SolutionPath;

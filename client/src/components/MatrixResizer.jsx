@@ -1,18 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import glamorous from 'glamorous';
 import ContainerDimensions from 'react-container-dimensions';
 import Matrix from '../components/Matrix';
 import SolutionPaths from '../components/SolutionPaths';
-import PureImmutable from '../helpers/hocs/PureImmutable';
+// import PureImmutable from '../helpers/hocs/PureImmutable';
 
 class MatrixResizer extends Component {
-
-  componentDidMount() {
-    console.log('matrix resizer did mount...');
-  }
-
   render() {
     const {
       matrix,
@@ -41,8 +35,6 @@ class MatrixResizer extends Component {
               background: 'palegoldenrod',
               position: 'relative',
             };
-
-            console.log('wh: ', width, height);
 
             return (<div style={matrixBoxStyle}>
               <SolutionPaths

@@ -1,17 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import glamorous from 'glamorous';
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import PureImmutable from '../helpers/hocs/PureImmutable';
+// import PureImmutable from '../helpers/hocs/PureImmutable';
 import SolutionPathsInteractionHandler from './SolutionPathsInteractionHandler';
 import SolutionPath from './SolutionPath';
 
 class SolutionPaths extends Component {
-  componentDidMount() {
-    console.log('Solution Paths Mounted...');
-  }
-
   render() {
     const {
       solutionPathsData,

@@ -1,20 +1,46 @@
 import React from 'react';
-import glamorous from 'glamorous';
 import PropTypes from 'prop-types';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const MatrixCell = ({ cell, cellSize }) => {
-  const Wrapper = glamorous.div({
+  const wrapperStyle = {
     width: cellSize,
     height: cellSize,
+    position: 'relative',
+  };
+
+  const textStyle = {
+    width: cellSize,
+    height: cellSize,
+    position: 'absolute',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-  });
+    top: 0,
+    lef: 0,
+    fontWeight: 'bold',
+    fontSize: 20,
+    fontFamily: 'sans-serif',
+    color: 'white',
+  };
 
-  return (<Wrapper>
-    {cell}
-  </Wrapper>);
+  const circleStyle = {
+    fill: 'steelblue',
+    fillOpacity: '0.8',
+    stroke: 'white',
+    strokeWidth: '2',
+  };
+
+  return (
+  <div style={wrapperStyle}>
+    <svg width={cellSize} height={cellSize}>
+      <circle cx={cellSize * 0.5} cy={cellSize * 0.5} r={cellSize * 0.15} style={circleStyle}/>
+    </svg>
+    <div style={textStyle}>
+      {cell}
+    </div>
+  </div>
+  );
 };
 
 MatrixCell.propTypes = {

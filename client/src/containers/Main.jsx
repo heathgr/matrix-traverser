@@ -1,4 +1,3 @@
-import glamorous from 'glamorous';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import React, { Component } from 'react';
@@ -21,27 +20,7 @@ import {
   setPreviewSolution,
 } from '../actions/solutionsActions';
 
-const FlexFullWidthHeight = ({ children }) => (
-  <div style={{
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}>
-    {
-      children
-    }
-  </div>
-);
-
 class Container extends Component {
-
-  componentDidMount() {
-    console.log('matrix container did mount...');
-  }
-
   render() {
     const {
       matrix,
@@ -65,8 +44,17 @@ class Container extends Component {
       flex: 1,
     };
 
+    const wrapperStyle = {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    };
+
     return (
-      <FlexFullWidthHeight>
+      <div style={wrapperStyle}>
         <div style={matrixWrapperStyle}>
           <MatrixResizer
             {...{
@@ -90,7 +78,7 @@ class Container extends Component {
             onSolutionHover,
           }}
         />
-      </FlexFullWidthHeight>
+      </div>
     );
   }
 }
