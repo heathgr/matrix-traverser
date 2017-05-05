@@ -7,6 +7,22 @@ import SolutionPathsInteractionHandler from './SolutionPathsInteractionHandler';
 import SolutionPath from './SolutionPath';
 
 class SolutionPaths extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { pathOffset: 0 };
+  }
+
+  componentDidMount() {
+    this.animatePathOffset = this.animatePathOffset.bind(this);
+    this.animatePathOffset();
+  }
+
+  animatePathOffset() {
+    this.setState({ pathOffset: (-performance.now()) * 0.025 });
+    window.requestAnimationFrame(this.animatePathOffset);
+  }
+
   render() {
     const {
       solutionPathsData,
@@ -54,6 +70,7 @@ class SolutionPaths extends Component {
             pathData={pathData}
             isActive={id === activeSolution}
             isPreview={id === previewSolution}
+            pathOffset={this.state.pathOffset}
             onSolutionClicked={onSolutionClicked}
             onSolutionHover={onSolutionHover}
           />

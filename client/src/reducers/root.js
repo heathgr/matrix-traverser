@@ -34,8 +34,9 @@ export const getSolutionPathsData = createSelector(
         cellIndex => calcMatrixCellPosition(cellIndex, columnCount)
       )
     );
+    const pathWeightStep = (1 / (solutionsState.size - 1)) * 3;
     const solutionPathsData = solutionPoints.map(
-      solution => bezierPathFromMatrixPoints(solution, 4)
+      (solution, i) => bezierPathFromMatrixPoints(solution, 3 + (pathWeightStep * i))
     );
     return solutionPathsData;
   }

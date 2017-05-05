@@ -3,22 +3,6 @@ import PropTypes from 'prop-types';
 
 class SolutionPath extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { offset: 0 };
-  }
-
-  componentDidMount() {
-    console.log('performance', performance);
-    this.animatePathOffset = this.animatePathOffset.bind(this);
-    this.animatePathOffset();
-  }
-
-  animatePathOffset() {
-    this.setState({ offset: (-performance.now()) * 0.025 });
-    window.requestAnimationFrame(this.animatePathOffset);
-  }
-
   render() {
     const {
       width,
@@ -26,6 +10,7 @@ class SolutionPath extends Component {
       pathData,
       isActive,
       isPreview,
+      pathOffset,
     } = this.props;
 
     const strokeWidth = () => {
@@ -62,7 +47,7 @@ class SolutionPath extends Component {
       strokeWidth: strokeWidth(),
       strokeDasharray: '0px 8px',
       strokeLinecap: 'round',
-      strokeDashoffset: this.state.offset,
+      strokeDashoffset: pathOffset,
       zIndex: zIndex(),
       transition: 'stroke-width 0.5s, stroke 0.5s',
     };
@@ -81,6 +66,7 @@ SolutionPath.propTypes = {
   pathData: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   isPreview: PropTypes.bool.isRequired,
+  pathOffset: PropTypes.number.isRequired,
 };
 
 export default SolutionPath;
