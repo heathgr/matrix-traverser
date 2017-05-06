@@ -2,22 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { List } from 'immutable';
-import glamorous from 'glamorous';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const SolutionPathsInteractionHandler = ({ width, height, solutionPathsData, onSolutionClicked, onSolutionHover }) => {
-  const Wrapper = glamorous.svg({
+  const wrapperStyle = {
     width,
     height,
     fill: 'none',
     stroke: 'rgba(0, 0, 0, 0)',
-    strokeWidth: 15,
+    strokeWidth: 6,
     position: 'absolute',
     zIndex: 10,
-  });
+  };
 
   return (
-    <Wrapper>
+    <svg style={wrapperStyle}>
       {
         solutionPathsData.map(
           (pathData, i) => <path
@@ -29,7 +28,7 @@ const SolutionPathsInteractionHandler = ({ width, height, solutionPathsData, onS
           />
         )
       }
-    </Wrapper>
+    </svg>
   );
 };
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import glamorous from 'glamorous';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const SolutionsList = ({
@@ -12,7 +11,7 @@ const SolutionsList = ({
   onNextSolutionClicked,
   onPreviousSolutionClicked,
 }) => {
-  const Wrapper = glamorous.div({
+  const wrapperStyle = {
     width: '100%',
     height: '20%',
     maxHeight: 50,
@@ -23,26 +22,26 @@ const SolutionsList = ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  });
-  const FlexRow = glamorous.div({
+  };
+  const flexRowStyle = {
     display: 'flex',
     flexDirection: 'row',
-  });
+  };
 
-  return (<Wrapper>
-    <FlexRow>
+  return (<div style={wrapperStyle}>
+    <div style={flexRowStyle}>
       <button onClick={() => onPreviousSolutionClicked()}>Prev</button>
       <div>{`Viewing solution ${activeSolution + 1} of ${solutions.size}`}</div>
       <button onClick={() => onNextSolutionClicked()}>Next</button>
-    </FlexRow>
-    <FlexRow>
+    </div>
+    <div style={flexRowStyle}>
       {
         solutions.map(
           (solution, i) => <div key={i}>{`${i === activeSolution ? '*' : i + 1}`}</div>
         )
       }
-    </FlexRow>
-  </Wrapper>);
+    </div>
+  </div>);
 };
 
 SolutionsList.propTypes = {
