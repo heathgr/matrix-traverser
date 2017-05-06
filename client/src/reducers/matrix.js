@@ -3,9 +3,9 @@ import { Map, List } from 'immutable';
 import { SET_MATRIX, SET_MATRIX_CELL } from '../constants/actionTypes';
 
 export const initialMatrix = Map({
-  cells: List([2, 1, 3, 9, 3, 8, 2, 1, 5]),
+  cells: List([0, 1, 3, 9, 3, 8, 2, 1, 5, 9, 0, 8]),
   columnCount: 3,
-  rowCount: 3,
+  rowCount: 4,
 });
 
 const matrix = (state = initialMatrix, action) => {

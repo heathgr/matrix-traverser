@@ -11,16 +11,24 @@ class SolutionPaths extends Component {
   constructor(props) {
     super(props);
     this.state = { pathOffset: 0 };
+    this.animatePathOffset = this.animatePathOffset.bind(this);
+    this.mounted = false;
   }
 
   componentDidMount() {
-    this.animatePathOffset = this.animatePathOffset.bind(this);
+    this.mounted = true;
     this.animatePathOffset();
   }
 
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   animatePathOffset() {
-    this.setState({ pathOffset: (-performance.now()) * 0.025 });
-    window.requestAnimationFrame(this.animatePathOffset);
+    if (this.mounted) {
+      this.setState({ pathOffset: (-performance.now()) * 0.025 });
+      window.requestAnimationFrame(this.animatePathOffset);
+    }
   }
 
   render() {

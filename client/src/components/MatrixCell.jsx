@@ -26,7 +26,7 @@ const MatrixCell = ({ cell, cellSize }) => {
 
   const circleStyle = {
     fill: 'steelblue',
-    fillOpacity: '0.8',
+    fillOpacity: '0.85',
     stroke: 'white',
     strokeWidth: '2',
   };
