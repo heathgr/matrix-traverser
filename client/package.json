@@ -17,8 +17,6 @@
   "dependencies": {
     "axios": "^0.16.0",
     "babel-polyfill": "^6.23.0",
-    "glamor": "^2.20.24",
-    "glamorous": "^3.5.0",
     "immutable": "^3.8.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
