@@ -1,64 +1,59 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class SolutionPath extends Component {
+const SolutionPath = ({
+  width,
+  height,
+  pathData,
+  isActive,
+  isPreview,
+  pathOffset,
+}) => {
+  const strokeWidth = () => {
+    if (isActive || isPreview) {
+      return 6;
+    }
+    return 3;
+  };
 
-  render() {
-    const {
-      width,
-      height,
-      pathData,
-      isActive,
-      isPreview,
-      pathOffset,
-    } = this.props;
+  const strokeColor = () => {
+    if (isActive) {
+      return 'white';
+    }
+    return 'steelblue';
+  };
 
-    const strokeWidth = () => {
-      if (isActive || isPreview) {
-        return 6;
-      }
-      return 3;
-    };
+  const zIndex = () => {
+    if (isActive) {
+      return 2;
+    } else if (isPreview) {
+      return 1;
+    }
+    return 0;
+  };
 
-    const strokeColor = () => {
-      if (isActive) {
-        return 'white';
-      }
-      return 'steelblue';
-    };
+  const wrapperStyle = {
+    width,
+    height,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    fill: 'none',
+    stroke: strokeColor(),
+    strokeWidth: strokeWidth(),
+    strokeDasharray: '0px 8px',
+    strokeLinecap: 'round',
+    strokeDashoffset: pathOffset,
+    zIndex: zIndex(),
+    transition: 'stroke-width 0.5s, stroke 0.5s',
+  };
 
-    const zIndex = () => {
-      if (isActive) {
-        return 2;
-      } else if (isPreview) {
-        return 1;
-      }
-      return 0;
-    };
-
-    const wrapperStyle = {
-      width,
-      height,
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      fill: 'none',
-      stroke: strokeColor(),
-      strokeWidth: strokeWidth(),
-      strokeDasharray: '0px 8px',
-      strokeLinecap: 'round',
-      strokeDashoffset: pathOffset,
-      zIndex: zIndex(),
-      transition: 'stroke-width 0.5s, stroke 0.5s',
-    };
-
-    return (
-      <svg style={wrapperStyle}>
-        <path d={pathData} />
-      </svg>
-    );
-  }
-}
+  return (
+    <svg style={wrapperStyle}>
+      <path d={pathData} />
+    </svg>
+  );
+};
 
 SolutionPath.propTypes = {
   width: PropTypes.number.isRequired,

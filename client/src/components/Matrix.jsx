@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-// import PureImmutable from '../helpers/hocs/PureImmutable';
+import PureImmutable from '../helpers/hocs/PureImmutable';
 import MatrixCell from './MatrixCell';
 
 const Matrix = ({ width, height, cellSize, matrix }) => {
@@ -47,4 +47,4 @@ Matrix.propTypes = {
   }).isRequired,
 };
 
-export default Matrix;
+export default PureImmutable()(Matrix);

@@ -1,65 +1,59 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ContainerDimensions from 'react-container-dimensions';
 import Matrix from '../components/Matrix';
 import SolutionPaths from '../components/SolutionPaths';
-// import PureImmutable from '../helpers/hocs/PureImmutable';
+import PureImmutable from '../helpers/hocs/PureImmutable';
 
-class MatrixResizer extends Component {
-  render() {
-    const {
-      matrix,
-      solutionPathsData,
-      activeSolution,
-      previewSolution,
-      onSolutionClicked,
-      onSolutionHover,
-    } = this.props;
+const MatrixResizer = ({
+  matrix,
+  solutionPathsData,
+  activeSolution,
+  previewSolution,
+  onSolutionClicked,
+  onSolutionHover,
+}) => (
+  <ContainerDimensions>
+    {
+      ({ width, height }) => {
+        const rowCount = matrix.get('rowCount');
+        const columnCount = matrix.get('columnCount');
+        const cellSize = Math.min(
+          height / rowCount,
+          width / columnCount
+        );
+        const matrixWidth = columnCount * cellSize;
+        const matrixHeight = rowCount * cellSize;
+        const matrixBoxStyle = {
+          width: matrixWidth,
+          height: matrixHeight,
+          background: 'palegoldenrod',
+          position: 'relative',
+        };
 
-    return (
-      <ContainerDimensions>
-        {
-          ({ width, height }) => {
-            const rowCount = matrix.get('rowCount');
-            const columnCount = matrix.get('columnCount');
-            const cellSize = Math.min(
-              height / rowCount,
-              width / columnCount
-            );
-            const matrixWidth = columnCount * cellSize;
-            const matrixHeight = rowCount * cellSize;
-            const matrixBoxStyle = {
-              width: matrixWidth,
-              height: matrixHeight,
-              background: 'palegoldenrod',
-              position: 'relative',
-            };
-
-            return (<div style={matrixBoxStyle}>
-              <SolutionPaths
-                width={matrixWidth}
-                height={matrixHeight}
-                cellSize={cellSize}
-                solutionPathsData={solutionPathsData}
-                activeSolution={activeSolution}
-                previewSolution={previewSolution}
-                onSolutionClicked={onSolutionClicked}
-                onSolutionHover={onSolutionHover}
-              />
-              <Matrix
-                width={matrixWidth}
-                height={matrixHeight}
-                cellSize={cellSize}
-                matrix={matrix}
-              />
-            </div>);
-          }
-        }
-      </ContainerDimensions>
-    );
-  }
-}
+        return (<div style={matrixBoxStyle}>
+          <SolutionPaths
+            width={matrixWidth}
+            height={matrixHeight}
+            cellSize={cellSize}
+            solutionPathsData={solutionPathsData}
+            activeSolution={activeSolution}
+            previewSolution={previewSolution}
+            onSolutionClicked={onSolutionClicked}
+            onSolutionHover={onSolutionHover}
+          />
+          <Matrix
+            width={matrixWidth}
+            height={matrixHeight}
+            cellSize={cellSize}
+            matrix={matrix}
+          />
+        </div>);
+      }
+    }
+  </ContainerDimensions>
+);
 
 MatrixResizer.defaultProps = {
   previewSolution: null,
@@ -79,4 +73,4 @@ MatrixResizer.propTypes = {
   onSolutionHover: PropTypes.func.isRequired,
 };
 
-export default MatrixResizer;
+export default PureImmutable()(MatrixResizer);
