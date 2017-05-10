@@ -27,7 +27,8 @@
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.3",
-    "reselect": "^3.0.0"
+    "reselect": "^3.0.0",
+    "style-it": "^1.6.8"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",

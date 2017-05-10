@@ -27,7 +27,7 @@ class SolutionPaths extends Component {
   animatePathOffset() {
     if (this.mounted) {
       this.setState({ pathOffset: (-performance.now()) * 0.025 });
-      window.requestAnimationFrame(this.animatePathOffset);
+      // window.requestAnimationFrame(this.animatePathOffset);
     }
   }
 
