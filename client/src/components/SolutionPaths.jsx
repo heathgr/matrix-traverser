@@ -1,92 +1,63 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-// import PureImmutable from '../helpers/hocs/PureImmutable';
+import PureImmutable from '../helpers/hocs/PureImmutable';
 import SolutionPathsInteractionHandler from './SolutionPathsInteractionHandler';
 import SolutionPath from './SolutionPath';
 
-class SolutionPaths extends Component {
+const SolutionPaths = ({
+  solutionPathsData,
+  width,
+  height,
+  cellSize,
+  activeSolution,
+  previewSolution,
+  onSolutionClicked,
+  onSolutionHover,
+}) => {
+  const wrapperStyle = {
+    width,
+    height,
+    position: 'absolute',
+    top: 0,
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = { pathOffset: 0 };
-    this.animatePathOffset = this.animatePathOffset.bind(this);
-    this.mounted = false;
-  }
-
-  componentDidMount() {
-    this.mounted = true;
-    this.animatePathOffset();
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  animatePathOffset() {
-    if (this.mounted) {
-      this.setState({ pathOffset: (-performance.now()) * 0.025 });
-      // window.requestAnimationFrame(this.animatePathOffset);
-    }
-  }
-
-  render() {
-    const {
-      solutionPathsData,
-      width,
-      height,
-      cellSize,
-      activeSolution,
-      previewSolution,
-      onSolutionClicked,
-      onSolutionHover,
-    } = this.props;
-
-    const wrapperStyle = {
-      width,
-      height,
-      position: 'absolute',
-      top: 0,
-    };
-
-    const resizedSolutionPathsData = solutionPathsData.map(
-      pathData => pathData.map(
-        segment => segment.map(
-          point => `${(point.get('x') * cellSize) + (cellSize * 0.5)},${(point.get('y') * cellSize) + (cellSize * 0.5)}`
-        ).join(' ')
-      ).map(
-        (segment, j) => (j === 0 ? `M${segment}` : `C${segment}`)
+  const resizedSolutionPathsData = solutionPathsData.map(
+    pathData => pathData.map(
+      segment => segment.map(
+        point => `${(point.get('x') * cellSize) + (cellSize * 0.5)},${(point.get('y') * cellSize) + (cellSize * 0.5)}`
       ).join(' ')
-    );
+    ).map(
+      (segment, j) => (j === 0 ? `M${segment}` : `C${segment}`)
+    ).join(' ')
+  );
 
-    return (<div style={wrapperStyle}>
-      <SolutionPathsInteractionHandler
-        width={width}
-        height={height}
-        solutionPathsData={resizedSolutionPathsData}
-        onSolutionClicked={onSolutionClicked}
-        onSolutionHover={onSolutionHover}
-      />
-      {
-        resizedSolutionPathsData.map(
-          (pathData, id) => <SolutionPath
-            key={id}
-            id={id}
-            width={width}
-            height={height}
-            pathData={pathData}
-            isActive={id === activeSolution}
-            isPreview={id === previewSolution}
-            pathOffset={this.state.pathOffset}
-            onSolutionClicked={onSolutionClicked}
-            onSolutionHover={onSolutionHover}
-          />
-        )
-      }
-    </div>);
-  }
-}
+  return (<div style={wrapperStyle}>
+    <SolutionPathsInteractionHandler
+      width={width}
+      height={height}
+      solutionPathsData={resizedSolutionPathsData}
+      onSolutionClicked={onSolutionClicked}
+      onSolutionHover={onSolutionHover}
+    />
+    {
+      resizedSolutionPathsData.map(
+        (pathData, id) => <SolutionPath
+          key={id}
+          id={id}
+          width={width}
+          height={height}
+          pathData={pathData}
+          isActive={id === activeSolution}
+          isPreview={id === previewSolution}
+          onSolutionClicked={onSolutionClicked}
+          onSolutionHover={onSolutionHover}
+        />
+      )
+    }
+  </div>);
+};
 
 SolutionPaths.defaultProps = {
   activeSolution: null,
@@ -107,4 +78,4 @@ SolutionPaths.propTypes = {
   onSolutionHover: PropTypes.func.isRequired,
 };
 
-export default SolutionPaths;
+export default PureImmutable()(SolutionPaths);
