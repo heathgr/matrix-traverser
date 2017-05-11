@@ -51,20 +51,26 @@ class SolutionPath extends Component {
         100% { stroke-dashoffset: -${this.state.pathLength}px; }
       }
 
+      @keyframes reveal {
+        0% {stroke-opacity: 0; }
+        100% {stroke-opacity: 1; }
+      }
+
       .path {
         fill: none;
         stroke: ${strokeColor()};
         stroke-width: ${strokeWidth()}px;
         stroke-dasharray: 0px 8px;
         stroke-linecap: round;
-        stroke-dashoffset: 0;
         width: ${width}px;
         height: ${height}px;
         position: absolute;
         top: 0px;
         left: 0px;
         z-index: ${zIndex()};
-        animation: ${this.state.pathLength * 0.05}s linear infinite normal pathSlide-${id};
+        animation:
+          ${this.state.pathLength * 0.05}s linear infinite normal pathSlide-${id},
+          1s ease reveal;
         transition: stroke-width ease 1s, stroke ease 0.5s;
       }
     `, (
