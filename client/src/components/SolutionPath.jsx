@@ -45,6 +45,16 @@ class SolutionPath extends Component {
       return 0;
     };
 
+    const getPathLength = ref => {
+      if (ref) {
+        if (ref.getTotalLength){
+          return ref.getTotalLength();
+        }
+        return 1;
+      }
+      return 0;
+    };
+
     return Style.it(`
       @keyframes pathSlide-${id} {
         0% { stroke-dashoffset: 0px; }
@@ -82,7 +92,7 @@ class SolutionPath extends Component {
               if (!this.state.pathLength) {
                 this.setState({
                   ...this.state,
-                  pathLength: ref ? ref.getTotalLength() : 0,
+                  pathLength: getPathLength(ref),
                 });
               }
             }

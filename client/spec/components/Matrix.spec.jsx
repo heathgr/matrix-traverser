@@ -10,7 +10,28 @@ describe('<Matrix />', () => {
   chai.use(chaiEnzyme());
 
   const testMatrix = fromJS({
-    cells: [1, 2, 3, 4],
+    cells: [
+      {
+        value: 1,
+        previewPosition: 0,
+        activePosition: 0,
+      },
+      {
+        value: 2,
+        previewPosition: 1,
+        activePosition: 1,
+      },
+      {
+        value: 3,
+        previewPosition: 2,
+        activePosition: 2,
+      },
+      {
+        value: 4,
+        previewPosition: 3,
+        activePosition: 3,
+      },
+    ],
     columnCount: 2,
     rowCount: 2,
   });

@@ -1,6 +1,7 @@
 /** @module reducers/root */
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
+import { Map } from 'immutable';
 import matrix, * as fromMatrix from './matrix';
 import solutions, * as fromSolutions from './solutions';
 import calcMatrixCellPosition from '../helpers/calcMatrixCellPosition';
@@ -20,9 +21,20 @@ export const getMatrix = state => fromMatrix.getMatrix(state.matrix);
 /**
  * The selector for the solutions state.
  * @param {Object} state - The application state.
+ * @return {List.<List.<Integer>>} - A list containing the traversal solutions.
  */
 export const getSolutions = state => fromSolutions.getSolutions(state.solutions);
+/**
+ * The selector for the active solution
+ * @param {Object} state - The application state.
+ * @return {Integer} - The index of the active solution.
+ */
 export const getActiveSolution = state => fromSolutions.getActiveSolution(state.solutions);
+/**
+ * The selector for the preview solution
+ * @param {Object} state - The application state.
+ * @return {Integer} - The index of the preview solution.
+ */
 export const getPreviewSolution = state => fromSolutions.getPreviewSolution(state.solutions);
 
 export const getSolutionPathsData = createSelector(
@@ -39,6 +51,29 @@ export const getSolutionPathsData = createSelector(
       (solution, i) => bezierPathFromMatrixPoints(solution, 4 + (pathWeightStep * i))
     );
     return solutionPathsData;
+  }
+);
+
+export const getDetailedMatrix = createSelector(
+  [getMatrix, getSolutions, getActiveSolution, getPreviewSolution],
+  (matrixState, solutionsState, activeSolutionIndex, previewSolutionIndex) => {
+    const matrixCells = matrixState.get('cells');
+    const activeSolution = solutionsState.get(activeSolutionIndex);
+    const previewSolution = solutionsState.get(previewSolutionIndex);
+    const newMatrixCells = matrixCells.map(
+      (cell, id) => {
+        const activePosition = activeSolution ? activeSolution.indexOf(id) : null;
+        const previewPosition = previewSolution ? previewSolution.indexOf(id) : null;
+
+        return Map({
+          value: cell,
+          activePosition: activePosition > -1 ? activePosition : null,
+          previewPosition: previewPosition > -1 ? previewPosition : null,
+        })
+      }
+    );
+
+    return matrixState.set('cells', newMatrixCells);
   }
 );
 

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { is } from 'immutable';
+import { is, fromJS } from 'immutable';
 import { testMatrix, testMatrixWithModifiedCell } from '../testData/testMatrixData';
 import matrix, { initialMatrix } from '../../src/reducers/matrix';
 import { setMatrix, setMatrixCell } from '../../src/actions/matrixActions';
@@ -8,7 +8,7 @@ describe('Matrix Reducer', () => {
   it('Should correctly handle a SET_MATRIX action.', () => {
     const testAction = setMatrix(testMatrix);
     const testState = matrix({}, testAction);
-    const expectedState = testMatrix;
+    const expectedState = fromJS(testMatrix);
 
     expect(is(testState, expectedState)).to.equal(true);
   });

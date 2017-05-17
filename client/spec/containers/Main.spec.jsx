@@ -6,8 +6,7 @@ import { createStore } from 'redux';
 import React from 'react';
 
 import Main from '../../src/containers/Main';
-import Matrix from '../../src/components/Matrix';
-import SolutionPaths from '../../src/components/SolutionPaths';
+import MatrixResizer from '../../src/components/MatrixResizer';
 import SolutionsList from '../../src/components/SolutionsList';
 import { initialSolutions } from '../../src/reducers/solutions';
 import { testMatrix } from '../testData/testMatrixData';
@@ -28,23 +27,17 @@ describe('<Main />', () => {
     </Provider>
   );
 
-  it('Should render a <Matrix /> component with the matrix state and solutions state passed as a props.', () => {
-    expect(componentWrapper).to.contain(
-      <Matrix width={0} height={0} cellSize={0} matrix={testMatrix} />
-    );
-  });
+  it('Should render a <MatrixResizer /> component with the matrix state and solutions state passed as a props.', () => {
+    const matrixResizerWrapper = componentWrapper.find(MatrixResizer);
 
-  it('Should render a <SolutionPaths /> component with correct props passed from the app state.', () => {
-    const solutionPathsWrapper = componentWrapper.find(SolutionPaths);
-
-    expect(componentWrapper).to.have.exactly(1).descendants(SolutionPaths);
-    expect(solutionPathsWrapper).to.have.prop('width');
-    expect(solutionPathsWrapper).to.have.prop('height');
-    expect(solutionPathsWrapper).to.have.prop('cellSize');
-    expect(solutionPathsWrapper).to.have.prop('solutionPathsData');
-    expect(solutionPathsWrapper).to.have.prop('activeSolution');
-    expect(solutionPathsWrapper).to.have.prop('onSolutionClicked');
-    expect(solutionPathsWrapper).to.have.prop('onSolutionHover');
+    console.log('test props', matrixResizerWrapper.props());
+    expect(componentWrapper).to.have.exactly(1).descendants(MatrixResizer);
+    expect(matrixResizerWrapper).to.have.prop('matrix');
+    expect(matrixResizerWrapper).to.have.prop('solutionPathsData');
+    expect(matrixResizerWrapper).to.have.prop('activeSolution');
+    expect(matrixResizerWrapper).to.have.prop('previewSolution');
+    expect(matrixResizerWrapper).to.have.prop('onSolutionClicked');
+    expect(matrixResizerWrapper).to.have.prop('onSolutionClicked');
   });
 
   it('Should render a <SolutionsList /> component with correct props passed from the app state.', () => {

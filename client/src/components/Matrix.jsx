@@ -42,7 +42,11 @@ Matrix.propTypes = {
   height: PropTypes.number.isRequired,
   cellSize: PropTypes.number.isRequired,
   matrix: ImmutablePropTypes.mapContains({
-    cells: ImmutablePropTypes.listOf(PropTypes.number).isRequired,
+    cells: ImmutablePropTypes.listOf(ImmutablePropTypes.mapContains({
+      value: PropTypes.number.isRequired,
+      activePosition: PropTypes.number,
+      previewPosition: PropTypes.number,
+    })).isRequired,
     columnCount: PropTypes.number.isRequired,
   }).isRequired,
 };

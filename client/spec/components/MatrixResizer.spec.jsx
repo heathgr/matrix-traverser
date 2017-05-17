@@ -12,7 +12,38 @@ describe('<MatrixResizer />', () => {
   chai.use(chaiEnzyme());
 
   const testMatrix = Map({
-    cells: List([0, 3, 9, 10, 2, 8]),
+    cells: List([
+      Map({
+        value: 0,
+        activePosition: 0,
+        previewPosition: 0,
+      }),
+      Map({
+        value: 3,
+        activePosition: 0,
+        previewPosition: 0,
+      }),
+      Map({
+        value: 9,
+        activePosition: 0,
+        previewPosition: 0,
+      }),
+      Map({
+        value: 10,
+        activePosition: 0,
+        previewPosition: 0,
+      }),
+      Map({
+        value: 2,
+        activePosition: 0,
+        previewPosition: 0,
+      }),
+      Map({
+        value: 8,
+        activePosition: 0,
+        previewPosition: 0,
+      }),
+    ]),
     columnCount: 2,
     rowCount: 3,
   });

@@ -1,8 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const MatrixCell = ({ cell, cellSize }) => {
+  const activePosition = cell.get('activePosition');
+  const previewPosition = cell.get('previewPosition');
+  const opacity = (() => {
+    if (activePosition !== null) {
+      return 1;
+    } else if (previewPosition !== null) {
+      return 0.85;
+    }
+    return 0.5;
+  })();
+
   const wrapperStyle = {
     width: cellSize,
     height: cellSize,
@@ -22,6 +34,8 @@ const MatrixCell = ({ cell, cellSize }) => {
     fontSize: 20,
     fontFamily: 'sans-serif',
     color: 'white',
+    opacity,
+    transition: '1s',
   };
 
   const circleStyle = {
@@ -29,6 +43,8 @@ const MatrixCell = ({ cell, cellSize }) => {
     fillOpacity: '0.85',
     stroke: 'white',
     strokeWidth: '2',
+    opacity,
+    transition: '1s',
   };
 
   return (
@@ -37,14 +53,18 @@ const MatrixCell = ({ cell, cellSize }) => {
       <circle cx={cellSize * 0.5} cy={cellSize * 0.5} r={cellSize * 0.15} style={circleStyle}/>
     </svg>
     <div style={textStyle}>
-      {cell}
+      {cell.get('value')}
     </div>
   </div>
   );
 };
 
 MatrixCell.propTypes = {
-  cell: PropTypes.number.isRequired,
+  cell: ImmutablePropTypes.mapContains({
+    value: PropTypes.number.isRequired,
+    activePosition: PropTypes.number,
+    previewPosition: PropTypes.number,
+  }).isRequired,
   cellSize: PropTypes.number.isRequired,
 };
 

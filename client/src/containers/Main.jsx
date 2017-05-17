@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import {
-  getMatrix,
+  getDetailedMatrix,
   getSolutionPathsData,
   getSolutions,
   getActiveSolution,
@@ -89,7 +89,11 @@ Container.defaultProps = {
 
 Container.propTypes = {
   matrix: ImmutablePropTypes.mapContains({
-    cells: ImmutablePropTypes.listOf(PropTypes.number).isRequired,
+    cells: ImmutablePropTypes.listOf(ImmutablePropTypes.mapContains({
+      value: PropTypes.number.isRequired,
+      activePosition: PropTypes.number,
+      previewPosition: PropTypes.number,
+    })).isRequired,
     columnCount: PropTypes.number.isRequired,
   }).isRequired,
   solutionPathsData: ImmutablePropTypes.listOf(
@@ -109,7 +113,7 @@ Container.propTypes = {
 };
 
 const stateToProps = state => ({
-  matrix: getMatrix(state),
+  matrix: getDetailedMatrix(state),
   solutions: getSolutions(state),
   activeSolution: getActiveSolution(state),
   previewSolution: getPreviewSolution(state),
@@ -122,7 +126,7 @@ const dispatchToProps = dispatch => ({
   onPreviousSolutionClicked: () => { dispatch(setPreviousActiveSolution()); },
   onSolutionHover: (solution) => { dispatch(setPreviewSolution(solution)); },
 });
-const MatrixContainer = compose(
+const Main = compose(
   connect(
     stateToProps,
     dispatchToProps
@@ -130,4 +134,4 @@ const MatrixContainer = compose(
   PureImmutable()
 )(Container);
 
-export default MatrixContainer;
+export default Main;
