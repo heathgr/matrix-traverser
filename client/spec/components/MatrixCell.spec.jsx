@@ -20,7 +20,10 @@ describe('<MatrixCell />', () => {
   />);
 
   it('Create a div with the cell value in it.', () => {
-    expect(testWrapper).to.have.tagName('div');
-    expect(testWrapper).to.have.text(7);
+    const textWrapper = testWrapper.find('.text');
+
+    expect(textWrapper).to.have.text(7);
+    expect(testWrapper).to.have.prop('cell');
+    expect(testWrapper).to.have.prop('cellSize');
   });
 });

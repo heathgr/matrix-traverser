@@ -36,7 +36,6 @@ class Container extends Component {
 
     const matrixWrapperStyle = {
       display: 'flex',
-      background: 'aqua',
       width: '100%',
       height: '100%',
       alignItems: 'center',

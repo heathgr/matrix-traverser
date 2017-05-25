@@ -28,7 +28,6 @@ const MatrixResizer = ({
         const matrixBoxStyle = {
           width: matrixWidth,
           height: matrixHeight,
-          background: 'palegoldenrod',
           position: 'relative',
         };
 

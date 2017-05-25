@@ -30,7 +30,6 @@ describe('<Main />', () => {
   it('Should render a <MatrixResizer /> component with the matrix state and solutions state passed as a props.', () => {
     const matrixResizerWrapper = componentWrapper.find(MatrixResizer);
 
-    console.log('test props', matrixResizerWrapper.props());
     expect(componentWrapper).to.have.exactly(1).descendants(MatrixResizer);
     expect(matrixResizerWrapper).to.have.prop('matrix');
     expect(matrixResizerWrapper).to.have.prop('solutionPathsData');

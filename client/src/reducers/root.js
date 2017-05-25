@@ -46,9 +46,8 @@ export const getSolutionPathsData = createSelector(
         cellIndex => calcMatrixCellPosition(cellIndex, columnCount)
       )
     );
-    const pathWeightStep = solutionsState.size < 2 ? 0 : 1 / (solutionsState.size - 1);
     const solutionPathsData = solutionPoints.map(
-      (solution, i) => bezierPathFromMatrixPoints(solution, 4 + (pathWeightStep * i))
+      solution => bezierPathFromMatrixPoints(solution, 4)
     );
     return solutionPathsData;
   }
@@ -69,7 +68,7 @@ export const getDetailedMatrix = createSelector(
           value: cell,
           activePosition: activePosition > -1 ? activePosition : null,
           previewPosition: previewPosition > -1 ? previewPosition : null,
-        })
+        });
       }
     );
 

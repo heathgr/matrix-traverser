@@ -5,13 +5,6 @@ import PureImmutable from '../helpers/hocs/PureImmutable';
 
 class SolutionPath extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      pathLength: 0,
-    };
-  }
-
   render() {
     const {
       id,
@@ -23,17 +16,21 @@ class SolutionPath extends Component {
     } = this.props;
 
     const strokeWidth = () => {
-      if (isActive || isPreview) {
-        return 6;
+      if (isActive) {
+        return 2;
+      } else if (isPreview) {
+        return 1;
       }
-      return 3;
+      return 0.75;
     };
 
     const strokeColor = () => {
       if (isActive) {
-        return 'white';
+        return '#FF4C0C';
+      } else if (isPreview) {
+        return '#FF0D0D';
       }
-      return 'steelblue';
+      return '#525252';
     };
 
     const zIndex = () => {
@@ -45,20 +42,10 @@ class SolutionPath extends Component {
       return 0;
     };
 
-    const getPathLength = ref => {
-      if (ref) {
-        if (ref.getTotalLength){
-          return ref.getTotalLength();
-        }
-        return 1;
-      }
-      return 0;
-    };
-
     return Style.it(`
       @keyframes pathSlide-${id} {
         0% { stroke-dashoffset: 0px; }
-        100% { stroke-dashoffset: -${this.state.pathLength}px; }
+        100% { stroke-dashoffset: -18px; }
       }
 
       @keyframes reveal {
@@ -70,7 +57,7 @@ class SolutionPath extends Component {
         fill: none;
         stroke: ${strokeColor()};
         stroke-width: ${strokeWidth()}px;
-        stroke-dasharray: 0px 8px;
+        stroke-dasharray: 10px 8px;
         stroke-linecap: round;
         width: ${width}px;
         height: ${height}px;
@@ -79,25 +66,13 @@ class SolutionPath extends Component {
         left: 0px;
         z-index: ${zIndex()};
         animation:
-          ${this.state.pathLength * 0.05}s linear infinite normal pathSlide-${id},
+          0.35s linear infinite normal pathSlide-${id},
           1s ease reveal;
-        transition: stroke-width ease 1s, stroke ease 0.5s;
+        transition: stroke-width ease 0.5s, stroke ease 1s;
       }
     `, (
       <svg className='path'>
-        <path
-          d={pathData}
-          ref={
-            (ref) => {
-              if (!this.state.pathLength) {
-                this.setState({
-                  ...this.state,
-                  pathLength: getPathLength(ref),
-                });
-              }
-            }
-          }
-        />
+        <path d={pathData} />
       </svg>
     ));
   }
