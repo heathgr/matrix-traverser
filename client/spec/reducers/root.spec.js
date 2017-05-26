@@ -56,9 +56,9 @@ describe('Root Reducer', () => {
     const expectedResult = fromJS([
       [
         [{ x: 0, y: 0 }],
-        [{ x: 0.25, y: 0 }, { x: 1, y: -0.25 }, { x: 1, y: 0 }],
-        [{ x: 1, y: 0.25 }, { x: 0, y: 0.75 }, { x: 0, y: 1 }],
-        [{ x: 0, y: 1.25 }, { x: 0.75, y: 1 }, { x: 1, y: 1 }],
+        [{ x: 2/9, y: 0 }, { x: 1, y: -2/9 }, { x: 1, y: 0 }],
+        [{ x: 1, y: 2/9 }, { x: 0, y: 7/9 }, { x: 0, y: 1 }],
+        [{ x: 0, y: 11/9 }, { x: 7/9, y: 1 }, { x: 1, y: 1 }],
       ],
     ]);
     const result = getSolutionPathsData(testState);

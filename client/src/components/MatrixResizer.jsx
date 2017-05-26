@@ -47,6 +47,7 @@ const MatrixResizer = ({
             height={matrixHeight}
             cellSize={cellSize}
             matrix={matrix}
+            activeSolution={activeSolution}
           />
         </div>);
       }
