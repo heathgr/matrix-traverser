@@ -32,7 +32,6 @@ const Matrix = ({ width, height, cellSize, matrix, activeSolution }) => {
                 key={`${row}-${column}`}
                 cell={cell}
                 cellSize={cellSize}
-                activeSolution={activeSolution}
               />
             )
           }

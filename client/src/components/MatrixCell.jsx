@@ -14,7 +14,6 @@ import {
 const MatrixCell = ({
   cell,
   cellSize,
-  activeSolution,
 }) => {
   const activePosition = cell.get('activePosition');
   const previewPosition = cell.get('previewPosition');
@@ -38,7 +37,7 @@ const MatrixCell = ({
     return INACTIVE_COLOR;
   })();
 
-  const activeStrokeDasharray =  (() => {
+  const activeStrokeDasharray = (() => {
     if (activePosition !== null) {
       return '30px 10px';
     }
@@ -170,7 +169,6 @@ MatrixCell.propTypes = {
     activePosition: PropTypes.number,
     previewPosition: PropTypes.number,
   }).isRequired,
-  activeSolution: PropTypes.number,
   cellSize: PropTypes.number.isRequired,
 };
 

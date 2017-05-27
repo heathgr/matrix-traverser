@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import {
@@ -20,67 +20,63 @@ import {
   setPreviewSolution,
 } from '../actions/solutionsActions';
 
-class Container extends Component {
-  render() {
-    const {
-      matrix,
-      solutions,
-      activeSolution,
-      previewSolution,
-      solutionPathsData,
-      onSolutionClicked,
-      onNextSolutionClicked,
-      onPreviousSolutionClicked,
-      onSolutionHover,
-    } = this.props;
+const Container = ({
+  matrix,
+  solutions,
+  activeSolution,
+  previewSolution,
+  solutionPathsData,
+  onSolutionClicked,
+  onNextSolutionClicked,
+  onPreviousSolutionClicked,
+  onSolutionHover,
+}) => {
+  const matrixWrapperStyle = {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  };
 
-    const matrixWrapperStyle = {
-      display: 'flex',
-      width: '100%',
-      height: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1,
-    };
+  const wrapperStyle = {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
 
-    const wrapperStyle = {
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    };
-
-    return (
-      <div style={wrapperStyle}>
-        <div style={matrixWrapperStyle}>
-          <MatrixResizer
-            {...{
-              matrix,
-              solutionPathsData,
-              activeSolution,
-              previewSolution,
-              onSolutionClicked,
-              onSolutionHover,
-            }}
-          />
-        </div>
-        <SolutionsList
+  return (
+    <div style={wrapperStyle}>
+      <div style={matrixWrapperStyle}>
+        <MatrixResizer
           {...{
-            solutions,
+            matrix,
+            solutionPathsData,
             activeSolution,
             previewSolution,
             onSolutionClicked,
-            onNextSolutionClicked,
-            onPreviousSolutionClicked,
             onSolutionHover,
           }}
         />
       </div>
-    );
-  }
-}
+      <SolutionsList
+        {...{
+          solutions,
+          activeSolution,
+          previewSolution,
+          onSolutionClicked,
+          onNextSolutionClicked,
+          onPreviousSolutionClicked,
+          onSolutionHover,
+        }}
+      />
+    </div>
+  );
+};
 
 Container.defaultProps = {
   previewSolution: null,
