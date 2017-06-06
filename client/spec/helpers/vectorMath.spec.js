@@ -28,7 +28,7 @@ describe('Calculate Vector From Points Helper', () => {
 
   it('Should correctly rorate a vector by 90 degrees.', () => {
     const testVector = rotateVector90(Map({ x: 1, y: 0 }));
-    const expectedVector = Map({ x: 0, y: 1});
+    const expectedVector = Map({ x: 0, y: 1 });
 
     expect(is(testVector, expectedVector)).to.equal(true);
   });

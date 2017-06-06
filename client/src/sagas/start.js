@@ -1,12 +1,15 @@
 /** @module sagas/start */
 
 import { fork, put } from 'redux-saga/effects';
-import handleRequestSolutions from './handleRequestSolutions';
-import { requestSolutions } from '../actions/solutionsActions';
+import takeRequestSolutions from './takeRequestSolutions';
+import takeRequestRandomMatrix from './takeRequestRandomMatrix';
+import { requestRandomMatrix } from '../actions/matrixActions';
+// import { requestSolutions } from '../actions/solutionsActions';
 
 const start = function* () {
-  yield fork(handleRequestSolutions);
-  yield put(requestSolutions({}));
+  yield fork(takeRequestSolutions);
+  yield fork(takeRequestRandomMatrix);
+  yield put(requestRandomMatrix());
 };
 
 /**

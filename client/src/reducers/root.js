@@ -155,7 +155,7 @@ export const getSolutionPathsData = createSelector(
       )
     );
     const solutionPathsData = solutionPoints.map(
-      solution => bezierPathFromMatrixPoints(solution, 5)
+      solution => bezierPathFromMatrixPoints(solution, 4.5)
     );
     return solutionPathsData;
   }

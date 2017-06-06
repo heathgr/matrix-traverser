@@ -2,6 +2,7 @@
 import { Map, List } from 'immutable';
 import { SET_MATRIX, SET_MATRIX_CELL } from '../constants/actionTypes';
 
+// TODO leave initial matrix blank
 export const initialMatrix = Map({
   cells: List([0, 1, 3, 9, 3, 8, 2, 1, 5, 9, 0, 8]),
   columnCount: 3,

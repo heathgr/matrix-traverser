@@ -19,8 +19,8 @@ const getSolutions = function* () {
   }
 };
 
-const handleRequesSolutions = function* () {
+const handleRequestSolutions = function* () {
   yield takeLatest(REQUEST_SOLUTIONS, getSolutions);
 };
 
-export default handleRequesSolutions;
+export default handleRequestSolutions;

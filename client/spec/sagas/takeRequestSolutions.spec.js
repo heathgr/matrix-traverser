@@ -4,7 +4,7 @@ import { stub } from 'sinon';
 import SagaTester from 'redux-saga-tester';
 import axios from 'axios';
 import { requestSolutions, gotSolutions, failedToGetSolutions } from '../../src/actions/solutionsActions';
-import handleRequestSolutions from '../../src/sagas/handleRequestSolutions';
+import takeRequestSolutions from '../../src/sagas/takeRequestSolutions';
 import * as selectors from '../../src/reducers/root';
 import { testMatrix } from '../testData/testMatrixData';
 import testMatrixSolution from '../testData/testMatrixSolution.json';
@@ -16,7 +16,7 @@ describe('Handle Request Solutions Saga', () => {
     sagaTester = new SagaTester({
       matrix: testMatrix,
     });
-    sagaTester.start(handleRequestSolutions);
+    sagaTester.start(takeRequestSolutions);
   });
 
   it('Should retrieve a solution from the Matrix Traversal Solver service.', () => {
