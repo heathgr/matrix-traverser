@@ -17,9 +17,9 @@ class SolutionPath extends Component {
 
     const strokeWidth = () => {
       if (isActive) {
-        return 2;
+        return 3;
       } else if (isPreview) {
-        return 1;
+        return 1.5;
       }
       return 0.75;
     };
@@ -69,6 +69,7 @@ class SolutionPath extends Component {
           0.35s linear infinite normal pathSlide-${id},
           1s ease reveal;
         transition: stroke-width ease 0.5s, stroke ease 1s;
+        cursor: pointer;
       }
     `, (
       <svg className='path'>
