@@ -4,7 +4,7 @@ import Style from 'style-it';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import SolutionsListItem from './SolutionListItem';
-import { PRIMARY_BORDER_COLOR } from '../constants/uiColors';
+import { PRIMARY_BORDER_COLOR, PRIMARY_COLOR, ACCENT_BORDER_COLOR } from '../constants/uiColors';
 
 const SolutionsList = ({
   solutions,
@@ -17,7 +17,7 @@ const SolutionsList = ({
 }) => Style.it(`
     .root {
       width: 100%;
-      height: 60px;
+      height: 25px;
       color: white;
       flex: 0 0 auto;
       display: flex;
@@ -41,22 +41,23 @@ const SolutionsList = ({
       justify-content: center;
     }
 
-    .prevNextButtons {
-      width: 15px;
-      height: 30px;
+    .toolbarButton {
+      min-width: 25px;
+      height: 25px;
       margin: 3px;
       flex 0 0 auto;
-      background: ${PRIMARY_BORDER_COLOR};
-      border: none;
+      color: ${PRIMARY_BORDER_COLOR};
+      background: none;
+      border: solid;
+      border-color: ${ACCENT_BORDER_COLOR};
+      border-width: 1px;
+      border-radius: 5px;
       outline: none;
+      transition: ease 1s;
     }
 
-    .prevButton {
-      border-radius: 15px 0px 0px 15px;
-    }
-
-    .nextButton {
-      border-radius: 0px 15px 15px 0px;
+    .toolbarButton:hover {
+      border-color: ${PRIMARY_BORDER_COLOR};
     }
 
     .solutionButtonContainer {
@@ -67,7 +68,7 @@ const SolutionsList = ({
   (<div className='root'>
     <div className='solutionsToolbar'>
       <button
-        className='prevNextButtons prevButton'
+        className='toolbarButton'
         onClick={() => onPreviousSolutionClicked()}
       >
         {'<'}
@@ -91,10 +92,13 @@ const SolutionsList = ({
         </div>
       </div>
       <button
-        className='prevNextButtons nextButton'
+        className='toolbarButton'
         onClick={() => onNextSolutionClicked()}
       >
         {'>'}
+      </button>
+      <button className='toolbarButton'>
+        +
       </button>
     </div>
   </div>)

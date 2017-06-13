@@ -2,9 +2,10 @@ import React from 'react';
 import Style from 'style-it';
 import {
   PRIMARY_BORDER_COLOR,
-  BACKGROUND_COLOR,
   ACCENT_BORDER_COLOR,
-  INACTIVE_COLOR,
+  BACKGROUND_COLOR,
+  PRIMARY_COLOR,
+  ACCENT_COLOR,
 } from '../constants/uiColors';
 
 const SolutionListItem = ({
@@ -14,55 +15,30 @@ const SolutionListItem = ({
   isActive,
   isPreview,
 }) => {
-  const itemColor = (() => {
-    if (isActive) {
-      return PRIMARY_BORDER_COLOR;
-    } else if (isPreview) {
-      return ACCENT_BORDER_COLOR;
-    }
-    return INACTIVE_COLOR;
-  })();
-
   return Style.it(`
-    .wrapper {
-      width: 60px;
-      height: 60px;
-      position: relative;
-    }
-
-    .textPositioner {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0px;
-      left: 0px;
+    .solutionItem {
+      width: 25px;
+      height: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 1;
-      color: ${BACKGROUND_COLOR};
-    }
-
-    .mainCircle {
-      stroke: none;
-      fill: ${itemColor};
-      width: 60px;
-      height: 60px;
-      transition: fill ease 1s;
+      color: ${isActive || isPreview ? PRIMARY_BORDER_COLOR : ACCENT_BORDER_COLOR};
+      border-style: 'solid';
+      border-color: ${isPreview ? ACCENT_COLOR : BACKGROUND_COLOR};
+      border-width: 1px;
+      border-radius: 5px;
+      background: ${isActive ? PRIMARY_COLOR : BACKGROUND_COLOR};
+      transition: 1s;
+      flex: 0 0 25px;
     }
   `, (
     <div
-      className='wrapper'
+      className='solutionItem'
       onClick={() => onSolutionClicked(solutionId)}
       onMouseEnter={() => onSolutionHover(solutionId)}
       onMouseLeave={() => onSolutionHover(null)}
     >
-      <svg className='mainCircle'>
-        <circle cx={30} cy={30} r={15} />
-      </svg>
-      <div className='textPositioner'>
-        {solutionId + 1}
-      </div>
+      {solutionId + 1}
     </div>
   ));
 };
