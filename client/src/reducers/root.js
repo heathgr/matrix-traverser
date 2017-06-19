@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 import { Map, List } from 'immutable';
 import matrix, * as fromMatrix from './matrix';
 import solutions, * as fromSolutions from './solutions';
+import ui, * as fromUI from './ui';
 import calcMatrixCellPosition from '../helpers/calcMatrixCellPosition';
 import {
   calcVectorFromPoints,
@@ -16,7 +17,11 @@ import bezierPathFromMatrixPoints from '../helpers/bezierPathFromMatrixPoints';
 const root = combineReducers({
   matrix,
   solutions,
+  ui,
 });
+
+export const getIsCreateMatrixUIVisible = state => fromUI.getIsCreateMatrixUIVisible(state.ui);
+export const getIsIntroductionUIVisible = state => fromUI.getIsIntroductionUIVisible(state.ui);
 
 /**
  * The selector for the matrix state.

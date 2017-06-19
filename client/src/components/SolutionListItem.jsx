@@ -15,6 +15,15 @@ const SolutionListItem = ({
   isActive,
   isPreview,
 }) => {
+  const borderColor = (() => {
+    if (isActive) {
+      return PRIMARY_COLOR;
+    } else if (isPreview) {
+      return ACCENT_COLOR;
+    }
+    return BACKGROUND_COLOR;
+  })();
+
   return Style.it(`
     .solutionItem {
       width: 25px;
@@ -24,10 +33,11 @@ const SolutionListItem = ({
       align-items: center;
       color: ${isActive || isPreview ? PRIMARY_BORDER_COLOR : ACCENT_BORDER_COLOR};
       border-style: 'solid';
-      border-color: ${isPreview ? ACCENT_COLOR : BACKGROUND_COLOR};
+      border-color: ${borderColor};
       border-width: 1px;
       border-radius: 5px;
       background: ${isActive ? PRIMARY_COLOR : BACKGROUND_COLOR};
+      margin: 3px;
       transition: 1s;
       flex: 0 0 25px;
     }

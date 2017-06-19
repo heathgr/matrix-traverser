@@ -5,18 +5,14 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import React from 'react';
 
+import root from '../../src/reducers/root';
 import Main from '../../src/containers/Main';
 import MatrixResizer from '../../src/components/MatrixResizer';
 import SolutionsList from '../../src/components/SolutionsList';
 import { initialSolutions } from '../../src/reducers/solutions';
 import { testMatrix } from '../testData/testMatrixData';
 
-const testStore = createStore(
-  () => ({
-    matrix: testMatrix,
-    solutions: initialSolutions,
-  })
-);
+const testStore = createStore(root);
 
 describe('<Main />', () => {
   chai.use(chaiEnzyme());

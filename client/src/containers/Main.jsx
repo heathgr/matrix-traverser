@@ -9,9 +9,13 @@ import {
   getSolutions,
   getActiveSolution,
   getPreviewSolution,
+  getIsCreateMatrixUIVisible,
+  getIsIntroductionUIVisible,
 } from '../reducers/root';
 import MatrixResizer from '../components/MatrixResizer';
 import SolutionsList from '../components/SolutionsList';
+import CreateMatrix from '../components/CreateMatrix';
+import Introduction from '../components/Introduction';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import {
   setActiveSolution,
@@ -19,6 +23,10 @@ import {
   setPreviousActiveSolution,
   setPreviewSolution,
 } from '../actions/solutionsActions';
+import {
+  toggleCreateMatrixUI,
+  toggleIntroductionUI,
+} from '../actions/uiActions';
 
 const Container = ({
   matrix,
@@ -30,6 +38,10 @@ const Container = ({
   onNextSolutionClicked,
   onPreviousSolutionClicked,
   onSolutionHover,
+  isIntroductionUIVisible,
+  isCreateMatrixUIVisible,
+  onToggleCreateMatrixUI,
+  onToggleIntroductionUI,
 }) => {
   const matrixWrapperStyle = {
     display: 'flex',
@@ -49,8 +61,16 @@ const Container = ({
     alignItems: 'center',
   };
 
+  console.log('create matrix visible: ', isCreateMatrixUIVisible);
+
   return (
     <div style={wrapperStyle}>
+      {
+        isCreateMatrixUIVisible && <CreateMatrix onToggleCreateMatrixUI={onToggleCreateMatrixUI}/>
+      }
+      {
+        isIntroductionUIVisible && <Introduction onToggleIntroductionUI={onToggleIntroductionUI}/>
+      }
       <div style={matrixWrapperStyle}>
         <MatrixResizer
           {...{
@@ -72,6 +92,8 @@ const Container = ({
           onNextSolutionClicked,
           onPreviousSolutionClicked,
           onSolutionHover,
+          onToggleCreateMatrixUI,
+          onToggleIntroductionUI,
         }}
       />
     </div>
@@ -113,6 +135,8 @@ const stateToProps = state => ({
   activeSolution: getActiveSolution(state),
   previewSolution: getPreviewSolution(state),
   solutionPathsData: getSolutionPathsData(state),
+  isCreateMatrixUIVisible: getIsCreateMatrixUIVisible(state),
+  isIntroductionUIVisible: getIsIntroductionUIVisible(state),
 });
 
 const dispatchToProps = dispatch => ({
@@ -120,6 +144,8 @@ const dispatchToProps = dispatch => ({
   onNextSolutionClicked: () => { dispatch(setNextActiveSolution()); },
   onPreviousSolutionClicked: () => { dispatch(setPreviousActiveSolution()); },
   onSolutionHover: (solution) => { dispatch(setPreviewSolution(solution)); },
+  onToggleCreateMatrixUI: () => { dispatch(toggleCreateMatrixUI()); },
+  onToggleIntroductionUI: () => { dispatch(toggleIntroductionUI()); },
 });
 const Main = compose(
   connect(

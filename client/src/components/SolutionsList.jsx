@@ -4,7 +4,8 @@ import Style from 'style-it';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import SolutionsListItem from './SolutionListItem';
-import { PRIMARY_BORDER_COLOR, PRIMARY_COLOR, ACCENT_BORDER_COLOR } from '../constants/uiColors';
+import Button from './Button';
+import { PRIMARY_BORDER_COLOR, ACCENT_BORDER_COLOR } from '../constants/uiColors';
 
 const SolutionsList = ({
   solutions,
@@ -14,10 +15,12 @@ const SolutionsList = ({
   onSolutionHover,
   onNextSolutionClicked,
   onPreviousSolutionClicked,
+  onToggleCreateMatrixUI,
+  onToggleIntroductionUI,
 }) => Style.it(`
     .root {
       width: 100%;
-      height: 25px;
+      height: 31px;
       color: white;
       flex: 0 0 auto;
       display: flex;
@@ -41,25 +44,6 @@ const SolutionsList = ({
       justify-content: center;
     }
 
-    .toolbarButton {
-      min-width: 25px;
-      height: 25px;
-      margin: 3px;
-      flex 0 0 auto;
-      color: ${PRIMARY_BORDER_COLOR};
-      background: none;
-      border: solid;
-      border-color: ${ACCENT_BORDER_COLOR};
-      border-width: 1px;
-      border-radius: 5px;
-      outline: none;
-      transition: ease 1s;
-    }
-
-    .toolbarButton:hover {
-      border-color: ${PRIMARY_BORDER_COLOR};
-    }
-
     .solutionButtonContainer {
       display: flex;
       flex-direction: row;
@@ -67,12 +51,12 @@ const SolutionsList = ({
   `,
   (<div className='root'>
     <div className='solutionsToolbar'>
-      <button
+      <Button
         className='toolbarButton'
         onClick={() => onPreviousSolutionClicked()}
       >
         {'<'}
-      </button>
+      </Button>
       <div className='scrollBox'>
         <div className='solutionButtonContainer'>
           {
@@ -91,15 +75,24 @@ const SolutionsList = ({
           }
         </div>
       </div>
-      <button
+      <Button
         className='toolbarButton'
         onClick={() => onNextSolutionClicked()}
       >
         {'>'}
-      </button>
-      <button className='toolbarButton'>
+      </Button>
+      <Button
+        className='toolbarButton'
+        onClick={() => onToggleCreateMatrixUI()}
+      >
         +
-      </button>
+      </Button>
+      <Button
+        className='toolbarButton'
+        onClick={() => onToggleIntroductionUI()}
+      >
+        ?
+      </Button>
     </div>
   </div>)
 );
