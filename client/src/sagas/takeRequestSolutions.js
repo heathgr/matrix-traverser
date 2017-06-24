@@ -9,7 +9,7 @@ const getSolutions = function* () {
     const matrix = yield select(getMatrix); // TODO don't fail the request if row count is present.
     const requestMatrix = matrix.delete('rowCount').toJS();
     const solutions = yield axios.post(
-      'http://localhost:8010/matrix-traversal/us-central1/matrixTraversalSolver',
+      'http://localhost:8010/matrix-traversal/us-central1/matrixTraversalSolver', // TODO make sure there is a production version of this
       requestMatrix,
       { headers: { 'content-type': 'application/json' } },
     );

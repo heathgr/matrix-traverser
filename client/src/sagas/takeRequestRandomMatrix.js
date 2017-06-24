@@ -1,13 +1,14 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import generateRandomMatrix from '../helpers/generateRandomMatrix';
 import { setMatrix } from '../actions/matrixActions';
-import { requestSolutions } from '../actions/solutionsActions';
+import { requestSolutions, resetSolutions } from '../actions/solutionsActions';
 import { REQUEST_RANDOM_MATRIX } from '../constants/actionTypes';
 
-const handleRequestRandomMatrix = function* () {
-  const newMatrix = generateRandomMatrix();
+const handleRequestRandomMatrix = function* (action) {
+  const newMatrix = generateRandomMatrix(action.rowCount, action.columnCount);
 
   yield put(setMatrix(newMatrix));
+  yield put(resetSolutions());
   yield put(requestSolutions());
 };
 

@@ -1,13 +1,13 @@
 import { Map, Range } from 'immutable';
 
-const generateRandomMatrix = () => {
-  const rowCount = Math.round(Math.random() * 10);
-  const columnCount = Math.round(Math.random() * 10);
+const generateRandomMatrix = (rowCount, columnCount) => {
+  const actualRowCount = !rowCount ? 1 + Math.round(Math.random() * 5) : rowCount;
+  const actualColumnCount = !columnCount ? 1 + Math.round(Math.random() * 5) : columnCount;
 
   return Map({
-    columnCount,
-    rowCount,
-    cells: Range(0, columnCount * rowCount).toList().map(
+    rowCount: actualRowCount,
+    columnCount: actualColumnCount,
+    cells: Range(0, actualRowCount * actualColumnCount).toList().map(
       () => Math.round(Math.random() * 10)
     ),
   });

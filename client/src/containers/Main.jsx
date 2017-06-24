@@ -27,6 +27,9 @@ import {
   toggleCreateMatrixUI,
   toggleIntroductionUI,
 } from '../actions/uiActions';
+import {
+  requestRandomMatrix,
+} from '../actions/matrixActions';
 
 const Container = ({
   matrix,
@@ -42,6 +45,7 @@ const Container = ({
   isCreateMatrixUIVisible,
   onToggleCreateMatrixUI,
   onToggleIntroductionUI,
+  onRequestRandomMatrix,
 }) => {
   const matrixWrapperStyle = {
     display: 'flex',
@@ -61,15 +65,16 @@ const Container = ({
     alignItems: 'center',
   };
 
-  console.log('create matrix visible: ', isCreateMatrixUIVisible);
-
   return (
     <div style={wrapperStyle}>
       {
-        isCreateMatrixUIVisible && <CreateMatrix onToggleCreateMatrixUI={onToggleCreateMatrixUI}/>
+        isCreateMatrixUIVisible && <CreateMatrix
+          onToggleCreateMatrixUI={onToggleCreateMatrixUI}
+          onRequestRandomMatrix={onRequestRandomMatrix}
+        />
       }
       {
-        isIntroductionUIVisible && <Introduction onToggleIntroductionUI={onToggleIntroductionUI}/>
+        isIntroductionUIVisible && <Introduction onToggleIntroductionUI={onToggleIntroductionUI} />
       }
       <div style={matrixWrapperStyle}>
         <MatrixResizer
@@ -127,6 +132,11 @@ Container.propTypes = {
   onNextSolutionClicked: PropTypes.func.isRequired,
   onPreviousSolutionClicked: PropTypes.func.isRequired,
   onSolutionHover: PropTypes.func.isRequired,
+  onToggleCreateMatrixUI: PropTypes.func.isRequired,
+  onToggleIntroductionUI: PropTypes.func.isRequired,
+  onRequestRandomMatrix: PropTypes.func.isRequired,
+  isIntroductionUIVisible: PropTypes.bool.isRequired,
+  isCreateMatrixUIVisible: PropTypes.bool.isRequired,
 };
 
 const stateToProps = state => ({
@@ -146,6 +156,7 @@ const dispatchToProps = dispatch => ({
   onSolutionHover: (solution) => { dispatch(setPreviewSolution(solution)); },
   onToggleCreateMatrixUI: () => { dispatch(toggleCreateMatrixUI()); },
   onToggleIntroductionUI: () => { dispatch(toggleIntroductionUI()); },
+  onRequestRandomMatrix: (rowCount, columnCount) => { dispatch(requestRandomMatrix(rowCount, columnCount)); },
 });
 const Main = compose(
   connect(

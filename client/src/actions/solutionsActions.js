@@ -2,6 +2,7 @@ import {
   REQUEST_SOLUTIONS,
   FAILED_TO_GET_SOLUTIONS,
   GOT_SOLUTIONS,
+  RESET_SOLUTIONS,
   SET_ACTIVE_SOLUTION,
   SET_NEXT_ACTIVE_SOLUTION,
   SET_PREVIOUS_ACTIVE_SOLUTION,
@@ -56,4 +57,8 @@ export const setPreviousActiveSolution = () => ({
 export const setPreviewSolution = solution => ({
   type: SET_PREVIEW_SOLUTION,
   solution,
+});
+
+export const resetSolutions = () => ({
+  type: RESET_SOLUTIONS,
 });

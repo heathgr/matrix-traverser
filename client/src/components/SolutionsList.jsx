@@ -5,7 +5,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import SolutionsListItem from './SolutionListItem';
 import Button from './Button';
-import { PRIMARY_BORDER_COLOR, ACCENT_BORDER_COLOR } from '../constants/uiColors';
 
 const SolutionsList = ({
   solutions,

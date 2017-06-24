@@ -2,6 +2,7 @@
 import { List, Map } from 'immutable';
 import {
   GOT_SOLUTIONS,
+  RESET_SOLUTIONS,
   SET_ACTIVE_SOLUTION,
   SET_NEXT_ACTIVE_SOLUTION,
   SET_PREVIOUS_ACTIVE_SOLUTION,
@@ -56,6 +57,9 @@ const solutions = (state = initialSolutions, action) => {
       const nextPreviewSolution = action.solution % solutionCount;
 
       return state.set('previewSolution', nextPreviewSolution);
+    }
+    case RESET_SOLUTIONS: {
+      return initialSolutions;
     }
     default: {
       return state;

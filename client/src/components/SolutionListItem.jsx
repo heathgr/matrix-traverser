@@ -40,16 +40,17 @@ const SolutionListItem = ({
       margin: 3px;
       transition: 1s;
       flex: 0 0 25px;
+      outline: none;
     }
   `, (
-    <div
+    <button
       className='solutionItem'
       onClick={() => onSolutionClicked(solutionId)}
       onMouseEnter={() => onSolutionHover(solutionId)}
       onMouseLeave={() => onSolutionHover(null)}
     >
       {solutionId + 1}
-    </div>
+    </button>
   ));
 };
 

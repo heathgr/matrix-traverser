@@ -17,6 +17,8 @@ export const setMatrixCell = (index, value) => ({
   },
 });
 
-export const requestRandomMatrix = () => ({
+export const requestRandomMatrix = (rowCount = null, columnCount = null) => ({
   type: REQUEST_RANDOM_MATRIX,
+  rowCount,
+  columnCount,
 });

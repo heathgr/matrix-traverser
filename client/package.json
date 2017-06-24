@@ -25,6 +25,7 @@
     "react-hot-loader": "^3.0.0-beta.6",
     "react-immutable-proptypes": "^2.1.0",
     "react-redux": "^5.0.4",
+    "react-slider": "^0.8.0",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.3",
     "reselect": "^3.0.0",
