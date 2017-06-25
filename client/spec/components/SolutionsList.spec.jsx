@@ -14,6 +14,8 @@ describe('<SolutionList />', () => {
   const nextSolutionClickedSpy = spy();
   const prevSolutionClickedSpy = spy();
   const solutionHoverSpy = spy();
+  const toggleCreateMatrixUIClickSpy = spy();
+  const toggleCreateIntroductionUIClickSpy = spy();
 
   const testSolution = List([
     List([7, 3, 9, 5]),
@@ -30,24 +32,31 @@ describe('<SolutionList />', () => {
       onNextSolutionClicked={nextSolutionClickedSpy}
       onPreviousSolutionClicked={prevSolutionClickedSpy}
       onSolutionHover={solutionHoverSpy}
+      onToggleCreateMatrixUI={toggleCreateMatrixUIClickSpy}
+      onToggleIntroductionUI={toggleCreateIntroductionUIClickSpy}
     />
   );
 
-  it('Should display text indicating the number of solutions and current active solution.', () => {
-    expect(testWrapper).to.contain.text('Viewing solution 2 of 4');
-  });
+  const buttons = testWrapper.find('button');
+
+  buttons.forEach(
+    button => button.simulate('click')
+  );
 
   it('Should display buttons for selecting the next or previous solution.', () => {
-    const buttons = testWrapper.find('button');
-
-    buttons.forEach(
-      button => button.simulate('click')
-    );
-
     expect(nextSolutionClickedSpy.calledOnce).to.equal(true);
     expect(prevSolutionClickedSpy.calledOnce).to.equal(true);
   });
 
-  xit('Should display a series of buttons for selecting a specfic solution.', () => {
+  it('Should display a series of buttons for selecting a specfic solution.', () => {
+    expect(solutionClickedSpy.callCount).to.equal(testSolution.size);
+  });
+
+  it('Should have a button for showing the create matrix UI.', () => {
+    expect(toggleCreateMatrixUIClickSpy.calledOnce).to.equal(true);
+  });
+
+  it('Should have a buttons for showing the introduction UI.', () => {
+    expect(toggleCreateIntroductionUIClickSpy.calledOnce).to.equal(true);
   });
 });

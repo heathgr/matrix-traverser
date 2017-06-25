@@ -8,15 +8,17 @@ import root, {
 } from '../../src/reducers/root';
 import { initialMatrix } from '../../src/reducers/matrix';
 import { initialSolutions } from '../../src/reducers/solutions';
+import { initialUIState } from '../../src/reducers/ui';
 
 describe('Root Reducer', () => {
   const state = root(undefined, { type: 'TEST' });
   const expectedState = {
     matrix: initialMatrix,
     solutions: initialSolutions,
+    ui: initialUIState,
   };
 
-  it('Should compose the matrix and solutions reducers.', () => {
+  it('Should compose the matrix, solutions, and UI reducers.', () => {
     Object.keys(state).forEach(
       key => expect(is(state[key], expectedState[key])).to.equal(true)
     );
@@ -56,9 +58,9 @@ describe('Root Reducer', () => {
     const expectedResult = fromJS([
       [
         [{ x: 0, y: 0 }],
-        [{ x: 0.2, y: 0 }, { x: 1, y: -0.2 }, { x: 1, y: 0 }],
-        [{ x: 1, y: 0.2 }, { x: 0, y: 0.8 }, { x: 0, y: 1 }],
-        [{ x: 0, y: 1.2 }, { x: 0.8, y: 1 }, { x: 1, y: 1 }],
+        [{ x: 2 / 9, y: 0 }, { x: 1, y: -2 / 9 }, { x: 1, y: 0 }],
+        [{ x: 1, y: 2 / 9 }, { x: 0, y: 7 / 9 }, { x: 0, y: 1 }],
+        [{ x: 0, y: 11 / 9 }, { x: 7 / 9, y: 1 }, { x: 1, y: 1 }],
       ],
     ]);
     const result = getSolutionPathsData(testState);

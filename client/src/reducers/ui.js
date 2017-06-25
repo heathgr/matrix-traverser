@@ -4,12 +4,12 @@ import {
   TOGGLE_INTRODUCTION_UI,
 } from '../constants/actionTypes';
 
-const initialState = Map({
+export const initialUIState = Map({
   isCreateMatrixUIVisible: false,
   isIntroductionUIVisible: false,
 });
 
-const ui = (state = initialState, action) => {
+const ui = (state = initialUIState, action) => {
   switch (action.type) {
     case TOGGLE_CREATE_MATRIX_UI: {
       return state.set('isCreateMatrixUIVisible', !state.get('isCreateMatrixUIVisible'));

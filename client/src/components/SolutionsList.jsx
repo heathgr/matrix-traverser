@@ -106,6 +106,8 @@ SolutionsList.propTypes = {
   onSolutionClicked: PropTypes.func.isRequired,
   onNextSolutionClicked: PropTypes.func.isRequired,
   onPreviousSolutionClicked: PropTypes.func.isRequired,
+  onToggleCreateMatrixUI: PropTypes.func.isRequired,
+  onToggleIntroductionUI: PropTypes.func.isRequired,
 };
 
 export default PureImmutable()(SolutionsList);
