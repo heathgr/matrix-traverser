@@ -4,6 +4,7 @@ import solutions, {
   getSolutions,
   getActiveSolution,
   getPreviewSolution,
+  initialSolutions,
 } from '../../src/reducers/solutions';
 import {
   gotSolutions,
@@ -11,6 +12,7 @@ import {
   setNextActiveSolution,
   setPreviousActiveSolution,
   setPreviewSolution,
+  resetSolutions,
 } from '../../src/actions/solutionsActions';
 
 describe('Solutions Reducer', () => {
@@ -56,6 +58,14 @@ describe('Solutions Reducer', () => {
     const testAction = setPreviewSolution(3);
     const testState = solutions(testSolutions, testAction);
     const expectedState = testSolutions.set('previewSolution', 0);
+
+    expect(is(expectedState, testState)).to.equal(true);
+  });
+
+  it('Should correctly handle a RESET_SOLUTIONS action', () => {
+    const testAction = resetSolutions();
+    const testState = solutions(testSolutions, testAction);
+    const expectedState = initialSolutions;
 
     expect(is(expectedState, testState)).to.equal(true);
   });

@@ -5,6 +5,7 @@ import root, {
   getMatrix,
   getSolutions,
   getSolutionPathsData,
+  getMatrixWithPositionOffsets,
 } from '../../src/reducers/root';
 import { initialMatrix } from '../../src/reducers/matrix';
 import { initialSolutions } from '../../src/reducers/solutions';
@@ -65,5 +66,64 @@ describe('Root Reducer', () => {
     ]);
     const result = getSolutionPathsData(testState);
     expect(is(result, expectedResult)).to.equal(true);
+  });
+
+  it('Should have a selector for offset matrix cell positions.', () => {
+    const testState = {
+      matrix: fromJS({
+        cells: [1, 2, 3, 4],
+        columnCount: 2,
+        rowCount: 2,
+      }),
+      solutions: fromJS({
+        data: [
+          [0, 1, 2, 3],
+        ],
+      }),
+    };
+    const expectedResult = fromJS({
+      cells: [
+        {
+          value: 1,
+          positions: [
+            {
+              position: { x: 0, y: 0 },
+              solution: 0,
+            }
+          ]
+        },
+        {
+          value: 2,
+          positions: [
+            {
+              position: { x: 1, y: 0 },
+              solution: 0
+            }
+          ]
+        },
+        {
+          value: 3,
+          positions: [
+            {
+              position: { x: 0, y: 1 },
+              solution: 0
+            }
+          ]
+        },
+        {
+          value: 4,
+          positions: [
+            {
+              position: { x: 1, y: 1 },
+              solution: 0,
+            }
+          ]
+        }
+      ],
+      columnCount: 2,
+      rowCount: 2,
+    });
+    const result = getMatrixWithPositionOffsets(testState);
+    expect(is(expectedResult, result)).to.equal(true);
   });
 });
