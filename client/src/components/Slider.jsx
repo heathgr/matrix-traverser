@@ -8,6 +8,7 @@ const Slider = ({
   min,
   max,
   onChange,
+  value,
 }) => Style.it(
   `
   .dragger {
@@ -46,6 +47,7 @@ const Slider = ({
       min={min}
       max={max}
       onChange={onChange}
+      value={value}
       withBars
     >
       <div className='dragger' />
@@ -57,6 +59,7 @@ Slider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
 };
 
 export default Slider;
