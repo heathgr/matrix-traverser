@@ -12,7 +12,8 @@ const SolutionPathsInteractionHandler = ({ width, height, solutionPathsData, onS
     stroke: 'rgba(0, 0, 0, 0)',
     strokeWidth: 6,
     position: 'absolute',
-    zIndex: 10,
+    zIndex: 3,
+    // pointerEvents: 'none',
   };
 
   return (

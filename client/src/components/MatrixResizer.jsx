@@ -30,7 +30,6 @@ const MatrixResizer = ({
           height: matrixHeight,
           position: 'relative',
         };
-
         return (<div style={matrixBoxStyle}>
           <SolutionPaths
             width={matrixWidth}

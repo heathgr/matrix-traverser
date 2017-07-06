@@ -63,7 +63,7 @@ const MatrixCell = ({
       position: relative;
     }
 
-    .textPositioner {
+    .inputPositioner {
       width: 100%;
       height: 100%;
       position: absolute;
@@ -121,17 +121,16 @@ const MatrixCell = ({
       transition: stroke-dasharray ease 0.5s ${previewPosition * 0.2}s;
     }
 
-    .text {
+    .input {
       color: ${mainColor};
       transition: color ease 1s;
       animation: 1s ease reveal;
+      pointer-events: all;
     }
   `, (
-    <div className='wrapper'>
-      <div className='textPositioner'>
-        <div className='text'>
-          {cell.get('value')}
-        </div>
+    <div className='wrapper' onClick={() => console.log('.........')}>
+      <div className='inputPositioner'>
+        <input type='text' className='input' defaultValue={cell.get('value')} />
       </div>
       <div className='circlesPositioner'>
         <svg className='cellSvg'>
