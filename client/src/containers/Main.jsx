@@ -29,6 +29,7 @@ import {
 } from '../actions/uiActions';
 import {
   requestRandomMatrix,
+  setMatrixCell,
 } from '../actions/matrixActions';
 
 const Container = ({
@@ -46,6 +47,7 @@ const Container = ({
   onToggleCreateMatrixUI,
   onToggleIntroductionUI,
   onRequestRandomMatrix,
+  onSetMatrixCell,
 }) => {
   const matrixWrapperStyle = {
     display: 'flex',
@@ -157,6 +159,7 @@ const dispatchToProps = dispatch => ({
   onToggleCreateMatrixUI: () => { dispatch(toggleCreateMatrixUI()); },
   onToggleIntroductionUI: () => { dispatch(toggleIntroductionUI()); },
   onRequestRandomMatrix: (rowCount, columnCount) => { dispatch(requestRandomMatrix(rowCount, columnCount)); },
+  onSetMatrixCell: (index, value) => { dispatch(setMatrixCell(index, value)); },
 });
 const Main = compose(
   connect(

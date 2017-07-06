@@ -181,6 +181,7 @@ export const getDetailedMatrix = createSelector(
           value: cell,
           activePosition: activePosition > -1 ? activePosition : null,
           previewPosition: previewPosition > -1 ? previewPosition : null,
+          id,
         });
       }
     );

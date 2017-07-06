@@ -126,11 +126,24 @@ const MatrixCell = ({
       transition: color ease 1s;
       animation: 1s ease reveal;
       pointer-events: all;
+      text-align: center;
+      background: none;
+      border: none;
+      outline: none;
     }
   `, (
-    <div className='wrapper' onClick={() => console.log('.........')}>
+    <div className='wrapper'>
       <div className='inputPositioner'>
-        <input type='text' className='input' defaultValue={cell.get('value')} />
+        <input
+          type='text'
+          className='input'
+          defaultValue={cell.get('value')}
+          onChange={
+            () => {
+              console.log('cell input changed!!!');
+            }
+          }
+        />
       </div>
       <div className='circlesPositioner'>
         <svg className='cellSvg'>
