@@ -36,7 +36,7 @@ describe('<Matrix />', () => {
     rowCount: 2,
   });
 
-  const testWrapper = mount(<Matrix matrix={testMatrix} width={100} height={100} cellSize={50} />);
+  const testWrapper = mount(<Matrix matrix={testMatrix} width={100} height={100} cellSize={50} onSetMatrixCell={() => null} />);
 
   it('Should render the correct number of <MatrixCell /> componenst.', () => {
     expect(testWrapper).to.have.exactly(4).descendants(MatrixCell);

@@ -87,6 +87,7 @@ const Container = ({
             previewSolution,
             onSolutionClicked,
             onSolutionHover,
+            onSetMatrixCell,
           }}
         />
       </div>

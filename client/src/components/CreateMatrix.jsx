@@ -5,15 +5,19 @@ import Modal from './Modal';
 import Button from './Button';
 import Slider from './Slider';
 
-const normalizeInput = (value, lastValue) => {
-  const filteredValue = value.replace(/[A-Za-z]/g, '').replace(lastValue, '');
-  const evtNumber = parseInt(filteredValue, 10);
-  let normalizedNumber = isNaN(evtNumber) ? 0 : evtNumber;
+const normalizeInput = (evt) => {
+  const target = evt.target;
+  const valueLength = target.value.length;
+  const evtNumber = parseInt(target.value[valueLength - 1], 10);
 
-  normalizedNumber = normalizedNumber < 0 ? 0 : normalizedNumber;
-  normalizedNumber = normalizedNumber > 6 ? 6 : normalizedNumber;
+  if (isNaN(evtNumber)) return 0;
+  return Math.min(6, Math.max(0, evtNumber));
+};
 
-  return normalizedNumber;
+const selectLast = (evt) => {
+  const valueLength = evt.target.value.length;
+
+  evt.target.setSelectionRange(valueLength, valueLength);
 };
 
 class CreateMatrix extends Component {
@@ -75,11 +79,15 @@ class CreateMatrix extends Component {
                   type='text'
                   className='count'
                   value={this.state.matrixColumnCount === 0 ? 'Random' : this.state.matrixColumnCount}
+                  onSelect={
+                    (evt) => {
+                      selectLast(evt);
+                    }
+                  }
                   onChange={
                     (evt) => {
-                      const input = normalizeInput(evt.target.value, this.state.matrixColumnCount);
+                      const input = normalizeInput(evt);
 
-                      console.log('c input: ', input);
                       this.setState({
                         ...this.state,
                         matrixColumnCount: input,
@@ -105,11 +113,15 @@ class CreateMatrix extends Component {
                   type='text'
                   className='count'
                   value={this.state.matrixRowCount === 0 ? 'Random' : this.state.matrixRowCount}
+                  onSelect={
+                    (evt) => {
+                      selectLast(evt);
+                    }
+                  }
                   onChange={
                     (evt) => {
-                      const input = normalizeInput(evt.target.value, this.state.matrixRowCount);
+                      const input = normalizeInput(evt);
 
-                      console.log('r input: ', input)
                       this.setState({
                         ...this.state,
                         matrixRowCount: input,

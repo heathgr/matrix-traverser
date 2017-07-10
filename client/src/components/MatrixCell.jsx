@@ -14,6 +14,7 @@ import {
 const MatrixCell = ({
   cell,
   cellSize,
+  onSetMatrixCell,
 }) => {
   const activePosition = cell.get('activePosition');
   const previewPosition = cell.get('previewPosition');
@@ -137,10 +138,27 @@ const MatrixCell = ({
         <input
           type='text'
           className='input'
-          defaultValue={cell.get('value')}
+          value={cell.get('value')}
+          onSelect={
+            (evt) => {
+              const valueLength = evt.target.value.length;
+
+              evt.target.setSelectionRange(valueLength, valueLength);
+            }
+          }
           onChange={
-            () => {
-              console.log('cell input changed!!!');
+            (evt) => {
+              const target = evt.target;
+              const valueLength = target.value.length;
+              const evtNumber = parseInt(target.value[valueLength - 1], 10);
+
+              if (!isNaN(evtNumber)) {
+                const newCellVal = Math.min(9, Math.max(0, evtNumber));
+
+                target.value = newCellVal;
+                target.setSelectionRange(1, 1);
+                onSetMatrixCell(cell.get('id'), newCellVal);
+              }
             }
           }
         />

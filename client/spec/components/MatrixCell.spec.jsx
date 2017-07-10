@@ -19,7 +19,7 @@ describe('<MatrixCell />', () => {
     cellSize={50}
   />);
 
-  it('Create a div with the cell value in it.', () => {
+  xit('Create a div with the cell value in it.', () => {
     const textWrapper = testWrapper.find('.text');
 
     expect(textWrapper).to.have.text(7);
