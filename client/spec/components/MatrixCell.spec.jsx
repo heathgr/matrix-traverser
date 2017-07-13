@@ -17,6 +17,7 @@ describe('<MatrixCell />', () => {
   const testWrapper = mount(<MatrixCell
     cell={testCell}
     cellSize={50}
+    onRequestMatrixCellChange={() => null}
   />);
 
   xit('Create a div with the cell value in it.', () => {

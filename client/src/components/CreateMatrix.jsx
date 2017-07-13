@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Style from 'style-it';
 import Modal from './Modal';
@@ -20,138 +20,123 @@ const selectLast = (evt) => {
   evt.target.setSelectionRange(valueLength, valueLength);
 };
 
-class CreateMatrix extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      matrixRowCount: 0,
-      matrixColumnCount: 0,
-    };
-  }
+const CreateMatrix = ({
+  onToggleCreateMatrixUI,
+  onRequestRandomMatrix,
+  onSetCreateMatrixColumnCount,
+  onSetCreateMatrixRowCount,
+  createMatrixColumnCount,
+  createMatrixRowCount,
+}) => (
+  <Modal>
+    {
+      Style.it(
+      `
+      .row {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+      }
 
-  render() {
-    const { onToggleCreateMatrixUI, onRequestRandomMatrix } = this.props;
+      .label {
+        width: 95px;
+        margin: 0 6px;
+      }
 
-    return (
-      <Modal>
-        {
-          Style.it(
-          `
-          .row {
-            display: flex;
-            justify-content: center;
-            flex-direction: row;
-          }
+      .count {
+        width: 55px;
+        margin: 0 6px;
+      }
 
-          .label {
-            width: 95px;
-            margin: 0 6px;
-          }
+      input {
+        background: none;
+        border: none;
+        outline: none;
+        color: white;
+      }
+      `,
+        <div>
+          <div className='row'>Create New Matrix</div>
+          <div className='row'>
+            <div className='label'>Column Count</div>
+            <Slider
+              min={0}
+              max={6}
+              value={createMatrixColumnCount}
+              onChange={
+                val => onSetCreateMatrixColumnCount(val)
+              }
+            />
+            <input
+              type='text'
+              className='count'
+              value={createMatrixColumnCount === 0 ? 'Random' : createMatrixColumnCount}
+              onSelect={
+                (evt) => {
+                  selectLast(evt);
+                }
+              }
+              onChange={
+                (evt) => {
+                  const input = normalizeInput(evt);
 
-          .count {
-            width: 55px;
-            margin: 0 6px;
-          }
+                  onSetCreateMatrixColumnCount(input);
+                }
+              }
+            />
+          </div>
+          <div className='row'>
+            <div className='label'>Row Count</div>
+            <Slider
+              min={0}
+              max={6}
+              value={createMatrixRowCount}
+              onChange={
+                val => onSetCreateMatrixRowCount(val)
+              }
+            />
+            <input
+              type='text'
+              className='count'
+              value={createMatrixRowCount === 0 ? 'Random' : createMatrixRowCount}
+              onSelect={
+                (evt) => {
+                  selectLast(evt);
+                }
+              }
+              onChange={
+                (evt) => {
+                  const input = normalizeInput(evt);
 
-          input {
-            background: none;
-            border: none;
-            outline: none;
-            color: white;
-          }
-          `,
-            <div>
-              <div className='row'>Create New Matrix</div>
-              <div className='row'>
-                <div className='label'>Column Count</div>
-                <Slider
-                  min={0}
-                  max={6}
-                  value={this.state.matrixColumnCount}
-                  onChange={
-                    val => this.setState({
-                      ...this.state,
-                      matrixColumnCount: val,
-                    })
-                  }
-                />
-                <input
-                  type='text'
-                  className='count'
-                  value={this.state.matrixColumnCount === 0 ? 'Random' : this.state.matrixColumnCount}
-                  onSelect={
-                    (evt) => {
-                      selectLast(evt);
-                    }
-                  }
-                  onChange={
-                    (evt) => {
-                      const input = normalizeInput(evt);
-
-                      this.setState({
-                        ...this.state,
-                        matrixColumnCount: input,
-                      });
-                    }
-                  }
-                />
-              </div>
-              <div className='row'>
-                <div className='label'>Row Count</div>
-                <Slider
-                  min={0}
-                  max={6}
-                  value={this.state.matrixRowCount}
-                  onChange={
-                    val => this.setState({
-                      ...this.state,
-                      matrixRowCount: val,
-                    })
-                  }
-                />
-                <input
-                  type='text'
-                  className='count'
-                  value={this.state.matrixRowCount === 0 ? 'Random' : this.state.matrixRowCount}
-                  onSelect={
-                    (evt) => {
-                      selectLast(evt);
-                    }
-                  }
-                  onChange={
-                    (evt) => {
-                      const input = normalizeInput(evt);
-
-                      this.setState({
-                        ...this.state,
-                        matrixRowCount: input,
-                      });
-                    }
-                  }
-                />
-              </div>
-              <div className='row'>
-                <Button
-                  onClick={() => {
-                    onToggleCreateMatrixUI();
-                    onRequestRandomMatrix(
-                      this.state.matrixRowCount,
-                      this.state.matrixColumnCount
-                    );
-                  }}
-                >Ok</Button>
-                <Button onClick={() => { onToggleCreateMatrixUI(); }}>Cancel</Button>
-              </div>
-            </div>)
-        }
-      </Modal>
-    );
-  }
-}
+                  onSetCreateMatrixRowCount(input);
+                }
+              }
+            />
+          </div>
+          <div className='row'>
+            <Button
+              onClick={() => {
+                onToggleCreateMatrixUI();
+                onRequestRandomMatrix(
+                  createMatrixRowCount,
+                  createMatrixColumnCount,
+                );
+              }}
+            >Ok</Button>
+            <Button onClick={() => { onToggleCreateMatrixUI(); }}>Cancel</Button>
+          </div>
+        </div>)
+    }
+  </Modal>
+);
 
 CreateMatrix.propTypes = {
   onToggleCreateMatrixUI: PropTypes.func.isRequired,
   onRequestRandomMatrix: PropTypes.func.isRequired,
+  onSetCreateMatrixColumnCount: PropTypes.func.isRequired,
+  onSetCreateMatrixRowCount: PropTypes.func.isRequired,
+  createMatrixColumnCount: PropTypes.number.isRequired,
+  createMatrixRowCount: PropTypes.number.isRequired,
 };
 
 export default CreateMatrix;

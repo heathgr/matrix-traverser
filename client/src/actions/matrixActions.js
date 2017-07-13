@@ -2,6 +2,7 @@ import {
   SET_MATRIX,
   SET_MATRIX_CELL,
   REQUEST_RANDOM_MATRIX,
+  REQUEST_MATRIX_CELL_CHANGE,
 } from '../constants/actionTypes';
 
 export const setMatrix = matrix => ({
@@ -21,4 +22,10 @@ export const requestRandomMatrix = (rowCount = null, columnCount = null) => ({
   type: REQUEST_RANDOM_MATRIX,
   rowCount,
   columnCount,
+});
+
+export const requestMatrixCellChange = (id, value) => ({
+  type: REQUEST_MATRIX_CELL_CHANGE,
+  id,
+  value,
 });

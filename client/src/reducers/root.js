@@ -22,6 +22,8 @@ const root = combineReducers({
 
 export const getIsCreateMatrixUIVisible = state => fromUI.getIsCreateMatrixUIVisible(state.ui);
 export const getIsIntroductionUIVisible = state => fromUI.getIsIntroductionUIVisible(state.ui);
+export const getCreateMatrixColumnCount = state => fromUI.getCreateMatrixColumnCount(state.ui);
+export const getCreateMatrixRowCount = state => fromUI.getCreateMatrixRowCount(state.ui);
 
 /**
  * The selector for the matrix state.
@@ -148,15 +150,13 @@ export const getSolutionPathsData = createSelector(
 
     const solutionPoints = solutionsState.map(
       (solution, solutionId) => solution.map(
-        (cellId) => {
-          return matrixCells
-            .get(cellId)
-            .get('positions')
-            .find(
-              position => position.get('solution') === solutionId
-            )
-            .get('position');
-        }
+        cellId => matrixCells
+          .get(cellId)
+          .get('positions')
+          .find(
+            position => position.get('solution') === solutionId
+          )
+          .get('position')
       )
     );
     const solutionPathsData = solutionPoints.map(

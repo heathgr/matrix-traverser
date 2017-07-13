@@ -4,7 +4,13 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import MatrixCell from './MatrixCell';
 
-const Matrix = ({ width, height, cellSize, matrix, onSetMatrixCell }) => {
+const Matrix = ({
+  width,
+  height,
+  cellSize,
+  matrix,
+  onRequestMatrixCellChange,
+}) => {
   const wrapperStyle = {
     width,
     height,
@@ -32,7 +38,7 @@ const Matrix = ({ width, height, cellSize, matrix, onSetMatrixCell }) => {
                 key={`${row}-${column}`}
                 cell={cell}
                 cellSize={cellSize}
-                onSetMatrixCell={onSetMatrixCell}
+                onRequestMatrixCellChange={onRequestMatrixCellChange}
               />
             )
           }
@@ -50,7 +56,7 @@ Matrix.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   cellSize: PropTypes.number.isRequired,
-  onSetMatrixCell: PropTypes.func.isRequired,
+  onRequestMatrixCellChange: PropTypes.func.isRequired,
   matrix: ImmutablePropTypes.mapContains({
     cells: ImmutablePropTypes.listOf(ImmutablePropTypes.mapContains({
       value: PropTypes.number.isRequired,

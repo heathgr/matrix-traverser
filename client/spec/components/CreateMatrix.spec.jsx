@@ -12,10 +12,16 @@ describe('<CreateMatrix />', () => {
 
   const onToggleCreateMatrixUISpy = spy();
   const onRequestRandomMatrixSpy = spy();
+  const onSetCreateMatrixColumnCountSpy = spy();
+  const onSetCreateMatrixRowCountSpy = spy();
   const testWrapper = mount(
     <CreateMatrix
       onToggleCreateMatrixUI={onToggleCreateMatrixUISpy}
       onRequestRandomMatrix={onRequestRandomMatrixSpy}
+      onSetCreateMatrixColumnCount={onSetCreateMatrixColumnCountSpy}
+      onSetCreateMatrixRowCount={onSetCreateMatrixRowCountSpy}
+      createMatrixColumnCount={1}
+      createMatrixRowCount={1}
     />
   );
 
@@ -32,10 +38,6 @@ describe('<CreateMatrix />', () => {
 
   it('Should have a column count slider and row count slider.', () => {
     expect(sliders.length).to.equal(2);
-    expect(testWrapper.state()).to.deep.equal({
-      matrixRowCount: 4,
-      matrixColumnCount: 4,
-    });
   });
 
   it('Should dispatch an onToggleCreateMatrixUI action when clicked the ok or cancel buttons are clicked.', () => {
@@ -48,39 +50,24 @@ describe('<CreateMatrix />', () => {
 
   it('Should have input fields for column and row counts.', () => {
     inputs.forEach(
-      input => input.simulate('change', { target: { value: '0' } })
+      input => input.simulate('change', { target: { value: '00' } })
     );
-    expect(testWrapper.state()).to.deep.equal({
-      matrixRowCount: 0,
-      matrixColumnCount: 0,
-    });
+    expect(onSetCreateMatrixColumnCountSpy.calledWith(0)).to.equal(true);
+    expect(onSetCreateMatrixRowCountSpy.calledWith(0)).to.equal(true);
     inputs.forEach(
-      input => input.simulate('change', { target: { value: '3' } })
+      input => input.simulate('change', { target: { value: '03' } })
     );
-    expect(testWrapper.state()).to.deep.equal({
-      matrixRowCount: 3,
-      matrixColumnCount: 3,
-    });
+    expect(onSetCreateMatrixColumnCountSpy.calledWith(3)).to.equal(true);
+    expect(onSetCreateMatrixRowCountSpy.calledWith(3)).to.equal(true);
     inputs.forEach(
-      input => input.simulate('change', { target: { value: '-3' } })
+      input => input.simulate('change', { target: { value: '09' } })
     );
-    expect(testWrapper.state()).to.deep.equal({
-      matrixRowCount: 0,
-      matrixColumnCount: 0,
-    });
+    expect(onSetCreateMatrixColumnCountSpy.calledWith(6)).to.equal(true);
+    expect(onSetCreateMatrixRowCountSpy.calledWith(6)).to.equal(true);
     inputs.forEach(
-      input => input.simulate('change', { target: { value: '9' } })
+      input => input.simulate('change', { target: { value: '0f' } })
     );
-    expect(testWrapper.state()).to.deep.equal({
-      matrixRowCount: 6,
-      matrixColumnCount: 6,
-    });
-    inputs.forEach(
-      input => input.simulate('change', { target: { value: 'f' } })
-    );
-    expect(testWrapper.state()).to.deep.equal({
-      matrixRowCount: 0,
-      matrixColumnCount: 0,
-    });
+    expect(onSetCreateMatrixColumnCountSpy.calledWith(0)).to.equal(true);
+    expect(onSetCreateMatrixRowCountSpy.calledWith(0)).to.equal(true);
   });
 });

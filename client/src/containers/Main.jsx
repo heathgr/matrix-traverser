@@ -11,6 +11,8 @@ import {
   getPreviewSolution,
   getIsCreateMatrixUIVisible,
   getIsIntroductionUIVisible,
+  getCreateMatrixColumnCount,
+  getCreateMatrixRowCount,
 } from '../reducers/root';
 import MatrixResizer from '../components/MatrixResizer';
 import SolutionsList from '../components/SolutionsList';
@@ -26,10 +28,12 @@ import {
 import {
   toggleCreateMatrixUI,
   toggleIntroductionUI,
+  setCreateMatrixColumnCount,
+  setCreateMatrixRowCount,
 } from '../actions/uiActions';
 import {
   requestRandomMatrix,
-  setMatrixCell,
+  requestMatrixCellChange,
 } from '../actions/matrixActions';
 
 const Container = ({
@@ -44,10 +48,15 @@ const Container = ({
   onSolutionHover,
   isIntroductionUIVisible,
   isCreateMatrixUIVisible,
+  createMatrixColumnCount,
+  createMatrixRowCount,
   onToggleCreateMatrixUI,
   onToggleIntroductionUI,
   onRequestRandomMatrix,
-  onSetMatrixCell,
+  onRequestMatrixCellChange,
+  onSetCreateMatrixColumnCount,
+  onSetCreateMatrixRowCount,
+
 }) => {
   const matrixWrapperStyle = {
     display: 'flex',
@@ -73,6 +82,10 @@ const Container = ({
         isCreateMatrixUIVisible && <CreateMatrix
           onToggleCreateMatrixUI={onToggleCreateMatrixUI}
           onRequestRandomMatrix={onRequestRandomMatrix}
+          createMatrixColumnCount={createMatrixColumnCount}
+          createMatrixRowCount={createMatrixRowCount}
+          onSetCreateMatrixColumnCount={onSetCreateMatrixColumnCount}
+          onSetCreateMatrixRowCount={onSetCreateMatrixRowCount}
         />
       }
       {
@@ -87,7 +100,7 @@ const Container = ({
             previewSolution,
             onSolutionClicked,
             onSolutionHover,
-            onSetMatrixCell,
+            onRequestMatrixCellChange,
           }}
         />
       </div>
@@ -135,11 +148,16 @@ Container.propTypes = {
   onNextSolutionClicked: PropTypes.func.isRequired,
   onPreviousSolutionClicked: PropTypes.func.isRequired,
   onSolutionHover: PropTypes.func.isRequired,
+  onSetCreateMatrixColumnCount: PropTypes.func.isRequired,
+  onSetCreateMatrixRowCount: PropTypes.func.isRequired,
   onToggleCreateMatrixUI: PropTypes.func.isRequired,
   onToggleIntroductionUI: PropTypes.func.isRequired,
   onRequestRandomMatrix: PropTypes.func.isRequired,
+  onRequestMatrixCellChange: PropTypes.func.isRequired,
   isIntroductionUIVisible: PropTypes.bool.isRequired,
   isCreateMatrixUIVisible: PropTypes.bool.isRequired,
+  createMatrixColumnCount: PropTypes.number.isRequired,
+  createMatrixRowCount: PropTypes.number.isRequired,
 };
 
 const stateToProps = state => ({
@@ -150,6 +168,8 @@ const stateToProps = state => ({
   solutionPathsData: getSolutionPathsData(state),
   isCreateMatrixUIVisible: getIsCreateMatrixUIVisible(state),
   isIntroductionUIVisible: getIsIntroductionUIVisible(state),
+  createMatrixColumnCount: getCreateMatrixColumnCount(state),
+  createMatrixRowCount: getCreateMatrixRowCount(state),
 });
 
 const dispatchToProps = dispatch => ({
@@ -160,7 +180,9 @@ const dispatchToProps = dispatch => ({
   onToggleCreateMatrixUI: () => { dispatch(toggleCreateMatrixUI()); },
   onToggleIntroductionUI: () => { dispatch(toggleIntroductionUI()); },
   onRequestRandomMatrix: (rowCount, columnCount) => { dispatch(requestRandomMatrix(rowCount, columnCount)); },
-  onSetMatrixCell: (index, value) => { dispatch(setMatrixCell(index, value)); },
+  onRequestMatrixCellChange: (index, value) => { dispatch(requestMatrixCellChange(index, value)); },
+  onSetCreateMatrixColumnCount: (count) => { dispatch(setCreateMatrixColumnCount(count)); },
+  onSetCreateMatrixRowCount: (count) => { dispatch(setCreateMatrixRowCount(count)); },
 });
 const Main = compose(
   connect(

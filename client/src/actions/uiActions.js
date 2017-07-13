@@ -14,10 +14,12 @@ export const toggleIntroductionUI = () => ({
 });
 
 
-export const setCreateMatrixRowCount = () => ({
+export const setCreateMatrixRowCount = count => ({
   type: SET_CREATE_MATRIX_ROW_COUNT,
+  count,
 });
 
-export const setCreateMatrixColumnCount = () => ({
+export const setCreateMatrixColumnCount = count => ({
   type: SET_CREATE_MATRIX_COLUMN_COUNT,
+  count,
 });

@@ -16,6 +16,8 @@ describe('UI Reducer', () => {
     const expectedState = Map({
       isCreateMatrixUIVisible: true,
       isIntroductionUIVisible: false,
+      setCreateMatrixColumnCount: 0,
+      setCreateMatrixRowCount: 0,
     });
 
     expect(is(testState, expectedState)).to.equal(true);
@@ -26,6 +28,8 @@ describe('UI Reducer', () => {
     const expectedState = Map({
       isCreateMatrixUIVisible: false,
       isIntroductionUIVisible: true,
+      setCreateMatrixColumnCount: 0,
+      setCreateMatrixRowCount: 0,
     });
 
     expect(is(testState, expectedState)).to.equal(true);

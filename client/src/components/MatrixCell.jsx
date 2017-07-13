@@ -14,7 +14,7 @@ import {
 const MatrixCell = ({
   cell,
   cellSize,
-  onSetMatrixCell,
+  onRequestMatrixCellChange,
 }) => {
   const activePosition = cell.get('activePosition');
   const previewPosition = cell.get('previewPosition');
@@ -157,7 +157,7 @@ const MatrixCell = ({
 
                 target.value = newCellVal;
                 target.setSelectionRange(1, 1);
-                onSetMatrixCell(cell.get('id'), newCellVal);
+                onRequestMatrixCellChange(cell.get('id'), newCellVal);
               }
             }
           }
@@ -200,6 +200,7 @@ MatrixCell.propTypes = {
     previewPosition: PropTypes.number,
   }).isRequired,
   cellSize: PropTypes.number.isRequired,
+  onRequestMatrixCellChange: PropTypes.func.isRequired,
 };
 
 

@@ -13,7 +13,7 @@ const MatrixResizer = ({
   previewSolution,
   onSolutionClicked,
   onSolutionHover,
-  onSetMatrixCell,
+  onRequestMatrixCellChange,
 }) => (
   <ContainerDimensions>
     {
@@ -49,7 +49,7 @@ const MatrixResizer = ({
             cellSize={cellSize}
             matrix={matrix}
             activeSolution={activeSolution}
-            onSetMatrixCell={onSetMatrixCell}
+            onRequestMatrixCellChange={onRequestMatrixCellChange}
           />
         </div>);
       }
@@ -77,7 +77,7 @@ MatrixResizer.propTypes = {
   previewSolution: PropTypes.number,
   onSolutionClicked: PropTypes.func.isRequired,
   onSolutionHover: PropTypes.func.isRequired,
-  onSetMatrixCell: PropTypes.func.isRequired,
+  onRequestMatrixCellChange: PropTypes.func.isRequired,
 };
 
 export default PureImmutable()(MatrixResizer);

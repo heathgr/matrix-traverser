@@ -57,6 +57,7 @@ describe('<MatrixResizer />', () => {
       onSolutionClicked={() => null}
       onSolutionHover={() => null}
       onSetMatrixCell={() => null}
+      onRequestMatrixCellChange={() => null}
     />
   );
   const dimensionsWrapper = componentWrapper.find(ContainerDimensions);
