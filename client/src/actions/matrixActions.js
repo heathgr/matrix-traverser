@@ -24,8 +24,8 @@ export const requestRandomMatrix = (rowCount = null, columnCount = null) => ({
   columnCount,
 });
 
-export const requestMatrixCellChange = (id, value) => ({
+export const requestMatrixCellChange = (index, value) => ({
   type: REQUEST_MATRIX_CELL_CHANGE,
-  id,
+  index,
   value,
 });

@@ -89,26 +89,26 @@ describe('Root Reducer', () => {
             {
               position: { x: 0, y: 0 },
               solution: 0,
-            }
-          ]
+            },
+          ],
         },
         {
           value: 2,
           positions: [
             {
               position: { x: 1, y: 0 },
-              solution: 0
-            }
-          ]
+              solution: 0,
+            },
+          ],
         },
         {
           value: 3,
           positions: [
             {
               position: { x: 0, y: 1 },
-              solution: 0
-            }
-          ]
+              solution: 0,
+            },
+          ],
         },
         {
           value: 4,
@@ -116,9 +116,9 @@ describe('Root Reducer', () => {
             {
               position: { x: 1, y: 1 },
               solution: 0,
-            }
-          ]
-        }
+            },
+          ],
+        },
       ],
       columnCount: 2,
       rowCount: 2,

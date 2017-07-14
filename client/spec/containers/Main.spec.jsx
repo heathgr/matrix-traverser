@@ -9,8 +9,6 @@ import root from '../../src/reducers/root';
 import Main from '../../src/containers/Main';
 import MatrixResizer from '../../src/components/MatrixResizer';
 import SolutionsList from '../../src/components/SolutionsList';
-import { initialSolutions } from '../../src/reducers/solutions';
-import { testMatrix } from '../testData/testMatrixData';
 
 const testStore = createStore(root);
 

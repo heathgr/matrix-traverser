@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from './Modal';
 import Button from './Button';
 
@@ -9,5 +10,9 @@ const Introduction = ({ onToggleIntroductionUI }) => (
     <Button onClick={() => onToggleIntroductionUI()}>OK</Button>
   </Modal>
 );
+
+Introduction.propTypes = {
+  onToggleIntroductionUI: PropTypes.func.isRequired,
+};
 
 export default Introduction;

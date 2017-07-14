@@ -3,12 +3,13 @@
 import { fork, put } from 'redux-saga/effects';
 import takeRequestSolutions from './takeRequestSolutions';
 import takeRequestRandomMatrix from './takeRequestRandomMatrix';
+import takeRequestMatrixCellChange from './takeRequestMatrixCellChange';
 import { requestRandomMatrix } from '../actions/matrixActions';
-// import { requestSolutions } from '../actions/solutionsActions';
 
 const start = function* () {
   yield fork(takeRequestSolutions);
   yield fork(takeRequestRandomMatrix);
+  yield fork(takeRequestMatrixCellChange);
   yield put(requestRandomMatrix());
 };
 
