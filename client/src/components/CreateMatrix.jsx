@@ -14,7 +14,7 @@ const normalizeInput = (evt) => {
   return Math.min(6, Math.max(0, evtNumber));
 };
 
-const selectLast = (evt) => {
+const selectLastInputCharacter = (evt) => {
   const valueLength = evt.target.value.length;
 
   evt.target.setSelectionRange(valueLength, valueLength);
@@ -73,7 +73,7 @@ const CreateMatrix = ({
               value={createMatrixColumnCount === 0 ? 'Random' : createMatrixColumnCount}
               onSelect={
                 (evt) => {
-                  selectLast(evt);
+                  selectLastInputCharacter(evt);
                 }
               }
               onChange={
@@ -101,7 +101,7 @@ const CreateMatrix = ({
               value={createMatrixRowCount === 0 ? 'Random' : createMatrixRowCount}
               onSelect={
                 (evt) => {
-                  selectLast(evt);
+                  selectLastInputCharacter(evt);
                 }
               }
               onChange={

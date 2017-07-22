@@ -50,7 +50,10 @@ describe('<CreateMatrix />', () => {
 
   it('Should have input fields for column and row counts.', () => {
     inputs.forEach(
-      input => input.simulate('change', { target: { value: '00' } })
+      (input) => {
+        input.simulate('select');
+        input.simulate('change', { target: { value: '00' } });
+      }
     );
     expect(onSetCreateMatrixColumnCountSpy.calledWith(0)).to.equal(true);
     expect(onSetCreateMatrixRowCountSpy.calledWith(0)).to.equal(true);
