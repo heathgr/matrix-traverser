@@ -8,7 +8,7 @@ const generateRandomMatrix = (rowCount, columnCount) => {
     rowCount: actualRowCount,
     columnCount: actualColumnCount,
     cells: Range(0, actualRowCount * actualColumnCount).toList().map(
-      () => Math.round(Math.random() * 10)
+      () => Math.round(Math.random() * 9)
     ),
   });
 };

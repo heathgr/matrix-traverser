@@ -9,8 +9,8 @@ import {
 export const initialUIState = Map({
   isCreateMatrixUIVisible: false,
   isIntroductionUIVisible: false,
-  setCreateMatrixColumnCount: 0,
-  setCreateMatrixRowCount: 0,
+  createMatrixColumnCount: 0,
+  createMatrixRowCount: 0,
 });
 
 const ui = (state = initialUIState, action) => {
@@ -22,10 +22,10 @@ const ui = (state = initialUIState, action) => {
       return state.set('isIntroductionUIVisible', !state.get('isIntroductionUIVisible'));
     }
     case SET_CREATE_MATRIX_COLUMN_COUNT: {
-      return state.set('setCreateMatrixColumnCount', action.count);
+      return state.set('createMatrixColumnCount', action.count);
     }
     case SET_CREATE_MATRIX_ROW_COUNT: {
-      return state.set('setCreateMatrixRowCount', action.count);
+      return state.set('createMatrixRowCount', action.count);
     }
     default: {
       return state;
@@ -35,7 +35,7 @@ const ui = (state = initialUIState, action) => {
 
 export const getIsCreateMatrixUIVisible = state => state.get('isCreateMatrixUIVisible');
 export const getIsIntroductionUIVisible = state => state.get('isIntroductionUIVisible');
-export const getCreateMatrixColumnCount = state => state.get('setCreateMatrixColumnCount');
-export const getCreateMatrixRowCount = state => state.get('setCreateMatrixRowCount');
+export const getCreateMatrixColumnCount = state => state.get('createMatrixColumnCount');
+export const getCreateMatrixRowCount = state => state.get('createMatrixRowCount');
 
 export default ui;

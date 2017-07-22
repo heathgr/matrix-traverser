@@ -3,6 +3,8 @@ import { is, Map } from 'immutable';
 import {
   toggleCreateMatrixUI,
   toggleIntroductionUI,
+  setCreateMatrixColumnCount,
+  setCreateMatrixRowCount,
 } from '../../src/actions/uiActions';
 import ui, {
   getIsCreateMatrixUIVisible,
@@ -16,8 +18,8 @@ describe('UI Reducer', () => {
     const expectedState = Map({
       isCreateMatrixUIVisible: true,
       isIntroductionUIVisible: false,
-      setCreateMatrixColumnCount: 0,
-      setCreateMatrixRowCount: 0,
+      createMatrixColumnCount: 0,
+      createMatrixRowCount: 0,
     });
 
     expect(is(testState, expectedState)).to.equal(true);
@@ -28,8 +30,32 @@ describe('UI Reducer', () => {
     const expectedState = Map({
       isCreateMatrixUIVisible: false,
       isIntroductionUIVisible: true,
-      setCreateMatrixColumnCount: 0,
-      setCreateMatrixRowCount: 0,
+      createMatrixColumnCount: 0,
+      createMatrixRowCount: 0,
+    });
+
+    expect(is(testState, expectedState)).to.equal(true);
+  });
+  it('Should correctly handle a SET_CREATE_MATRIX_COLUMN_COUNT action.', () => {
+    const testAction = setCreateMatrixColumnCount(2);
+    const testState = ui(undefined, testAction);
+    const expectedState = Map({
+      isCreateMatrixUIVisible: false,
+      isIntroductionUIVisible: false,
+      createMatrixColumnCount: 2,
+      createMatrixRowCount: 0,
+    });
+
+    expect(is(testState, expectedState)).to.equal(true);
+  });
+  it('Should correctly handle a SET_CREATE_MATRIX_ROW_COUNT action.', () => {
+    const testAction = setCreateMatrixRowCount(7);
+    const testState = ui(undefined, testAction);
+    const expectedState = Map({
+      isCreateMatrixUIVisible: false,
+      isIntroductionUIVisible: false,
+      createMatrixColumnCount: 0,
+      createMatrixRowCount: 7,
     });
 
     expect(is(testState, expectedState)).to.equal(true);

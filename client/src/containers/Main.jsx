@@ -36,7 +36,7 @@ import {
   requestMatrixCellChange,
 } from '../actions/matrixActions';
 
-const Container = ({
+export const Container = ({
   matrix,
   solutions,
   activeSolution,
@@ -56,7 +56,6 @@ const Container = ({
   onRequestMatrixCellChange,
   onSetCreateMatrixColumnCount,
   onSetCreateMatrixRowCount,
-
 }) => {
   const matrixWrapperStyle = {
     display: 'flex',
