@@ -195,6 +195,7 @@ MatrixCell.defaultProps = {
 
 MatrixCell.propTypes = {
   cell: ImmutablePropTypes.mapContains({
+    id: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
     activePosition: PropTypes.number,
     previewPosition: PropTypes.number,

@@ -12,21 +12,25 @@ describe('<Matrix />', () => {
   const testMatrix = fromJS({
     cells: [
       {
+        id: 0,
         value: 1,
         previewPosition: 0,
         activePosition: 0,
       },
       {
+        id: 0,
         value: 2,
         previewPosition: 1,
         activePosition: 1,
       },
       {
+        id: 0,
         value: 3,
         previewPosition: 2,
         activePosition: 2,
       },
       {
+        id: 0,
         value: 4,
         previewPosition: 3,
         activePosition: 3,

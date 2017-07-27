@@ -14,31 +14,37 @@ describe('<MatrixResizer />', () => {
   const testMatrix = Map({
     cells: List([
       Map({
+        id: 0,
         value: 0,
         activePosition: 0,
         previewPosition: 0,
       }),
       Map({
+        id: 1,
         value: 3,
         activePosition: 0,
         previewPosition: 0,
       }),
       Map({
+        id: 2,
         value: 9,
         activePosition: 0,
         previewPosition: 0,
       }),
       Map({
+        id: 3,
         value: 10,
         activePosition: 0,
         previewPosition: 0,
       }),
       Map({
+        id: 4,
         value: 2,
         activePosition: 0,
         previewPosition: 0,
       }),
       Map({
+        id: 5,
         value: 8,
         activePosition: 0,
         previewPosition: 0,
