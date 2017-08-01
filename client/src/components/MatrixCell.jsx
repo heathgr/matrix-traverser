@@ -4,12 +4,25 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import Style from 'style-it';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import {
-  PRIMARY_COLOR,
-  ACCENT_COLOR,
-  INACTIVE_COLOR,
-  PRIMARY_BORDER_COLOR,
-  ACCENT_BORDER_COLOR,
-} from '../constants/uiColors';
+  MATRIX_CELL_WRAPPER,
+  MATRIX_CELL_SVG_WRAPPER,
+  MATRIX_CELL_SVG,
+  MATRIX_CELL_INPUT_WRAPPER,
+  MATRIX_CELL_INPUT,
+  MATRIX_CELL_INPUT_ACTIVE,
+  MATRIX_CELL_INPUT_PREVIEW,
+  MATRIX_CELL_INPUT_INACTIVE,
+  MATRIX_CELL_MAIN_CIRCLE,
+  MATRIX_CELL_MAIN_CIRCLE_ACTIVE,
+  MATRIX_CELL_MAIN_CIRCLE_INACTIVE,
+  MATRIX_CELL_MAIN_CIRCLE_PREVIEW,
+  MATRIX_CELL_ACTIVE_CIRCLE,
+  MATRIX_CELL_ACTIVE_CIRCLE_VISIBLE,
+  MATRIX_CELL_ACTIVE_CIRCLE_HIDDEN,
+  MATRIX_CELL_PREVIEW_CIRCLE,
+  MATRIX_CELL_PREVIEW_CIRCLE_VISIBLE,
+  MATRIX_CELL_PREVIEW_CIRCLE_HIDDEN,
+} from '../constants/styleNames';
 
 const MatrixCell = ({
   cell,
@@ -20,124 +33,52 @@ const MatrixCell = ({
   const previewPosition = cell.get('previewPosition');
   const halfCellSize = cellSize * 0.5;
 
-  const circleScale = (() => {
+  const circleStyle = (() => {
     if (activePosition !== null) {
-      return 1.5;
+      return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_ACTIVE}`;
     } else if (previewPosition !== null) {
-      return 1.25;
+      return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_PREVIEW}`;
     }
-    return 1;
+    return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_INACTIVE}`;
   })();
 
-  const mainColor = (() => {
+  const activeCircleStyle = (() => {
     if (activePosition !== null) {
-      return PRIMARY_BORDER_COLOR;
-    } else if (previewPosition !== null) {
-      return ACCENT_BORDER_COLOR;
+      return `${MATRIX_CELL_ACTIVE_CIRCLE} ${MATRIX_CELL_ACTIVE_CIRCLE_VISIBLE} activeAnimationOffset`;
     }
-    return INACTIVE_COLOR;
+    return `${MATRIX_CELL_ACTIVE_CIRCLE} ${MATRIX_CELL_ACTIVE_CIRCLE_HIDDEN}`;
   })();
 
-  const activeStrokeDasharray = (() => {
-    if (activePosition !== null) {
-      return '30px 10px';
-    }
-    return '0px 40px';
-  })();
-
-  const previewStrokeDasharray = (() => {
+  const previewCircleStyle = (() => {
     if (previewPosition !== null) {
-      return '25px 10px';
+      return `${MATRIX_CELL_PREVIEW_CIRCLE} ${MATRIX_CELL_PREVIEW_CIRCLE_VISIBLE} previewAnimationOffset`;
     }
-    return '0px 35px';
+    return `${MATRIX_CELL_PREVIEW_CIRCLE} ${MATRIX_CELL_PREVIEW_CIRCLE_HIDDEN}`;
+  })();
+
+  const inputStyle = (() => {
+    if (activePosition !== null) {
+      return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_ACTIVE}`;
+    } else if (previewPosition !== null) {
+      return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_PREVIEW}`;
+    }
+    return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_INACTIVE}`;
   })();
 
   return Style.it(`
-    @keyframes reveal {
-      0% {opacity: 0; }
-      100% {opacity: 1; }
+    .activeAnimationOffset {
+      transition: stroke-dasharray ease 0.5s ${activePosition * 0.35}s;
     }
 
-    .wrapper {
-      width: ${cellSize}px;
-      height: ${cellSize}px;
-      position: relative;
-    }
-
-    .inputPositioner {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-    }
-
-    .circlesPositioner {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 0;
-    }
-
-    .cellSvg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .mainCircle {
-      fill: #152026;
-      fill-opacity: 0.65;
-      stroke: ${mainColor};
-      stroke-width: 1px;
-      transform: scale(${circleScale});
-      transform-origin: ${halfCellSize}px ${halfCellSize}px;
-      transition: stroke ease 1s, transform ease 0.5s;
-      vector-effect: non-scaling-stroke;
-      animation: 1s ease reveal;
-    }
-
-    .activeCircle {
-      fill: none;
-      stroke: ${PRIMARY_COLOR};
-      stroke-width: 1px;
-      stroke-dasharray: ${activeStrokeDasharray};
-      transition: stroke-dasharray ease 0.5s ${activePosition * 0.2}s;
-      vector-effect: non-scaling-stroke;
-    }
-
-    .previewCircle {
-      fill: none;
-      stroke: ${ACCENT_COLOR};
-      stroke-dasharray: ${previewStrokeDasharray};
-      stroke-width: 1px;
+    .previewAnimationOffset {
       transition: stroke-dasharray ease 0.5s ${previewPosition * 0.2}s;
     }
-
-    .input {
-      color: ${mainColor};
-      transition: color ease 1s;
-      animation: 1s ease reveal;
-      pointer-events: all;
-      text-align: center;
-      background: none;
-      border: none;
-      outline: none;
-    }
   `, (
-    <div className='wrapper'>
-      <div className='inputPositioner'>
+    <div className={MATRIX_CELL_WRAPPER}>
+      <div className={MATRIX_CELL_INPUT_WRAPPER}>
         <input
           type='text'
-          className='input'
+          className={inputStyle}
           value={cell.get('value')}
           onSelect={
             (evt) => {
@@ -163,22 +104,22 @@ const MatrixCell = ({
           }
         />
       </div>
-      <div className='circlesPositioner'>
-        <svg className='cellSvg'>
+      <div className={MATRIX_CELL_SVG_WRAPPER}>
+        <svg className={MATRIX_CELL_SVG}>
           <circle
-            className='mainCircle'
+            className={circleStyle}
             cx={halfCellSize}
             cy={halfCellSize}
             r={cellSize * 0.1}
           />
           <circle
-            className='activeCircle'
+            className={activeCircleStyle}
             cx={halfCellSize}
             cy={halfCellSize}
             r={cellSize * 0.2}
           />
           <circle
-            className='previewCircle'
+            className={previewCircleStyle}
             cx={halfCellSize}
             cy={halfCellSize}
             r={cellSize * 0.175}
@@ -204,6 +145,4 @@ MatrixCell.propTypes = {
   onRequestMatrixCellChange: PropTypes.func.isRequired,
 };
 
-
 export default PureImmutable()(MatrixCell);
-
