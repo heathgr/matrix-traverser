@@ -3,6 +3,12 @@ import chaiEnzyme from 'chai-enzyme';
 import { mount } from 'enzyme';
 import React from 'react';
 import SolutionPath from '../../src/components/SolutionPath';
+import {
+  SOLUTION_PATH,
+  SOLUTION_PATH_ACTIVE,
+  SOLUTION_PATH_PREVIEW,
+  SOLUTION_PATH_INACTIVE,
+} from '../../src//constants/styleNames';
 
 describe('<SolutionPath />', () => {
   chai.use(chaiEnzyme());
@@ -33,5 +39,32 @@ describe('<SolutionPath />', () => {
     expect(testWrapper).to.have.prop('pathData');
     expect(testWrapper).to.have.prop('isActive');
     expect(testWrapper).to.have.prop('isPreview');
+  });
+
+  it('Should style the path based what solutions are active or being previewed.', () => {
+
+    testWrapper.setProps({ isActive: false, isPreview: false });
+
+    expect(testWrapper.hasClass(SOLUTION_PATH_ACTIVE)).to.equal(false);
+    expect(testWrapper.hasClass(SOLUTION_PATH_PREVIEW)).to.equal(false);
+    expect(testWrapper.hasClass(SOLUTION_PATH_INACTIVE)).to.equal(true);
+
+    testWrapper.setProps({ isActive: true, isPreview: false });
+
+    expect(testWrapper.hasClass(SOLUTION_PATH_ACTIVE)).to.equal(true);
+    expect(testWrapper.hasClass(SOLUTION_PATH_PREVIEW)).to.equal(false);
+    expect(testWrapper.hasClass(SOLUTION_PATH_INACTIVE)).to.equal(false);
+
+    testWrapper.setProps({ isActive: false, isPreview: true });
+
+    expect(testWrapper.hasClass(SOLUTION_PATH_ACTIVE)).to.equal(false);
+    expect(testWrapper.hasClass(SOLUTION_PATH_PREVIEW)).to.equal(true);
+    expect(testWrapper.hasClass(SOLUTION_PATH_INACTIVE)).to.equal(false);
+
+    testWrapper.setProps({ isActive: true, isPreview: true });
+
+    expect(testWrapper.hasClass(SOLUTION_PATH_ACTIVE)).to.equal(true);
+    expect(testWrapper.hasClass(SOLUTION_PATH_PREVIEW)).to.equal(false);
+    expect(testWrapper.hasClass(SOLUTION_PATH_INACTIVE)).to.equal(false);
   });
 });
