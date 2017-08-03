@@ -33,7 +33,6 @@ const SolutionPathsInteractionHandler = ({ width, height, solutionPathsData, onS
   );
 };
 
-
 SolutionPathsInteractionHandler.defaultProps = {
   solutionPathsData: List([]),
 };
