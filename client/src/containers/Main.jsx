@@ -15,7 +15,7 @@ import {
   getCreateMatrixRowCount,
 } from '../reducers/root';
 import MatrixResizer from '../components/MatrixResizer';
-import SolutionsList from '../components/SolutionsList';
+import SolutionList from '../components/SolutionList';
 import CreateMatrix from '../components/CreateMatrix';
 import Introduction from '../components/Introduction';
 import PureImmutable from '../helpers/hocs/PureImmutable';
@@ -103,7 +103,7 @@ export const Container = ({
           }}
         />
       </div>
-      <SolutionsList
+      <SolutionList
         {...{
           solutions,
           activeSolution,

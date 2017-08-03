@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import { List } from 'immutable';
 import React from 'react';
 
-import SolutionList from '../../src/components/SolutionsList';
+import SolutionList from '../../src/components/SolutionList';
 
 describe('<SolutionList />', () => {
   chai.use(chaiEnzyme());

@@ -9,7 +9,7 @@ import React from 'react';
 import root from '../../src/reducers/root';
 import Main from '../../src/containers/Main';
 import MatrixResizer from '../../src/components/MatrixResizer';
-import SolutionsList from '../../src/components/SolutionsList';
+import SolutionList from '../../src/components/SolutionList';
 import CreateMatrix from '../../src/components/CreateMatrix';
 import Introduction from '../../src/components/Introduction';
 
@@ -57,10 +57,10 @@ describe('<Main />', () => {
     expect(matrixResizerWrapper).to.have.prop('onRequestMatrixCellChange');
   });
 
-  it('Should render a <SolutionsList /> component with correct props passed from the app state.', () => {
-    const solutionsListWrapper = componentWrapper.find(SolutionsList);
+  it('Should render a <SolutionList /> component with correct props passed from the app state.', () => {
+    const solutionsListWrapper = componentWrapper.find(SolutionList);
 
-    expect(componentWrapper).to.have.exactly(1).descendants(SolutionsList);
+    expect(componentWrapper).to.have.exactly(1).descendants(SolutionList);
     expect(solutionsListWrapper).to.have.prop('solutions');
     expect(solutionsListWrapper).to.have.prop('activeSolution');
     expect(solutionsListWrapper).to.have.prop('onSolutionClicked');
@@ -155,7 +155,7 @@ describe('<Main />', () => {
   });
 
   it('Should create the dispactchers for the <SolutionsList /> component', () => {
-    const solutionListWrapper = componentWrapper.find(SolutionsList);
+    const solutionListWrapper = componentWrapper.find(SolutionList);
 
     const solutionClickedAction = setActiveSolution(7);
 

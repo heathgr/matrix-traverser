@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import Style from 'style-it';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
-import SolutionsListItem from './SolutionListItem';
+import SolutionListItem from './SolutionListItem';
 import Button from './Button';
 
-const SolutionsList = ({
+const SolutionList = ({
   solutions,
   activeSolution,
   previewSolution,
@@ -60,7 +60,7 @@ const SolutionsList = ({
         <div className='solutionButtonContainer'>
           {
             solutions.map(
-              (solution, id) => <SolutionsListItem
+              (solution, id) => <SolutionListItem
                 {...{
                   key: id,
                   solutionId: id,
@@ -96,7 +96,7 @@ const SolutionsList = ({
   </div>)
 );
 
-SolutionsList.propTypes = {
+SolutionList.propTypes = {
   activeSolution: PropTypes.number.isRequired,
   solutions: ImmutablePropTypes.listOf(
     ImmutablePropTypes.listOf(
@@ -110,4 +110,4 @@ SolutionsList.propTypes = {
   onToggleIntroductionUI: PropTypes.func.isRequired,
 };
 
-export default PureImmutable()(SolutionsList);
+export default PureImmutable()(SolutionList);
