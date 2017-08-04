@@ -1,12 +1,11 @@
 import React from 'react';
-import Style from 'style-it';
+import PropTypes from 'prop-types';
 import {
-  PRIMARY_BORDER_COLOR,
-  ACCENT_BORDER_COLOR,
-  BACKGROUND_COLOR,
-  PRIMARY_COLOR,
-  ACCENT_COLOR,
-} from '../constants/uiColors';
+  SOLUTION_LIST_ITEM,
+  SOLUTION_LIST_ITEM_ACTIVE,
+  SOLUTION_LIST_ITEM_INACTIVE,
+  SOLUTION_LIST_ITEM_PREVIEW,
+} from '../constants/styleNames';
 
 const SolutionListItem = ({
   solutionId,
@@ -15,43 +14,35 @@ const SolutionListItem = ({
   isActive,
   isPreview,
 }) => {
-  const borderColor = (() => {
-    if (isActive) {
-      return PRIMARY_COLOR;
-    } else if (isPreview) {
-      return ACCENT_COLOR;
+  const itemStyle = (
+    () => {
+      if (isActive) {
+        return `${SOLUTION_LIST_ITEM} ${SOLUTION_LIST_ITEM_ACTIVE}`;
+      } else if (isPreview) {
+        return `${SOLUTION_LIST_ITEM} ${SOLUTION_LIST_ITEM_PREVIEW}`;
+      }
+      return `${SOLUTION_LIST_ITEM} ${SOLUTION_LIST_ITEM_INACTIVE}`;
     }
-    return BACKGROUND_COLOR;
-  })();
+  )();
 
-  return Style.it(`
-    .solutionItem {
-      width: 25px;
-      height: 25px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: ${isActive || isPreview ? PRIMARY_BORDER_COLOR : ACCENT_BORDER_COLOR};
-      border-style: 'solid';
-      border-color: ${borderColor};
-      border-width: 1px;
-      border-radius: 5px;
-      background: ${isActive ? PRIMARY_COLOR : BACKGROUND_COLOR};
-      margin: 3px;
-      transition: 1s;
-      flex: 0 0 25px;
-      outline: none;
-    }
-  `, (
+  return (
     <button
-      className='solutionItem'
+      className={itemStyle}
       onClick={() => onSolutionClicked(solutionId)}
       onMouseEnter={() => onSolutionHover(solutionId)}
       onMouseLeave={() => onSolutionHover(null)}
     >
       {solutionId + 1}
     </button>
-  ));
+  );
+};
+
+SolutionListItem.propTypes = {
+  solutionId: PropTypes.number.isRequired,
+  onSolutionClicked: PropTypes.func.isRequired,
+  onSolutionHover: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  isPreview: PropTypes.bool.isRequired,
 };
 
 export default SolutionListItem;

@@ -6,10 +6,6 @@ import React from 'react';
 import { spy } from 'sinon';
 import MatrixCell from '../../src/components/MatrixCell';
 import {
-  MATRIX_CELL_WRAPPER,
-  MATRIX_CELL_SVG_WRAPPER,
-  MATRIX_CELL_SVG,
-  MATRIX_CELL_INPUT_WRAPPER,
   MATRIX_CELL_INPUT,
   MATRIX_CELL_INPUT_ACTIVE,
   MATRIX_CELL_INPUT_PREVIEW,
@@ -65,7 +61,6 @@ describe('<MatrixCell />', () => {
   });
 
   it('Should style the cell based what solutions are active or being previewed.', () => {
-
     const mainCircleWrapper = testWrapper.find(`.${MATRIX_CELL_MAIN_CIRCLE}`);
     const activeCircleWrapper = testWrapper.find(`.${MATRIX_CELL_ACTIVE_CIRCLE}`);
     const previewCircleWrapper = testWrapper.find(`.${MATRIX_CELL_PREVIEW_CIRCLE}`);

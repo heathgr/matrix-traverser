@@ -5,6 +5,19 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 import SolutionListItem from './SolutionListItem';
 import Button from './Button';
+import {
+  SOLUTION_LIST_ITEM,
+  SOLUTION_LIST_ITEM_ACTIVE,
+  SOLUTION_LIST_ITEM_INACTIVE,
+  SOLUTION_LIST_ITEM_PREVIEW,
+} from '../constants/styleNames';
+import {
+  PRIMARY_BORDER_COLOR,
+  ACCENT_BORDER_COLOR,
+  BACKGROUND_COLOR,
+  PRIMARY_COLOR,
+  ACCENT_COLOR,
+} from '../constants/uiColors';
 
 const SolutionList = ({
   solutions,
@@ -46,6 +59,39 @@ const SolutionList = ({
     .solutionButtonContainer {
       display: flex;
       flex-direction: row;
+    }
+
+    .${SOLUTION_LIST_ITEM} {
+      width: 25px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-style: 'solid';
+      border-width: 1px;
+      border-radius: 5px;
+      margin: 3px;
+      transition: 1s;
+      flex: 0 0 25px;
+      outline: none;
+    }
+
+    .${SOLUTION_LIST_ITEM_ACTIVE} {
+      color: ${PRIMARY_BORDER_COLOR};
+      border-color: ${PRIMARY_COLOR};
+      background: ${PRIMARY_COLOR};
+    }
+
+    .${SOLUTION_LIST_ITEM_INACTIVE} {
+      color: ${ACCENT_BORDER_COLOR};
+      border-color: ${BACKGROUND_COLOR};
+      background: ${BACKGROUND_COLOR};
+    }
+
+    .${SOLUTION_LIST_ITEM_PREVIEW} {
+      color: ${PRIMARY_BORDER_COLOR};
+      border-color: ${ACCENT_COLOR};
+      background: ${BACKGROUND_COLOR};
     }
   `,
   (<div className='root'>
