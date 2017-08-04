@@ -2,7 +2,6 @@ import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import { mount } from 'enzyme';
 import React from 'react';
-import { spy } from 'sinon';
 import Modal from '../../src/components/Modal';
 
 describe('<Modal />', () => {

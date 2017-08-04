@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import React from 'react';
 import SolutionPath from '../../src/components/SolutionPath';
 import {
-  SOLUTION_PATH,
   SOLUTION_PATH_ACTIVE,
   SOLUTION_PATH_PREVIEW,
   SOLUTION_PATH_INACTIVE,
@@ -42,7 +41,6 @@ describe('<SolutionPath />', () => {
   });
 
   it('Should style the path based what solutions are active or being previewed.', () => {
-
     testWrapper.setProps({ isActive: false, isPreview: false });
 
     expect(testWrapper.hasClass(SOLUTION_PATH_ACTIVE)).to.equal(false);

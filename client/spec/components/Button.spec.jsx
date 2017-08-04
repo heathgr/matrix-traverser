@@ -1,6 +1,5 @@
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
-import { Map } from 'immutable';
 import { mount } from 'enzyme';
 import React from 'react';
 import { spy } from 'sinon';
