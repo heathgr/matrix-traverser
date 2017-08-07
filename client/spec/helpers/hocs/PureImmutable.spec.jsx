@@ -49,6 +49,7 @@ describe('The Pure render higher order component.', () => {
 
     expect(testWrapper).to.contain(<div>one: 1 two: 2 three: 3</div>);
   });
+
   it('Should only call the render function if its props have changed.', () => {
     const TestComposed = Pure()(TestComponent);
     const renderSpy = spy(TestComposed.prototype, 'render');

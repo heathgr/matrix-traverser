@@ -1,5 +1,3 @@
-/* eslint react/prefer-stateless-function: 0 */
-
 import React, { PureComponent } from 'react';
 import { is } from 'immutable';
 
