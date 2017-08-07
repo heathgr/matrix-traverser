@@ -3,6 +3,7 @@ import {
   FAILED_TO_GET_SOLUTIONS,
   GOT_SOLUTIONS,
   RESET_SOLUTIONS,
+  TAKING_REQUEST_SOLUTIONS,
   SET_ACTIVE_SOLUTION,
   SET_NEXT_ACTIVE_SOLUTION,
   SET_PREVIOUS_ACTIVE_SOLUTION,
@@ -19,6 +20,10 @@ import {
  */
 export const requestSolutions = () => ({
   type: REQUEST_SOLUTIONS,
+});
+
+export const takingRequestSolutions = () => ({
+  type: TAKING_REQUEST_SOLUTIONS,
 });
 
 /**

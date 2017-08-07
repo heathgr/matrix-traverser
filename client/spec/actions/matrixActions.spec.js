@@ -1,7 +1,21 @@
 import { expect } from 'chai';
 import { testMatrix } from '../testData/testMatrixData';
-import { SET_MATRIX, SET_MATRIX_CELL, REQUEST_RANDOM_MATRIX } from '../../src/constants/actionTypes';
-import { setMatrix, setMatrixCell, requestRandomMatrix } from '../../src/actions/matrixActions';
+import {
+  SET_MATRIX,
+  SET_MATRIX_CELL,
+  REQUEST_RANDOM_MATRIX,
+  TAKING_REQUEST_RANDOM_MATRIX,
+  REQUEST_MATRIX_CELL_CHANGE,
+  TAKING_REQUEST_MATRIX_CELL_CHANGE,
+} from '../../src/constants/actionTypes';
+import {
+  setMatrix,
+  setMatrixCell,
+  requestRandomMatrix,
+  takingRequestRandomMatrix,
+  requestMatrixCellChange,
+  takingRequestMatrixCellChange,
+} from '../../src/actions/matrixActions';
 
 describe('Matrix Actions', () => {
   it('Should create a SET_MATRIX action.', () => {
@@ -38,7 +52,7 @@ describe('Matrix Actions', () => {
     expect(testAction).to.deep.equal(expectedAction);
   });
 
-  it('Should create a null REQUEST_RANDOM_MATRIX action', () => {
+  it('Should create a null REQUEST_RANDOM_MATRIX action.', () => {
     const expectedAction = {
       type: REQUEST_RANDOM_MATRIX,
       rowCount: null,
@@ -47,5 +61,31 @@ describe('Matrix Actions', () => {
     const testAction = requestRandomMatrix();
 
     expect(testAction).to.deep.equal(expectedAction);
+  });
+
+  it('Should create a TAKING_REQUEST_RANDOM_MATRIX action.', () => {
+    const expectedAction = {
+      type: TAKING_REQUEST_RANDOM_MATRIX,
+    };
+
+    expect(takingRequestRandomMatrix()).to.deep.equal(expectedAction);
+  });
+
+  it('Should create a REQUEST_MATRIX_CELL_CHANGE action.', () => {
+    const expectedAction = {
+      type: REQUEST_MATRIX_CELL_CHANGE,
+      index: 1,
+      value: 7,
+    };
+
+    expect(requestMatrixCellChange(1, 7)).to.deep.equal(expectedAction);
+  });
+
+  it('Should create a TAKING_REQUEST_MATRIX_CELL_CHANGE action.', () => {
+    const expectedAction = {
+      type: TAKING_REQUEST_MATRIX_CELL_CHANGE,
+    };
+
+    expect(takingRequestMatrixCellChange()).to.deep.equal(expectedAction);
   });
 });

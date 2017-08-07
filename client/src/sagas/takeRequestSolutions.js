@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { takeLatest, put, select } from 'redux-saga/effects';
-import { gotSolutions, failedToGetSolutions } from '../actions/solutionsActions';
+import { gotSolutions, failedToGetSolutions, takingRequestSolutions } from '../actions/solutionsActions';
 import { REQUEST_SOLUTIONS } from '../constants/actionTypes';
 import { getMatrix } from '../reducers/root';
 
@@ -21,6 +21,7 @@ const getSolutions = function* () {
 
 const handleRequestSolutions = function* () {
   yield takeLatest(REQUEST_SOLUTIONS, getSolutions);
+  yield put(takingRequestSolutions());
 };
 
 export default handleRequestSolutions;

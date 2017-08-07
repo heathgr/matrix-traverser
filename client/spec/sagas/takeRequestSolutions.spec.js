@@ -3,13 +3,19 @@ import { expect } from 'chai';
 import { stub } from 'sinon';
 import SagaTester from 'redux-saga-tester';
 import axios from 'axios';
-import { requestSolutions, gotSolutions, failedToGetSolutions } from '../../src/actions/solutionsActions';
+import {
+  requestSolutions,
+  gotSolutions,
+  failedToGetSolutions,
+  takingRequestSolutions,
+} from '../../src/actions/solutionsActions';
+import { TAKING_REQUEST_SOLUTIONS } from  '../../src/constants/actionTypes';
 import takeRequestSolutions from '../../src/sagas/takeRequestSolutions';
 import * as selectors from '../../src/reducers/root';
 import { testMatrix } from '../testData/testMatrixData';
 import testMatrixSolution from '../testData/testMatrixSolution.json';
 
-describe('Handle Request Solutions Saga', () => {
+describe('Take Request Solutions Saga', () => {
   let sagaTester = null;
 
   beforeEach(() => {
@@ -39,5 +45,9 @@ describe('Handle Request Solutions Saga', () => {
     expect(sagaTester.getLatestCalledAction()).to.deep.equal(failedToGetSolutions(testError));
     selectors.getMatrix.restore();
     axios.post.restore();
+  });
+
+  it('Should dispatch a TAKING_REQUEST_SOLUTIONS', () => {
+    expect(sagaTester.wasCalled(TAKING_REQUEST_SOLUTIONS)).to.equal(true);
   });
 });

@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import {
   requestSolutions,
+  takingRequestSolutions,
   failedToGetSolutions,
   gotSolutions,
   setActiveSolution,
@@ -10,6 +11,7 @@ import {
 } from '../../src/actions/solutionsActions';
 import {
   REQUEST_SOLUTIONS,
+  TAKING_REQUEST_SOLUTIONS,
   FAILED_TO_GET_SOLUTIONS,
   GOT_SOLUTIONS,
   SET_ACTIVE_SOLUTION,
@@ -26,6 +28,14 @@ describe('Solutions Actions', () => {
     };
 
     expect(requestSolutions()).to.deep.equal(expectedAction);
+  });
+
+  it('Should create a "takingRequestSolutions" action.', () => {
+    const expectedAction = {
+      type: TAKING_REQUEST_SOLUTIONS,
+    };
+
+    expect(takingRequestSolutions()).to.deep.equal(expectedAction);
   });
 
   it('Should create a "failedToGetSolutions" action.', () => {
