@@ -1,4 +1,5 @@
 import { List, Map } from 'immutable';
+import { multiplyVectorByScalar, addVectors } from '../helpers/vectorMath';
 
 /**
  * Takes an array of point maps (matrix points) and returns data that will be used to render an SVG path.
@@ -13,6 +14,25 @@ const bezierPathFromMatrixPoints = (points, tension = 3) => {
   let bezierCurves = List([
     List([points.get(0)]),
   ]);
+
+  // If there are only two matrix points, special handeling is requried.
+  if (points.size === 2) {
+    const first = points.get(0);
+    const second = points.get(1);
+    const offsetVector = Map({
+      x: second.get('x') - first.get('x'),
+      y: second.get('y') - first.get('y'),
+    });
+    const segment = List([
+      addVectors(first, multiplyVectorByScalar(offsetVector, 1 / 3)),
+      addVectors(first, multiplyVectorByScalar(offsetVector, 2 / 3)),
+      second,
+    ]);
+
+    bezierCurves = bezierCurves.push(segment);
+
+    return bezierCurves;
+  }
 
   for (let i = 0; i < points.size - 1; i += 1) {
     let rSeg = List([]);
@@ -57,7 +77,7 @@ const bezierPathFromMatrixPoints = (points, tension = 3) => {
       .push(Map({ x: rSeg.get(2).get('x'), y: rSeg.get(2).get('y') }))
     );
   }
-
+  
   return bezierCurves;
 };
 
