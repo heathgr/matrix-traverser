@@ -6,6 +6,7 @@ import root, {
   getSolutions,
   getSolutionPathsData,
   getMatrixWithPositionOffsets,
+  getDetailedMatrix,
 } from '../../src/reducers/root';
 import { initialMatrix } from '../../src/reducers/matrix';
 import { initialSolutions } from '../../src/reducers/solutions';
@@ -68,6 +69,64 @@ describe('Root Reducer', () => {
     expect(is(result, expectedResult)).to.equal(true);
   });
 
+  it('Should have a selector for getting a detailed matrix.', () => {
+    const testState1 = {
+      matrix: fromJS({
+        cells: [1, 2, 3, 4],
+        columnCount: 2,
+        rowCount: 2,
+      }),
+      solutions: fromJS({
+        data: [
+          [0, 1, 2],
+          [0, 2, 1],
+        ],
+        activeSolution: 0,
+        previewSolution: 1,
+      }),
+    };
+    const testState2 = {
+      matrix: fromJS({
+        cells: [1, 2, 3, 4],
+        columnCount: 2,
+        rowCount: 2,
+      }),
+      solutions: fromJS({
+        data: [
+          [0, 1, 2],
+          [0, 2, 1],
+        ],
+        activeSolution: null,
+        previewSolution: null,
+      }),
+    };
+    const expectedResult1 = fromJS({
+      cells: [
+        { value: 1, activePosition: 0, previewPosition: 0, id: 0 },
+        { value: 2, activePosition: 1, previewPosition: 2, id: 1 },
+        { value: 3, activePosition: 2, previewPosition: 1, id: 2 },
+        { value: 4, activePosition: null, previewPosition: null, id: 3 },
+      ],
+      columnCount: 2,
+      rowCount: 2,
+    });
+    const expectedResult2 = fromJS({
+      cells: [
+        { value: 1, activePosition: null, previewPosition: null, id: 0 },
+        { value: 2, activePosition: null, previewPosition: null, id: 1 },
+        { value: 3, activePosition: null, previewPosition: null, id: 2 },
+        { value: 4, activePosition: null, previewPosition: null, id: 3 },
+      ],
+      columnCount: 2,
+      rowCount: 2
+    });
+    const result1 = getDetailedMatrix(testState1);
+    const result2 = getDetailedMatrix(testState2);
+
+    expect(is(expectedResult1, result1)).to.equal(true);
+    expect(is(expectedResult2, result2)).to.equal(true);
+  });
+
   it('Should have a selector for offset matrix cell positions.', () => {
     const testState = {
       matrix: fromJS({
@@ -77,8 +136,10 @@ describe('Root Reducer', () => {
       }),
       solutions: fromJS({
         data: [
-          [0, 1, 2, 3],
+          [0, 1, 2],
         ],
+        activeSolution: null,
+        previewSolution: null,
       }),
     };
     const expectedResult = fromJS({
@@ -112,18 +173,14 @@ describe('Root Reducer', () => {
         },
         {
           value: 4,
-          positions: [
-            {
-              position: { x: 1, y: 1 },
-              solution: 0,
-            },
-          ],
+          positions: [],
         },
       ],
       columnCount: 2,
       rowCount: 2,
     });
     const result = getMatrixWithPositionOffsets(testState);
+
     expect(is(expectedResult, result)).to.equal(true);
   });
 });

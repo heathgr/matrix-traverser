@@ -186,8 +186,7 @@ export const getDetailedMatrix = createSelector(
       }
     );
 
-    const shit = matrixState.set('cells', newMatrixCells);
-    return shit;
+    return matrixState.set('cells', newMatrixCells);
   }
 );
 
