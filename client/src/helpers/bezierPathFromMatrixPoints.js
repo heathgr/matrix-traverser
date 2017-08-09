@@ -77,7 +77,7 @@ const bezierPathFromMatrixPoints = (points, tension = 3) => {
       .push(Map({ x: rSeg.get(2).get('x'), y: rSeg.get(2).get('y') }))
     );
   }
-  
+
   return bezierCurves;
 };
 
