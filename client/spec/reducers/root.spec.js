@@ -118,7 +118,7 @@ describe('Root Reducer', () => {
         { value: 4, activePosition: null, previewPosition: null, id: 3 },
       ],
       columnCount: 2,
-      rowCount: 2
+      rowCount: 2,
     });
     const result1 = getDetailedMatrix(testState1);
     const result2 = getDetailedMatrix(testState2);

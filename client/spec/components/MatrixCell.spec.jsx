@@ -38,6 +38,7 @@ describe('<MatrixCell />', () => {
     cell={testCell}
     cellSize={50}
     onRequestMatrixCellChange={requestMatixCellChangeSpy}
+    activeSolution={0}
   />);
 
   const inputWrapper = testWrapper.find('input');

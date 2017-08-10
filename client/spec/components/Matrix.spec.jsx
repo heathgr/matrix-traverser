@@ -47,6 +47,7 @@ describe('<Matrix />', () => {
     cellSize={50}
     onSetMatrixCell={() => null}
     onRequestMatrixCellChange={() => null}
+    activeSolution={1}
   />);
 
   it('Should render the correct number of <MatrixCell /> componenst.', () => {

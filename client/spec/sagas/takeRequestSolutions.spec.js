@@ -7,9 +7,8 @@ import {
   requestSolutions,
   gotSolutions,
   failedToGetSolutions,
-  takingRequestSolutions,
 } from '../../src/actions/solutionsActions';
-import { TAKING_REQUEST_SOLUTIONS } from  '../../src/constants/actionTypes';
+import { TAKING_REQUEST_SOLUTIONS } from '../../src/constants/actionTypes';
 import takeRequestSolutions from '../../src/sagas/takeRequestSolutions';
 import * as selectors from '../../src/reducers/root';
 import { testMatrix } from '../testData/testMatrixData';

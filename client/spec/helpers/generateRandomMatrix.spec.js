@@ -7,7 +7,6 @@ describe('Generate Random Matrix Helper.', () => {
 
   it('Should generate a random matrix.', () => {
     const result = generateRandomMatrix();
-    const resultCells = result.get('cells');
 
     expect(result).to.have.keys('rowCount', 'columnCount', 'cells');
     expect(result.get('cells')).to.have.sizeOf(result.get('columnCount') * result.get('rowCount'));

@@ -30,7 +30,6 @@ class MatrixCell extends Component {
     super(props);
     this.state = {
       isTransitioningActive: false,
-      isTransitioningPreview: false,
       transitionTimeout: null,
     };
   }
@@ -177,7 +176,6 @@ MatrixCell.propTypes = {
   cellSize: PropTypes.number.isRequired,
   onRequestMatrixCellChange: PropTypes.func.isRequired,
   activeSolution: PropTypes.number.isRequired,
-  previewSolution: PropTypes.number.isRequired,
 };
 
 export default PureImmutable()(MatrixCell);
