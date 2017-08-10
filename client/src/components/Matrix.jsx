@@ -39,6 +39,8 @@ const Matrix = ({
   cellSize,
   matrix,
   onRequestMatrixCellChange,
+  activeSolution,
+  previewSolution,
 }) => {
   const wrapperStyle = {
     width,
@@ -189,6 +191,8 @@ const Matrix = ({
                     cell={cell}
                     cellSize={cellSize}
                     onRequestMatrixCellChange={onRequestMatrixCellChange}
+                    activeSolution={activeSolution}
+                    previewSolution={previewSolution}
                   />
                 )
               }
@@ -208,6 +212,8 @@ Matrix.propTypes = {
   height: PropTypes.number.isRequired,
   cellSize: PropTypes.number.isRequired,
   onRequestMatrixCellChange: PropTypes.func.isRequired,
+  activeSolution: PropTypes.number.isRequired,
+  previewSolution: PropTypes.number.isRequired,
   matrix: ImmutablePropTypes.mapContains({
     cells: ImmutablePropTypes.listOf(ImmutablePropTypes.mapContains({
       value: PropTypes.number.isRequired,

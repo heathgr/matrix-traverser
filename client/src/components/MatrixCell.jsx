@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Style from 'style-it';
@@ -24,111 +24,144 @@ import {
   MATRIX_CELL_PREVIEW_CIRCLE_HIDDEN,
 } from '../constants/styleNames';
 
-const MatrixCell = ({
-  cell,
-  cellSize,
-  onRequestMatrixCellChange,
-}) => {
-  const activePosition = cell.get('activePosition');
-  const previewPosition = cell.get('previewPosition');
-  const halfCellSize = cellSize * 0.5;
+class MatrixCell extends Component {
 
-  const circleStyle = (() => {
-    if (activePosition !== null) {
-      return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_ACTIVE}`;
-    } else if (previewPosition !== null) {
-      return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_PREVIEW}`;
+  constructor(props) {
+    super(props);
+    this.state = {
+      isTransitioningActive: false,
+      isTransitioningPreview: false,
+      transitionTimeout: null,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.activeSolution !== this.props.activeSolution) {
+      clearTimeout(this.state.transitionTimeout);
+      const newTransitionTimeout = setTimeout(
+        () => {
+          this.setState({
+            ...this.state,
+            isTransitioningActive: false,
+          });
+        },
+        500
+      );
+      this.setState({
+        ...this.state,
+        isTransitioningActive: true,
+        transitionTimeout: newTransitionTimeout,
+      });
     }
-    return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_INACTIVE}`;
-  })();
+  }
 
-  const activeCircleStyle = (() => {
-    if (activePosition !== null) {
-      return `${MATRIX_CELL_ACTIVE_CIRCLE} ${MATRIX_CELL_ACTIVE_CIRCLE_VISIBLE} activeAnimationOffset`;
-    }
-    return `${MATRIX_CELL_ACTIVE_CIRCLE} ${MATRIX_CELL_ACTIVE_CIRCLE_HIDDEN}`;
-  })();
+  render() {
+    const {
+      cell,
+      cellSize,
+      onRequestMatrixCellChange,
+    } = this.props;
+    const {
+      isTransitioningActive,
+      isTransitioningPreview,
+    } = this.state;
+    const activePosition = cell.get('activePosition');
+    const previewPosition = cell.get('previewPosition');
+    const halfCellSize = cellSize * 0.5;
+    const circleStyle = (() => {
+      if (activePosition !== null) {
+        return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_ACTIVE}`;
+      } else if (previewPosition !== null) {
+        return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_PREVIEW}`;
+      }
+      return `${MATRIX_CELL_MAIN_CIRCLE} ${MATRIX_CELL_MAIN_CIRCLE_INACTIVE}`;
+    })();
+    const activeCircleStyle = (() => {
+      if (activePosition !== null && !isTransitioningActive) {
+        return `${MATRIX_CELL_ACTIVE_CIRCLE} ${MATRIX_CELL_ACTIVE_CIRCLE_VISIBLE} activeAnimationOffset`;
+      }
+      return `${MATRIX_CELL_ACTIVE_CIRCLE} ${MATRIX_CELL_ACTIVE_CIRCLE_HIDDEN}`;
+    })();
+    const previewCircleStyle = (() => {
+      if (previewPosition !== null && !isTransitioningPreview) {
+        return `${MATRIX_CELL_PREVIEW_CIRCLE} ${MATRIX_CELL_PREVIEW_CIRCLE_VISIBLE} previewAnimationOffset`;
+      }
+      return `${MATRIX_CELL_PREVIEW_CIRCLE} ${MATRIX_CELL_PREVIEW_CIRCLE_HIDDEN}`;
+    })();
+    const inputStyle = (() => {
+      if (activePosition !== null) {
+        return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_ACTIVE}`;
+      } else if (previewPosition !== null) {
+        return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_PREVIEW}`;
+      }
+      return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_INACTIVE}`;
+    })();
 
-  const previewCircleStyle = (() => {
-    if (previewPosition !== null) {
-      return `${MATRIX_CELL_PREVIEW_CIRCLE} ${MATRIX_CELL_PREVIEW_CIRCLE_VISIBLE} previewAnimationOffset`;
-    }
-    return `${MATRIX_CELL_PREVIEW_CIRCLE} ${MATRIX_CELL_PREVIEW_CIRCLE_HIDDEN}`;
-  })();
+    return Style.it(`
+      .activeAnimationOffset {
+        transition: stroke-dasharray ease 0.5s ${activePosition * 0.2}s;
+      }
 
-  const inputStyle = (() => {
-    if (activePosition !== null) {
-      return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_ACTIVE}`;
-    } else if (previewPosition !== null) {
-      return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_PREVIEW}`;
-    }
-    return `${MATRIX_CELL_INPUT} ${MATRIX_CELL_INPUT_INACTIVE}`;
-  })();
+      .previewAnimationOffset {
+        transition: stroke-dasharray ease 0.5s ${previewPosition * 0.2}s;
+      }
+    `, (
+      <div className={MATRIX_CELL_WRAPPER}>
+        <div className={MATRIX_CELL_INPUT_WRAPPER}>
+          <input
+            type='text'
+            className={inputStyle}
+            value={cell.get('value')}
+            onSelect={
+              (evt) => {
+                const valueLength = evt.target.value.length;
 
-  return Style.it(`
-    .activeAnimationOffset {
-      transition: stroke-dasharray ease 0.5s ${activePosition * 0.35}s;
-    }
-
-    .previewAnimationOffset {
-      transition: stroke-dasharray ease 0.5s ${previewPosition * 0.2}s;
-    }
-  `, (
-    <div className={MATRIX_CELL_WRAPPER}>
-      <div className={MATRIX_CELL_INPUT_WRAPPER}>
-        <input
-          type='text'
-          className={inputStyle}
-          value={cell.get('value')}
-          onSelect={
-            (evt) => {
-              const valueLength = evt.target.value.length;
-
-              evt.target.setSelectionRange(valueLength, valueLength);
-            }
-          }
-          onChange={
-            (evt) => {
-              const target = evt.target;
-              const valueLength = target.value.length;
-              const evtNumber = parseInt(target.value[valueLength - 1], 10);
-
-              if (!isNaN(evtNumber)) {
-                const newCellVal = Math.min(9, Math.max(0, evtNumber));
-
-                target.value = newCellVal;
-                target.setSelectionRange(1, 1);
-                onRequestMatrixCellChange(cell.get('id'), newCellVal);
+                evt.target.setSelectionRange(valueLength, valueLength);
               }
             }
-          }
-        />
+            onChange={
+              (evt) => {
+                const target = evt.target;
+                const valueLength = target.value.length;
+                const evtNumber = parseInt(target.value[valueLength - 1], 10);
+
+                if (!isNaN(evtNumber)) {
+                  const newCellVal = Math.min(9, Math.max(0, evtNumber));
+
+                  target.value = newCellVal;
+                  target.setSelectionRange(1, 1);
+                  onRequestMatrixCellChange(cell.get('id'), newCellVal);
+                }
+              }
+            }
+          />
+        </div>
+        <div className={MATRIX_CELL_SVG_WRAPPER}>
+          <svg className={MATRIX_CELL_SVG}>
+            <circle
+              className={circleStyle}
+              cx={halfCellSize}
+              cy={halfCellSize}
+              r={cellSize * 0.1}
+            />
+            <circle
+              className={activeCircleStyle}
+              cx={halfCellSize}
+              cy={halfCellSize}
+              r={cellSize * 0.2}
+            />
+            <circle
+              className={previewCircleStyle}
+              cx={halfCellSize}
+              cy={halfCellSize}
+              r={cellSize * 0.175}
+            />
+          </svg>
+        </div>
       </div>
-      <div className={MATRIX_CELL_SVG_WRAPPER}>
-        <svg className={MATRIX_CELL_SVG}>
-          <circle
-            className={circleStyle}
-            cx={halfCellSize}
-            cy={halfCellSize}
-            r={cellSize * 0.1}
-          />
-          <circle
-            className={activeCircleStyle}
-            cx={halfCellSize}
-            cy={halfCellSize}
-            r={cellSize * 0.2}
-          />
-          <circle
-            className={previewCircleStyle}
-            cx={halfCellSize}
-            cy={halfCellSize}
-            r={cellSize * 0.175}
-          />
-        </svg>
-      </div>
-    </div>
-  ));
-};
+    ));
+  }
+}
 
 MatrixCell.defaultProps = {
   activeSolution: null,
@@ -143,6 +176,8 @@ MatrixCell.propTypes = {
   }).isRequired,
   cellSize: PropTypes.number.isRequired,
   onRequestMatrixCellChange: PropTypes.func.isRequired,
+  activeSolution: PropTypes.number.isRequired,
+  previewSolution: PropTypes.number.isRequired,
 };
 
 export default PureImmutable()(MatrixCell);
