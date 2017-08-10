@@ -3,7 +3,7 @@ import chaiEnzyme from 'chai-enzyme';
 import { Map } from 'immutable';
 import { mount } from 'enzyme';
 import React from 'react';
-import { spy } from 'sinon';
+import { spy, useFakeTimers } from 'sinon';
 import MatrixCell from '../../src/components/MatrixCell';
 import {
   MATRIX_CELL_INPUT,
@@ -115,6 +115,22 @@ describe('<MatrixCell />', () => {
     expect(cellInputWrapper.hasClass(MATRIX_CELL_INPUT_PREVIEW)).to.equal(false);
     expect(cellInputWrapper.hasClass(MATRIX_CELL_INPUT_INACTIVE)).to.equal(true);
 
-    expect(true).to.equal(true);
+    const fakeTimer = useFakeTimers();
+
+    testWrapper.setProps({ activeSolution: 1 });
+    fakeTimer.tick(500);
+
+    expect(mainCircleWrapper.hasClass(MATRIX_CELL_MAIN_CIRCLE_ACTIVE)).to.equal(false);
+    expect(mainCircleWrapper.hasClass(MATRIX_CELL_MAIN_CIRCLE_PREVIEW)).to.equal(false);
+    expect(mainCircleWrapper.hasClass(MATRIX_CELL_MAIN_CIRCLE_INACTIVE)).to.equal(true);
+    expect(activeCircleWrapper.hasClass(MATRIX_CELL_ACTIVE_CIRCLE_VISIBLE)).to.equal(false);
+    expect(activeCircleWrapper.hasClass(MATRIX_CELL_ACTIVE_CIRCLE_HIDDEN)).to.equal(true);
+    expect(previewCircleWrapper.hasClass(MATRIX_CELL_PREVIEW_CIRCLE_VISIBLE)).to.equal(false);
+    expect(previewCircleWrapper.hasClass(MATRIX_CELL_PREVIEW_CIRCLE_HIDDEN)).to.equal(true);
+    expect(cellInputWrapper.hasClass(MATRIX_CELL_INPUT_ACTIVE)).to.equal(false);
+    expect(cellInputWrapper.hasClass(MATRIX_CELL_INPUT_PREVIEW)).to.equal(false);
+    expect(cellInputWrapper.hasClass(MATRIX_CELL_INPUT_INACTIVE)).to.equal(true);
+
+    fakeTimer.restore();
   });
 });

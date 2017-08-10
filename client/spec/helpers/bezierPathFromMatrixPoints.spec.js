@@ -41,4 +41,24 @@ describe('The Bezier Points From Matrix Points helper.', () => {
 
     expect(is(result, expectedResult)).to.equal(true);
   });
+
+  it('Should correctly calculate a bezier path from only two matrix points.', () => {
+    const testPoints = fromJS([
+      { x: 1, y: 0 },
+      { x: 0, y: 1 },
+    ]);
+    const expectedResult = fromJS(
+      [
+        [{ x: 1, y: 0 }],
+        [
+          { x: 0.6666666666666667, y: 0.3333333333333333 },
+          { x: 0.33333333333333337, y: 0.6666666666666666 },
+          { x: 0, y: 1 },
+        ],
+      ]
+    );
+    const result = bezierPathFromMatrixPoints(testPoints, 4);
+
+    expect(is(expectedResult, result)).to.equal(true);
+  });
 });
