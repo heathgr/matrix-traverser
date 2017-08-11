@@ -7,10 +7,12 @@ import {
 } from '../../src/actions/solutionsActions';
 import statusMessage, {
   getStatusMessage,
-  createLoadingMessage,
-  createLoadedMessage,
-  createFailedMessage,
 } from '../../src/reducers/statusMessage';
+import {
+  LOADING_MESSAGE,
+  LOADED_MESSAGE,
+  ERROR_MESSAGE,
+} from '../../src/constants/statusMessageTypes';
 
 describe('Status Message Reducer', () => {
   it('Should let non supported actions fall through.', () => {
@@ -25,45 +27,41 @@ describe('Status Message Reducer', () => {
     const testAction = requestSolutions();
     const testState = statusMessage(undefined, testAction);
     const expectedState = Map({
-      statusMessage: createLoadingMessage(),
+      messageType: LOADING_MESSAGE,
     });
 
     expect(is(testState, expectedState)).to.equal(true);
   });
 
-  it('Should correctly handle a REQUEST_SOLUTIONS action.', () => {
-    const testAction = gotSolutions(
-      [
-        [4, 5, 8, 11],
-        [4, 5, 9, 11],
-        [4, 5, 10, 11],
-      ]
-    );
+  it('Should correctly handle a GOT_SOLUTIONS action.', () => {
+    const testAction = gotSolutions([
+      [0, 1, 2],
+      [0, 1, 3],
+    ]);
     const testState = statusMessage(undefined, testAction);
     const expectedState = Map({
-      statusMessage: createLoadedMessage(3, 4),
+      messageType: LOADED_MESSAGE,
     });
 
     expect(is(testState, expectedState)).to.equal(true);
   });
+
 
   it('Should correctly handle a FAILED_TO_GET_SOLUTIONS action.', () => {
-    const error = 'Something is broken!!!';
-    const testAction = failedToGetSolutions(error);
+    const testAction = failedToGetSolutions('Something is broken!!!');
     const testState = statusMessage(undefined, testAction);
     const expectedState = Map({
-      statusMessage: createFailedMessage(error),
+      messageType: ERROR_MESSAGE,
     });
 
     expect(is(testState, expectedState)).to.equal(true);
   });
 
   it('Should have a getStatusMessage selector.', () => {
-    const message = 'Some Message';
     const testState = Map({
-      statusMessage: message,
+      messageType: LOADING_MESSAGE,
     });
 
-    expect(getStatusMessage(testState)).to.equal(message);
+    expect(getStatusMessage(testState)).to.equal(LOADING_MESSAGE);
   });
 });

@@ -5,6 +5,7 @@ import { Map, List } from 'immutable';
 import matrix, * as fromMatrix from './matrix';
 import solutions, * as fromSolutions from './solutions';
 import ui, * as fromUI from './ui';
+import statusMessage, * as fromStatusMessage from './statusMessage';
 import calcMatrixCellPosition from '../helpers/calcMatrixCellPosition';
 import {
   calcVectorFromPoints,
@@ -18,8 +19,10 @@ const root = combineReducers({
   matrix,
   solutions,
   ui,
+  statusMessage,
 });
 
+export const getStatusMessage = state => fromStatusMessage.getStatusMessage(state.statusMessage);
 export const getIsCreateMatrixUIVisible = state => fromUI.getIsCreateMatrixUIVisible(state.ui);
 export const getIsIntroductionUIVisible = state => fromUI.getIsIntroductionUIVisible(state.ui);
 export const getCreateMatrixColumnCount = state => fromUI.getCreateMatrixColumnCount(state.ui);

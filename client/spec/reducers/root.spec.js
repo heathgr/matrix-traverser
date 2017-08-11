@@ -7,10 +7,12 @@ import root, {
   getSolutionPathsData,
   getMatrixWithPositionOffsets,
   getDetailedMatrix,
+  getStatusMessage,
 } from '../../src/reducers/root';
 import { initialMatrix } from '../../src/reducers/matrix';
 import { initialSolutions } from '../../src/reducers/solutions';
 import { initialUIState } from '../../src/reducers/ui';
+import { initialStatusMessageState } from '../../src/reducers/statusMessage';
 
 describe('Root Reducer', () => {
   const state = root(undefined, { type: 'TEST' });
@@ -18,12 +20,19 @@ describe('Root Reducer', () => {
     matrix: initialMatrix,
     solutions: initialSolutions,
     ui: initialUIState,
+    statusMessage: initialStatusMessageState,
   };
 
-  it('Should compose the matrix, solutions, and UI reducers.', () => {
+  it('Should compose the matrix, solutions, UI, and statusMessage reducers.', () => {
     Object.keys(state).forEach(
       key => expect(is(state[key], expectedState[key])).to.equal(true)
     );
+  });
+
+  it('Should have a get status message slector.', () => {
+    expect(
+      is(getStatusMessage(state), initialStatusMessageState)
+    ).to.equal(true);
   });
 
   it('Should have a matrix selector.', () => {

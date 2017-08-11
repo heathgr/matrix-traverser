@@ -5,25 +5,26 @@ import {
   GOT_SOLUTIONS,
   FAILED_TO_GET_SOLUTIONS,
 } from '../constants/actionTypes';
+import {
+  LOADING_MESSAGE,
+  LOADED_MESSAGE,
+  ERROR_MESSAGE,
+} from '../constants/statusMessageTypes';
 
-const initialState = Map({
-  statusMessage: '',
+export const initialStatusMessageState = Map({
+  messageType: null,
 });
 
-export const createLoadingMessage = () => 'Loading...';
-export const createLoadedMessage = (solutionCount, solutionLength) => `Found ${solutionCount} solution${solutionCount > 1 ? 's' : ''} with a length of ${solutionLength}`;
-export const createFailedMessage = error => `Error: ${error}`;
-
-const statusMessage = (state = initialState, action) => {
+const statusMessage = (state = initialStatusMessageState, action) => {
   switch (action.type) {
     case REQUEST_SOLUTIONS: {
-      return state.set('statusMessage', createLoadingMessage());
+      return state.set('messageType', LOADING_MESSAGE);
     }
     case GOT_SOLUTIONS: {
-      return state.set('statusMessage', createLoadedMessage(action.solutions.length, action.solutions[0].length));
+      return state.set('messageType', LOADED_MESSAGE);
     }
     case FAILED_TO_GET_SOLUTIONS: {
-      return state.set('statusMessage', createFailedMessage(action.error));
+      return state.set('messageType', ERROR_MESSAGE);
     }
     default: {
       return state;
@@ -31,6 +32,6 @@ const statusMessage = (state = initialState, action) => {
   }
 };
 
-export const getStatusMessage = state => state.get('statusMessage');
+export const getStatusMessage = state => state.get('messageType');
 
 export default statusMessage;
