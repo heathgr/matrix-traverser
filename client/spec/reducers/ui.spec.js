@@ -65,7 +65,7 @@ describe('UI Reducer', () => {
 
     expect(getIsCreateMatrixUIVisible(testState)).to.equal(false);
   });
-  it('Should have a getIsIntroductionUIVisible.', () => {
+  it('Should have a getIsIntroductionUIVisible selector.', () => {
     const testState = ui(undefined, { type: '@@INIT' });
 
     expect(getIsIntroductionUIVisible(testState)).to.equal(false);
