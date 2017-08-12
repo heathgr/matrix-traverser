@@ -2,6 +2,7 @@
 import { List, Map } from 'immutable';
 import {
   GOT_SOLUTIONS,
+  FAILED_TO_GET_SOLUTIONS,
   RESET_SOLUTIONS,
   SET_ACTIVE_SOLUTION,
   SET_NEXT_ACTIVE_SOLUTION,
@@ -13,26 +14,31 @@ export const initialSolutions = Map({
   data: List([]),
   activeSolution: 0,
   previewSolution: null,
+  error: null,
 });
 
 const solutions = (state = initialSolutions, action) => {
   switch (action.type) {
     case GOT_SOLUTIONS: {
-      return Map({
-        data: List(
-          action.solutions.map(
-            solution => List(solution)
-          )
-        ),
-        activeSolution: 0,
-        previewSolution: null,
-      });
+      const newData = List(
+        action.solutions.map(
+          solution => List(solution)
+        )
+      );
+
+      return state
+        .set('data', newData)
+        .set('activeSolution', 0)
+        .set('previewSolution', null);
     }
     case SET_ACTIVE_SOLUTION: {
       const solutionCount = state.get('data').size;
       const nextActiveSolution = action.solution % solutionCount;
 
       return state.set('activeSolution', nextActiveSolution);
+    }
+    case FAILED_TO_GET_SOLUTIONS: {
+      return state.set('error', action.error);
     }
     case SET_NEXT_ACTIVE_SOLUTION: {
       const currentActiveSolution = state.get('activeSolution');

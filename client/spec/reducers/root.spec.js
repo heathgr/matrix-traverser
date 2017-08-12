@@ -15,7 +15,7 @@ import { initialUIState } from '../../src/reducers/ui';
 import { initialStatusMessageState } from '../../src/reducers/statusMessage';
 
 describe('Root Reducer', () => {
-  const state = root(undefined, { type: 'TEST' });
+  const state = root(undefined, { type: '@@INIT' });
   const expectedState = {
     matrix: initialMatrix,
     solutions: initialSolutions,
@@ -29,9 +29,9 @@ describe('Root Reducer', () => {
     );
   });
 
-  it('Should have a get status message slector.', () => {
+  it('Should have a get status message selector.', () => {
     expect(
-      is(getStatusMessage(state), initialStatusMessageState)
+      is(getStatusMessage(state), initialStatusMessageState.get('messageType'))
     ).to.equal(true);
   });
 

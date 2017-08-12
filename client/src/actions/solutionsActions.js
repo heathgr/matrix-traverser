@@ -33,7 +33,7 @@ export const takingRequestSolutions = () => ({
  */
 export const failedToGetSolutions = error => ({
   type: FAILED_TO_GET_SOLUTIONS,
-  error,
+  error: String(error),
 });
 
 /**
