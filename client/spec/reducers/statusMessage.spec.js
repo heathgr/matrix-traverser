@@ -6,7 +6,7 @@ import {
   failedToGetSolutions,
 } from '../../src/actions/solutionsActions';
 import statusMessage, {
-  getStatusMessage,
+  getStatusMessageType,
 } from '../../src/reducers/statusMessage';
 import {
   LOADING_MESSAGE,
@@ -18,7 +18,7 @@ describe('Status Message Reducer', () => {
   it('Should let non supported actions fall through.', () => {
     const testAction = { type: 'SOME_ACTION' };
     const testState = statusMessage(undefined, testAction);
-    const expectedState = statusMessage(undefined, { type: '@@INIT'});
+    const expectedState = statusMessage(undefined, { type: '@@INIT' });
 
     expect(is(testState, expectedState)).to.equal(true);
   });
@@ -62,6 +62,6 @@ describe('Status Message Reducer', () => {
       messageType: LOADING_MESSAGE,
     });
 
-    expect(getStatusMessage(testState)).to.equal(LOADING_MESSAGE);
+    expect(getStatusMessageType(testState)).to.equal(LOADING_MESSAGE);
   });
 });

@@ -29,9 +29,6 @@ describe('Solutions Reducer', () => {
     const testState = solutions(undefined, testAction);
     const expectedState = testSolutions;
 
-    console.log('TEST STATE: ', testState);
-    console.log('EXPECTED STATE: ', expectedState);
-
     expect(is(expectedState, testState)).to.equal(true);
   });
 

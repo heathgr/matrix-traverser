@@ -22,7 +22,7 @@ const root = combineReducers({
   statusMessage,
 });
 
-export const getStatusMessage = state => fromStatusMessage.getStatusMessage(state.statusMessage);
+export const getStatusMessageType = state => fromStatusMessage.getStatusMessageType(state.statusMessage);
 export const getIsCreateMatrixUIVisible = state => fromUI.getIsCreateMatrixUIVisible(state.ui);
 export const getIsIntroductionUIVisible = state => fromUI.getIsIntroductionUIVisible(state.ui);
 export const getCreateMatrixColumnCount = state => fromUI.getCreateMatrixColumnCount(state.ui);
@@ -52,6 +52,7 @@ export const getActiveSolution = state => fromSolutions.getActiveSolution(state.
  * @return {Integer} - The index of the preview solution.
  */
 export const getPreviewSolution = state => fromSolutions.getPreviewSolution(state.solutions);
+export const getSolutionsError = state => fromSolutions.getSolutionsError(state.solutions);
 
 export const getMatrixWithPositionOffsets = createSelector(
   [getMatrix, getSolutions],

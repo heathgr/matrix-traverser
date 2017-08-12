@@ -7,14 +7,17 @@ import {
   getDetailedMatrix,
   getSolutionPathsData,
   getSolutions,
+  getSolutionsError,
   getActiveSolution,
   getPreviewSolution,
   getIsCreateMatrixUIVisible,
   getIsIntroductionUIVisible,
   getCreateMatrixColumnCount,
   getCreateMatrixRowCount,
+  getStatusMessageType,
 } from '../reducers/root';
 import MatrixResizer from '../components/MatrixResizer';
+import StatusMessage from '../components/StatusMessage';
 import SolutionList from '../components/SolutionList';
 import CreateMatrix from '../components/CreateMatrix';
 import Introduction from '../components/Introduction';
@@ -39,9 +42,11 @@ import {
 export const Container = ({
   matrix,
   solutions,
+  solutionsError,
   activeSolution,
   previewSolution,
   solutionPathsData,
+  statusMessageType,
   onSolutionClicked,
   onNextSolutionClicked,
   onPreviousSolutionClicked,
@@ -103,6 +108,11 @@ export const Container = ({
           }}
         />
       </div>
+      <StatusMessage
+        messageType={statusMessageType}
+        solutions={solutions}
+        error={solutionsError}
+      />
       <SolutionList
         {...{
           solutions,
@@ -122,6 +132,10 @@ export const Container = ({
 
 Container.defaultProps = {
   previewSolution: null,
+};
+
+Container.defaultProps = {
+  solutionsError: null,
 };
 
 Container.propTypes = {
@@ -157,11 +171,14 @@ Container.propTypes = {
   isCreateMatrixUIVisible: PropTypes.bool.isRequired,
   createMatrixColumnCount: PropTypes.number.isRequired,
   createMatrixRowCount: PropTypes.number.isRequired,
+  statusMessageType: PropTypes.string.isRequired,
+  solutionsError: PropTypes.string,
 };
 
 const stateToProps = state => ({
   matrix: getDetailedMatrix(state),
   solutions: getSolutions(state),
+  solutionsError: getSolutionsError(state),
   activeSolution: getActiveSolution(state),
   previewSolution: getPreviewSolution(state),
   solutionPathsData: getSolutionPathsData(state),
@@ -169,6 +186,7 @@ const stateToProps = state => ({
   isIntroductionUIVisible: getIsIntroductionUIVisible(state),
   createMatrixColumnCount: getCreateMatrixColumnCount(state),
   createMatrixRowCount: getCreateMatrixRowCount(state),
+  statusMessageType: getStatusMessageType(state),
 });
 
 const dispatchToProps = dispatch => ({

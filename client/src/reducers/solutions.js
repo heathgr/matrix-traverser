@@ -80,6 +80,7 @@ const solutions = (state = initialSolutions, action) => {
 export const getSolutions = state => state.get('data');
 export const getActiveSolution = state => state.get('activeSolution');
 export const getPreviewSolution = state => state.get('previewSolution');
+export const getSolutionsError = state => state.get('error');
 
 /**
  * The reducer that handles the solutions state.  Solutions is an immutable list of integers.  These integers corespond to cells on /matrix/cells.

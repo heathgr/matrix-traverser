@@ -7,7 +7,7 @@ import root, {
   getSolutionPathsData,
   getMatrixWithPositionOffsets,
   getDetailedMatrix,
-  getStatusMessage,
+  getStatusMessageType,
 } from '../../src/reducers/root';
 import { initialMatrix } from '../../src/reducers/matrix';
 import { initialSolutions } from '../../src/reducers/solutions';
@@ -31,7 +31,7 @@ describe('Root Reducer', () => {
 
   it('Should have a get status message selector.', () => {
     expect(
-      is(getStatusMessage(state), initialStatusMessageState.get('messageType'))
+      is(getStatusMessageType(state), initialStatusMessageState.get('messageType'))
     ).to.equal(true);
   });
 

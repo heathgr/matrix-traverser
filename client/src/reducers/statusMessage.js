@@ -12,7 +12,7 @@ import {
 } from '../constants/statusMessageTypes';
 
 export const initialStatusMessageState = Map({
-  messageType: null,
+  messageType: LOADING_MESSAGE,
 });
 
 const statusMessage = (state = initialStatusMessageState, action) => {
@@ -32,6 +32,6 @@ const statusMessage = (state = initialStatusMessageState, action) => {
   }
 };
 
-export const getStatusMessage = state => state.get('messageType');
+export const getStatusMessageType = state => state.get('messageType');
 
 export default statusMessage;
