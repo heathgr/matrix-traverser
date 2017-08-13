@@ -7,7 +7,7 @@ import {
   LOADING_MESSAGE,
   LOADED_MESSAGE,
   ERROR_MESSAGE,
-} from '../../src/constants/statusMessageTypes'
+} from '../../src/constants/statusMessageTypes';
 import StatusMessage from '../../src/components/StatusMessage';
 
 describe('<StatusMessage />', () => {

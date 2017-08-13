@@ -8,8 +8,9 @@ import {
 import {
   LOADING_MESSAGE,
   LOADED_MESSAGE,
-  ERROR_MESSAGE,
 } from '../constants/statusMessageTypes';
+import Transitioner from './Transitioner';
+import PureImmutable from '../helpers/hocs/PureImmutable';
 
 const StatusMessage = ({
   messageType,
@@ -19,29 +20,33 @@ const StatusMessage = ({
   `
     .statusMessage {
       color: ${PRIMARY_BORDER_COLOR};
-      padding: 8px;
+      margin: 8px;
+      width: 100%;
+      height: 13px;
       font-size: 11px;
     }
   `,
   (
     <div className='statusMessage'>
-      {
-        (
-          () => {
-            switch (messageType) {
-              case LOADING_MESSAGE: {
-                return <div>Loading</div>;
-              }
-              case LOADED_MESSAGE: {
-                return <div>{`Found ${solutions.size} solutions with a length of ${solutions.get(0).size}.`}</div>;
-              }
-              default: {
-                return <div>{error}</div>;
+      <Transitioner>
+        {
+          (
+            () => {
+              switch (messageType) {
+                case LOADING_MESSAGE: {
+                  return <div>Loading</div>;
+                }
+                case LOADED_MESSAGE: {
+                  return <div>{`Found ${solutions.size} solutions with a length of ${solutions.get(0).size}.`}</div>;
+                }
+                default: {
+                  return <div>{error}</div>;
+                }
               }
             }
-          }
-        )()
-      }
+          )()
+        }
+      </Transitioner>
     </div>
   )
 );
@@ -61,4 +66,4 @@ StatusMessage.propTypes = {
   error: PropTypes.string,
 };
 
-export default StatusMessage;
+export default PureImmutable()(StatusMessage);

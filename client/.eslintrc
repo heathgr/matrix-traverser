@@ -18,6 +18,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-array-index-key": 0,
     "react/prefer-stateless-function": 1,
+    "react/prop-types" : [1, { "ignore": ["children"]}],
     "comma-dangle": [2, "always-multiline"],
     "no-constant-condition": 0,
     "func-names": ["error", "as-needed"],
