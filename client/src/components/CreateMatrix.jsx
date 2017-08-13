@@ -35,6 +35,7 @@ const CreateMatrix = ({
       .row {
         display: flex;
         justify-content: center;
+        align-items: center;
         flex-direction: row;
         font-size: 11px;
       }

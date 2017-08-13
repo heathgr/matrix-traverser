@@ -15,6 +15,7 @@ const Slider = ({
     width: 15px;
     height: 15px;
     border-radius: 100%;
+    margin: 2.5px;
     background: ${PRIMARY_COLOR};
   }
 
@@ -25,13 +26,11 @@ const Slider = ({
 
   .slider {
     height: 20px;
-    display: flex;
-    align-items: center;
   }
 
   .bar {
     height: 1px;
-    margin: 0px 7px;
+    margin: 10px 7px;
   }
 
   .bar-0 {
