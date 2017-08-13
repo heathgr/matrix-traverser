@@ -62,9 +62,9 @@ const SolutionList = ({
     }
 
     .${SOLUTION_LIST_ITEM} {
+      display: block;
       width: 25px;
       height: 25px;
-      display: flex;
       justify-content: center;
       align-items: center;
       border-style: 'solid';

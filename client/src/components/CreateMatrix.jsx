@@ -36,6 +36,7 @@ const CreateMatrix = ({
         display: flex;
         justify-content: center;
         flex-direction: row;
+        font-size: 11px;
       }
 
       .label {
@@ -48,6 +49,11 @@ const CreateMatrix = ({
         margin: 0 6px;
       }
 
+      .header {
+        font-size: 15px;
+        margin: 8px;
+      }
+
       input {
         background: none;
         border: none;
@@ -56,7 +62,7 @@ const CreateMatrix = ({
       }
       `,
         <div>
-          <div className='row'>Create New Matrix</div>
+          <div className='row header'>Create New Matrix</div>
           <div className='row'>
             <div className='label'>Column Count</div>
             <Slider
