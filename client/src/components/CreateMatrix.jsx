@@ -37,7 +37,7 @@ const CreateMatrix = ({
         justify-content: center;
         align-items: center;
         flex-direction: row;
-        font-size: 11px;
+        font-size: 13px;
       }
 
       .label {
@@ -51,7 +51,7 @@ const CreateMatrix = ({
       }
 
       .header {
-        font-size: 15px;
+        font-size: 18px;
         margin: 8px;
       }
 
@@ -60,6 +60,7 @@ const CreateMatrix = ({
         border: none;
         outline: none;
         color: white;
+        font-size: 13px;
       }
       `,
         <div>

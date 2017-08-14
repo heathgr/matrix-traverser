@@ -19,6 +19,7 @@ const Button = ({ children, onClick }) => Style.it(
       outline: none;
       transition: ease 1s;
       position: relative;
+      font-size: 13px;
     }
 
     .wrapper:hover {

@@ -107,6 +107,7 @@ const Matrix = ({
       background: none;
       border: none;
       outline: none;
+      font-size: 13px;
     }
 
     .${MATRIX_CELL_INPUT_ACTIVE} {

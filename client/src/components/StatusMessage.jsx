@@ -23,7 +23,7 @@ const StatusMessage = ({
       margin: 8px;
       width: 100%;
       height: 13px;
-      font-size: 11px;
+      font-size: 13px;
     }
   `,
   (
