@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Style from 'style-it';
 import Modal from './Modal';
 import Button from './Button';
+import { PRIMARY_COLOR } from '../constants/uiColors';
 
 const Introduction = ({ onToggleIntroductionUI }) => (
   <Modal>
@@ -22,6 +23,10 @@ const Introduction = ({ onToggleIntroductionUI }) => (
         .header {
           font-size: 18px;
           margin: 8px;
+          padding: 0px 16px;
+          border-style: solid;
+          border-width: 1px 0px;
+          border-color: ${PRIMARY_COLOR};
         }
 
         .paragraph {

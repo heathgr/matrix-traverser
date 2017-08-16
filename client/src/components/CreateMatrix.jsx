@@ -4,6 +4,7 @@ import Style from 'style-it';
 import Modal from './Modal';
 import Button from './Button';
 import Slider from './Slider';
+import { PRIMARY_COLOR } from '../constants/uiColors';
 
 const normalizeInput = (evt) => {
   const target = evt.target;
@@ -53,6 +54,10 @@ const CreateMatrix = ({
       .header {
         font-size: 18px;
         margin: 8px;
+        padding: 0px 16px;
+        border-style: solid;
+        border-width: 1px 0px;
+        border-color: ${PRIMARY_COLOR};
       }
 
       input {
@@ -64,7 +69,9 @@ const CreateMatrix = ({
       }
       `,
         <div>
-          <div className='row header'>Create New Matrix</div>
+          <div className='row'>
+            <div className='header'>Create New Matrix</div>
+          </div>
           <div className='row'>
             <div className='label'>Column Count</div>
             <Slider

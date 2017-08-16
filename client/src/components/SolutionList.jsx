@@ -91,7 +91,7 @@ const SolutionList = ({
     .${SOLUTION_LIST_ITEM_PREVIEW} {
       color: ${PRIMARY_BORDER_COLOR};
       border-color: ${ACCENT_COLOR};
-      background: ${BACKGROUND_COLOR};
+      background: ${ACCENT_COLOR};
     }
   `,
   (<div className='root'>
