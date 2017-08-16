@@ -9,8 +9,9 @@ const Modal = ({ children }) => Style.it(
       width: 100%;
       height: 100%;
       position: absolute;
+      left: 0px;
+      right: 0px;
       color: white;
-      z-index: 20;
     }
 
     .background {
@@ -19,6 +20,7 @@ const Modal = ({ children }) => Style.it(
       width: 100%;
       height: 100%;
       position: absolute;
+      z-index: 19;
     }
 
     .centerContent {
@@ -29,6 +31,7 @@ const Modal = ({ children }) => Style.it(
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      z-index: 20;
     }
   `,
   <div className='wrapper'>

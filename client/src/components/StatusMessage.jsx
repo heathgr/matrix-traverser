@@ -1,9 +1,9 @@
 import React from 'react';
 import Style from 'style-it';
 import PropTypes from 'prop-types';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
-import Transition from 'react-transition-group/Transition';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import FaderGroup from './FaderGroup';
+import Fader from './Fader';
 import {
   PRIMARY_BORDER_COLOR,
 } from '../constants/uiColors';
@@ -13,45 +13,12 @@ import {
 } from '../constants/statusMessageTypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
 
-
-const fadeDuration = 500;
-const fadeClassname = {
-  entering: 'entering',
-  entered: 'entered',
-  exiting: 'exiting',
-  exited: 'exited',
-};
-
-const Fader = ({ in: inProp, out: outProp, children }) => (
-  <Transition in={inProp} out={outProp} timeout={fadeDuration} unmountOnExit>
-    {
-      (state) => {
-        return (<div className={`transitionItem ${fadeClassname[state]}`}>
-          {
-            children
-          }
-        </div>);
-      }
-    }
-  </Transition>
-);
-
 const StatusMessage = ({
   messageType,
   solutions,
   error,
 }) => Style.it(
   `
-    @keyframes transitionInKeyframes {
-      0% {opacity: 0; }
-      100% {opacity: 1; }
-    }
-
-    @keyframes transitionOutKeyframes {
-      0% {opacity: 1; }
-      100% {opacity: 0; }
-    }
-
     .statusMessage {
       color: ${PRIMARY_BORDER_COLOR};
       margin: 8px;
@@ -60,7 +27,7 @@ const StatusMessage = ({
       font-size: 13px;
     }
 
-    .transitionItem {
+    .messagePositioner {
       position: absolute;
       left: 0px;
       right: 0px;
@@ -68,26 +35,10 @@ const StatusMessage = ({
       align-items: center;
       justify-content: center;
     }
-
-    .entering {
-      animation: 500ms ease transitionInKeyframes;
-    }
-
-    .entered {
-      opacity: 1;
-    }
-
-    .exiting {
-      animation: 500ms ease transitionOutKeyframes;
-    }
-
-    .exited {
-      opacity: 0;
-    }
   `,
   (
     <div className='statusMessage'>
-      <TransitionGroup>
+      <FaderGroup>
         {
           (
             () => {
@@ -95,21 +46,27 @@ const StatusMessage = ({
                 case LOADING_MESSAGE: {
                   return (
                     <Fader key={0}>
-                      Loading
+                      <div className='messagePositioner'>
+                        Loading
+                      </div>
                     </Fader>
                   );
                 }
                 case LOADED_MESSAGE: {
                   return (
                     <Fader key={1}>
-                      {`Found ${solutions.size} solutions with a length of ${solutions.get(0).size}.`}
+                      <div className='messagePositioner'>
+                        {`Found ${solutions.size} solutions with a length of ${solutions.get(0).size}.`}
+                      </div>
                     </Fader>
                   );
                 }
                 default: {
                   return (
                     <Fader key={2}>
-                      {error}
+                      <div className='messagePositioner'>
+                        {error}
+                      </div>
                     </Fader>
                   );
                 }
@@ -117,7 +74,7 @@ const StatusMessage = ({
             }
           )()
         }
-      </TransitionGroup>
+      </FaderGroup>
     </div>
   )
 );

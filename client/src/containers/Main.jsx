@@ -16,6 +16,8 @@ import {
   getCreateMatrixRowCount,
   getStatusMessageType,
 } from '../reducers/root';
+import Fader from '../components/Fader';
+import FaderGroup from '../components/FaderGroup';
 import MatrixResizer from '../components/MatrixResizer';
 import StatusMessage from '../components/StatusMessage';
 import SolutionList from '../components/SolutionList';
@@ -82,19 +84,25 @@ export const Container = ({
 
   return (
     <div style={wrapperStyle}>
-      {
-        isCreateMatrixUIVisible && <CreateMatrix
-          onToggleCreateMatrixUI={onToggleCreateMatrixUI}
-          onRequestRandomMatrix={onRequestRandomMatrix}
-          createMatrixColumnCount={createMatrixColumnCount}
-          createMatrixRowCount={createMatrixRowCount}
-          onSetCreateMatrixColumnCount={onSetCreateMatrixColumnCount}
-          onSetCreateMatrixRowCount={onSetCreateMatrixRowCount}
-        />
-      }
-      {
-        isIntroductionUIVisible && <Introduction onToggleIntroductionUI={onToggleIntroductionUI} />
-      }
+      <FaderGroup>
+        {
+          isCreateMatrixUIVisible && (<Fader>
+            <CreateMatrix
+              onToggleCreateMatrixUI={onToggleCreateMatrixUI}
+              onRequestRandomMatrix={onRequestRandomMatrix}
+              createMatrixColumnCount={createMatrixColumnCount}
+              createMatrixRowCount={createMatrixRowCount}
+              onSetCreateMatrixColumnCount={onSetCreateMatrixColumnCount}
+              onSetCreateMatrixRowCount={onSetCreateMatrixRowCount}
+            />
+          </Fader>)
+        }
+        {
+          isIntroductionUIVisible && (<Fader>
+            <Introduction onToggleIntroductionUI={onToggleIntroductionUI} />
+          </Fader>)
+        }
+      </FaderGroup>
       <div style={matrixWrapperStyle}>
         <MatrixResizer
           {...{
