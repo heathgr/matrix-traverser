@@ -20,7 +20,11 @@ describe('<StatusMessage />', () => {
   />);
 
   it('Should display a loading message.', () => {
-    expect(testWrapper.contains(<div>Loading</div>)).to.equal(true);
+    expect(testWrapper.contains(
+      <div className='messagePositioner'>
+        Loading
+      </div>
+    )).to.equal(true);
   });
 
   it('Should display a loaded message.', () => {
@@ -32,7 +36,11 @@ describe('<StatusMessage />', () => {
       ]),
     });
 
-    expect(testWrapper.contains(<div>Found 2 solutions with a length of 3.</div>)).to.equal(true);
+    expect(testWrapper.contains(
+      <div className='messagePositioner'>
+        Found 2 solutions with a length of 3.
+      </div>
+    )).to.equal(true);
   });
 
   it('Should display an error message.', () => {
@@ -41,6 +49,10 @@ describe('<StatusMessage />', () => {
       error: 'It is broken.',
     });
 
-    expect(testWrapper.contains(<div>It is broken.</div>)).to.equal(true);
+    expect(testWrapper.contains(
+      <div className='messagePositioner'>
+        It is broken.
+      </div>
+    )).to.equal(true);
   });
 });

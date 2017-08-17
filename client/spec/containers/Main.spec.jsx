@@ -69,7 +69,7 @@ describe('<Main />', () => {
     expect(solutionsListWrapper).to.have.prop('onSolutionHover');
   });
 
-  it('Should render a <CreateMatrix /> modal if needed.', () => {
+  xit('Should render a <CreateMatrix /> modal if needed.', () => {
     testStore.dispatch(toggleCreateMatrixUI());
     expect(componentWrapper).to.have.descendants(CreateMatrix);
 
@@ -85,7 +85,7 @@ describe('<Main />', () => {
     expect(componentWrapper).to.not.have.descendants(CreateMatrix);
   });
 
-  it('Should render an <Introduction /> modal if needed.', () => {
+  xit('Should render an <Introduction /> modal if needed.', () => {
     testStore.dispatch(toggleIntroductionUI());
     expect(componentWrapper).to.have.descendants(Introduction);
 

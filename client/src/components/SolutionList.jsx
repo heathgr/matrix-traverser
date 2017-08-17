@@ -105,7 +105,7 @@ const SolutionList = ({
           display: flex;
           flex-direction: row;
           opacity: 1;
-          transition: max-width 500ms ease, opacity 500ms ease;
+          transition: max-width 300ms ease, opacity 300ms ease;
         }
 
         .primaryListHidden {
@@ -172,7 +172,7 @@ SolutionList.propTypes = {
       PropTypes.number
     )
   ).isRequired,
-  previewSolution: PropTypes.number.isRequired,
+  previewSolution: PropTypes.number,
   onSolutionHover: PropTypes.func.isRequired,
   onSolutionClicked: PropTypes.func.isRequired,
   onNextSolutionClicked: PropTypes.func.isRequired,

@@ -68,7 +68,7 @@ const SolutionPaths = ({
       animation:
         0.35s linear infinite normal pathSlide,
         1s ease reveal;
-      transition: stroke-width ease 0.5s, stroke ease 1s;
+      transition: stroke-width ease 0.3s, stroke ease 0.3s;
       cursor: pointer;
     }
 
