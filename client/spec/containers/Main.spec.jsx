@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import { mount } from 'enzyme';
-import { spy } from 'sinon';
+import { spy, useFakeTimers } from 'sinon';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import React from 'react';
@@ -69,7 +69,7 @@ describe('<Main />', () => {
     expect(solutionsListWrapper).to.have.prop('onSolutionHover');
   });
 
-  xit('Should render a <CreateMatrix /> modal if needed.', () => {
+  it('Should render a <CreateMatrix /> modal if needed.', () => {
     testStore.dispatch(toggleCreateMatrixUI());
     expect(componentWrapper).to.have.descendants(CreateMatrix);
 
@@ -80,20 +80,14 @@ describe('<Main />', () => {
     expect(createMatrixWrapper).to.have.prop('createMatrixRowCount');
     expect(createMatrixWrapper).to.have.prop('onSetCreateMatrixColumnCount');
     expect(createMatrixWrapper).to.have.prop('onSetCreateMatrixRowCount');
-
-    testStore.dispatch(toggleCreateMatrixUI());
-    expect(componentWrapper).to.not.have.descendants(CreateMatrix);
   });
 
-  xit('Should render an <Introduction /> modal if needed.', () => {
+  it('Should render an <Introduction /> modal if needed.', () => {
     testStore.dispatch(toggleIntroductionUI());
     expect(componentWrapper).to.have.descendants(Introduction);
 
     const introductionWrapper = componentWrapper.find(Introduction);
     expect(introductionWrapper).to.have.prop('onToggleIntroductionUI');
-
-    testStore.dispatch(toggleIntroductionUI());
-    expect(componentWrapper).to.not.have.descendants(Introduction);
   });
 
   it('Should create the dispatchers for the <CreateMatrix /> component.', () => {
