@@ -12,11 +12,11 @@ import ui, {
 } from '../../src/reducers/ui';
 
 describe('UI Reducer', () => {
-  it('Should correctly handle a TOGGLE_CREATE_MATRIX_UI action', () => {
-    const testAction = toggleCreateMatrixUI();
+  it('Should correctly handle a TOGGLE_INTRODUCTION_UI action.', () => {
+    const testAction = toggleIntroductionUI();
     const testState = ui(undefined, testAction);
     const expectedState = Map({
-      isCreateMatrixUIVisible: true,
+      isCreateMatrixUIVisible: false,
       isIntroductionUIVisible: false,
       createMatrixColumnCount: 0,
       createMatrixRowCount: 0,
@@ -24,11 +24,11 @@ describe('UI Reducer', () => {
 
     expect(is(testState, expectedState)).to.equal(true);
   });
-  it('Should correctly handle a TOGGLE_INTRODUCTION_UI action.', () => {
-    const testAction = toggleIntroductionUI();
+  it('Should correctly handle a TOGGLE_CREATE_MATRIX_UI action', () => {
+    const testAction = toggleCreateMatrixUI();
     const testState = ui(undefined, testAction);
     const expectedState = Map({
-      isCreateMatrixUIVisible: false,
+      isCreateMatrixUIVisible: true,
       isIntroductionUIVisible: true,
       createMatrixColumnCount: 0,
       createMatrixRowCount: 0,
@@ -41,7 +41,7 @@ describe('UI Reducer', () => {
     const testState = ui(undefined, testAction);
     const expectedState = Map({
       isCreateMatrixUIVisible: false,
-      isIntroductionUIVisible: false,
+      isIntroductionUIVisible: true,
       createMatrixColumnCount: 2,
       createMatrixRowCount: 0,
     });
@@ -53,7 +53,7 @@ describe('UI Reducer', () => {
     const testState = ui(undefined, testAction);
     const expectedState = Map({
       isCreateMatrixUIVisible: false,
-      isIntroductionUIVisible: false,
+      isIntroductionUIVisible: true,
       createMatrixColumnCount: 0,
       createMatrixRowCount: 7,
     });
@@ -68,6 +68,6 @@ describe('UI Reducer', () => {
   it('Should have a getIsIntroductionUIVisible selector.', () => {
     const testState = ui(undefined, { type: '@@INIT' });
 
-    expect(getIsIntroductionUIVisible(testState)).to.equal(false);
+    expect(getIsIntroductionUIVisible(testState)).to.equal(true);
   });
 });

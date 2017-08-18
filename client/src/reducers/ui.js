@@ -8,7 +8,7 @@ import {
 
 export const initialUIState = Map({
   isCreateMatrixUIVisible: false,
-  isIntroductionUIVisible: false,
+  isIntroductionUIVisible: true,
   createMatrixColumnCount: 0,
   createMatrixRowCount: 0,
 });
