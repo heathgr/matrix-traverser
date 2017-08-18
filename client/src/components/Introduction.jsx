@@ -18,6 +18,7 @@ const Introduction = ({ onToggleIntroductionUI }) => (
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          max-width: 700px;
         }
 
         .header {
