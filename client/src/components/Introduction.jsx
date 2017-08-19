@@ -73,7 +73,3 @@ Introduction.propTypes = {
 };
 
 export default Introduction;
-
-/*
-
-      */

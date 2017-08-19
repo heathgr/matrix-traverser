@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Style from 'style-it';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -20,150 +20,177 @@ import {
   ACCENT_COLOR,
 } from '../constants/uiColors';
 
-const SolutionList = ({
-  solutions,
-  activeSolution,
-  previewSolution,
-  onSolutionClicked,
-  onSolutionHover,
-  onNextSolutionClicked,
-  onPreviousSolutionClicked,
-  onToggleCreateMatrixUI,
-  onToggleIntroductionUI,
-}) => (
-  <ContainerDimensions>
-    {
-      ({ width }) => Style.it(`
-        .root {
-          width: 100%;
-          height: 31px;
-          color: white;
-          flex: 0 0 auto;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          margin: 0px 8px 8px 8px;
-        }
+class SolutionList extends Component {
 
-        .solutionsToolbar {
-          max-width: 100%;
-          display: flex;
-          flex: 0 1 auto;
-          flex-direction: row;
-          align-items: center;
-        }
-
-        .scrollBox {
-          flex: 1 1 auto;
-          flex-direction: row;
-          overflow: auto;
-          justify-content: center;
-        }
-
-        .solutionButtonContainer {
-          display: flex;
-          flex-direction: row;
-        }
-
-        .${SOLUTION_LIST_ITEM} {
-          display: block;
-          width: 25px;
-          height: 25px;
-          justify-content: center;
-          align-items: center;
-          border-style: 'solid';
-          border-width: 1px;
-          border-radius: 5px;
-          margin: 3px;
-          transition: 1s;
-          flex: 0 0 25px;
-          outline: none;
-          padding: 0px;
-        }
-
-        .${SOLUTION_LIST_ITEM_ACTIVE} {
-          color: ${PRIMARY_BORDER_COLOR};
-          border-color: ${PRIMARY_COLOR};
-          background: ${PRIMARY_COLOR};
-        }
-
-        .${SOLUTION_LIST_ITEM_INACTIVE} {
-          color: ${ACCENT_BORDER_COLOR};
-          border-color: ${BACKGROUND_COLOR};
-          background: ${BACKGROUND_COLOR};
-        }
-
-        .${SOLUTION_LIST_ITEM_PREVIEW} {
-          color: ${PRIMARY_BORDER_COLOR};
-          border-color: ${ACCENT_COLOR};
-          background: ${ACCENT_COLOR};
-        }
-
-        .primaryList {
-          max-width: ${width - 80}px;
-          display: flex;
-          flex-direction: row;
-          opacity: 1;
-          transition: max-width 300ms ease, opacity 300ms ease;
-        }
-
-        .primaryListHidden {
-          max-width: 0;
-          opacity: 0;
-        }
-      `,
-      (<div className='root'>
-        <div className='solutionsToolbar'>
-          <div className={`primaryList ${solutions.size < 2 ? 'primaryListHidden' : ''}`}>
-            <Button
-              className='toolbarButton'
-              onClick={() => onPreviousSolutionClicked()}
-            >
-              {'<'}
-            </Button>
-            <div className='scrollBox'>
-              <div className='solutionButtonContainer'>
-                {
-                  solutions.map(
-                    (solution, id) => <SolutionListItem
-                      {...{
-                        key: id,
-                        solutionId: id,
-                        onSolutionClicked,
-                        onSolutionHover,
-                        isActive: activeSolution === id,
-                        isPreview: previewSolution === id,
-                      }}
-                    />
-                  )
-                }
-              </div>
-            </div>
-            <Button
-              className='toolbarButton'
-              onClick={() => onNextSolutionClicked()}
-            >
-              {'>'}
-            </Button>
-          </div>
-          <Button
-            className='toolbarButton'
-            onClick={() => onToggleCreateMatrixUI()}
-          >
-            +
-          </Button>
-          <Button
-            className='toolbarButton'
-            onClick={() => onToggleIntroductionUI()}
-          >
-            ?
-          </Button>
-        </div>
-      </div>))
+  componentDidUpdate(prevProps) {
+    if (this.activeRef && (prevProps.activeSolution !== this.props.activeSolution)) {
+      this.activeRef.scrollIntoView({ behavior: 'smooth' });
     }
-  </ContainerDimensions>
-);
+  }
+
+  render() {
+    const {
+      solutions,
+      activeSolution,
+      previewSolution,
+      onSolutionClicked,
+      onSolutionHover,
+      onNextSolutionClicked,
+      onPreviousSolutionClicked,
+      onToggleCreateMatrixUI,
+      onToggleIntroductionUI,
+    } = this.props;
+
+    return (
+      <ContainerDimensions>
+        {
+          ({ width }) => Style.it(`
+            .root {
+              width: 100%;
+              height: 31px;
+              color: white;
+              flex: 0 0 auto;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+              margin: 0px 8px 8px 8px;
+            }
+    
+            .solutionsToolbar {
+              max-width: 100%;
+              display: flex;
+              flex: 0 1 auto;
+              flex-direction: row;
+              align-items: center;
+            }
+    
+            .scrollBox {
+              flex: 1 1 auto;
+              flex-direction: row;
+              overflow: auto;
+              justify-content: center;
+            }
+    
+            .solutionButtonContainer {
+              display: flex;
+              flex-direction: row;
+            }
+    
+            .${SOLUTION_LIST_ITEM} {
+              display: block;
+              width: 25px;
+              height: 25px;
+              justify-content: center;
+              align-items: center;
+              border-style: 'solid';
+              border-width: 1px;
+              border-radius: 5px;
+              margin: 3px;
+              transition: 1s;
+              flex: 0 0 25px;
+              outline: none;
+              padding: 0px;
+            }
+    
+            .${SOLUTION_LIST_ITEM_ACTIVE} {
+              color: ${PRIMARY_BORDER_COLOR};
+              border-color: ${PRIMARY_COLOR};
+              background: ${PRIMARY_COLOR};
+            }
+    
+            .${SOLUTION_LIST_ITEM_INACTIVE} {
+              color: ${ACCENT_BORDER_COLOR};
+              border-color: ${BACKGROUND_COLOR};
+              background: ${BACKGROUND_COLOR};
+            }
+    
+            .${SOLUTION_LIST_ITEM_PREVIEW} {
+              color: ${PRIMARY_BORDER_COLOR};
+              border-color: ${ACCENT_COLOR};
+              background: ${ACCENT_COLOR};
+            }
+    
+            .primaryList {
+              max-width: ${width - 80}px;
+              display: flex;
+              flex-direction: row;
+              opacity: 1;
+              transition: max-width 300ms ease, opacity 300ms ease;
+            }
+    
+            .primaryListHidden {
+              max-width: 0;
+              opacity: 0;
+            }
+          `,
+          (<div className='root'>
+            <div className='solutionsToolbar'>
+              <div className={`primaryList ${solutions.size < 2 ? 'primaryListHidden' : ''}`}>
+                <Button
+                  className='toolbarButton'
+                  onClick={() => onPreviousSolutionClicked()}
+                >
+                  {'<'}
+                </Button>
+                <div className='scrollBox'>
+                  <div className='solutionButtonContainer'>
+                    {
+                      solutions.map(
+                        (solution, id) => (
+                          <div
+                            key={id}
+                            ref={(solutionRef) => {
+                              if (activeSolution === id) {
+                                this.activeRef = solutionRef;
+                              }
+                            }}
+                          >
+                            <SolutionListItem
+                              {...{
+                                solutionId: id,
+                                onSolutionClicked,
+                                onSolutionHover,
+                                isActive: activeSolution === id,
+                                isPreview: previewSolution === id,
+                              }}
+                            />
+                          </div>
+                        )
+                      )
+                    }
+                  </div>
+                </div>
+                <Button
+                  className='toolbarButton'
+                  onClick={() => onNextSolutionClicked()}
+                >
+                  {'>'}
+                </Button>
+              </div>
+              <Button
+                className='toolbarButton'
+                onClick={() => onToggleCreateMatrixUI()}
+              >
+                +
+              </Button>
+              <Button
+                className='toolbarButton'
+                onClick={() => onToggleIntroductionUI()}
+              >
+                ?
+              </Button>
+            </div>
+          </div>))
+        }
+      </ContainerDimensions>
+    );
+  }
+}
+
+SolutionList.defaultProps = {
+  previewSolution: null,
+};
 
 SolutionList.propTypes = {
   activeSolution: PropTypes.number.isRequired,
