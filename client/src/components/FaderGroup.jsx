@@ -16,6 +16,7 @@ const FaderStyles = ({ children }) => Style.it(
     }
 
     .entering {
+      opacity: 1;
       animation: 300ms ease transitionInKeyframes;
     }
 
@@ -24,10 +25,15 @@ const FaderStyles = ({ children }) => Style.it(
     }
 
     .exiting {
+      opacity: 0;
       animation: 300ms ease transitionOutKeyframes;
     }
 
     .exited {
+      opacity: 0;
+    }
+
+    .fader {
       opacity: 0;
     }
   `, (

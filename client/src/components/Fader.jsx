@@ -13,7 +13,7 @@ const Fader = ({ in: inProp, out: outProp, children }) => (
   <Transition in={inProp} out={outProp} timeout={fadeDuration} unmountOnExit>
     {
       (state) => {
-        return (<div className={`transitionItem ${fadeClassname[state]}`}>
+        return (<div className={`${fadeClassname[state]}`}>
           {
             children
           }

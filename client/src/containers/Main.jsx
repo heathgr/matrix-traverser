@@ -84,25 +84,31 @@ export const Container = ({
 
   return (
     <div style={wrapperStyle}>
-      <FaderGroup>
-        {
-          isCreateMatrixUIVisible && (<Fader>
-            <CreateMatrix
-              onToggleCreateMatrixUI={onToggleCreateMatrixUI}
-              onRequestRandomMatrix={onRequestRandomMatrix}
-              createMatrixColumnCount={createMatrixColumnCount}
-              createMatrixRowCount={createMatrixRowCount}
-              onSetCreateMatrixColumnCount={onSetCreateMatrixColumnCount}
-              onSetCreateMatrixRowCount={onSetCreateMatrixRowCount}
-            />
-          </Fader>)
-        }
-        {
-          isIntroductionUIVisible && (<Fader>
-            <Introduction onToggleIntroductionUI={onToggleIntroductionUI} />
-          </Fader>)
-        }
-      </FaderGroup>
+      <div
+        style={{
+          zIndex: 10,
+        }}
+      >
+        <FaderGroup>
+          {
+            isCreateMatrixUIVisible && (<Fader>
+              <CreateMatrix
+                onToggleCreateMatrixUI={onToggleCreateMatrixUI}
+                onRequestRandomMatrix={onRequestRandomMatrix}
+                createMatrixColumnCount={createMatrixColumnCount}
+                createMatrixRowCount={createMatrixRowCount}
+                onSetCreateMatrixColumnCount={onSetCreateMatrixColumnCount}
+                onSetCreateMatrixRowCount={onSetCreateMatrixRowCount}
+              />
+            </Fader>)
+          }
+          {
+            isIntroductionUIVisible && (<Fader>
+              <Introduction onToggleIntroductionUI={onToggleIntroductionUI} />
+            </Fader>)
+          }
+        </FaderGroup>
+      </div>
       <div style={matrixWrapperStyle}>
         <MatrixResizer
           {...{
