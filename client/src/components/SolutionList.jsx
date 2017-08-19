@@ -21,10 +21,12 @@ import {
 } from '../constants/uiColors';
 
 class SolutionList extends Component {
-
   componentDidUpdate(prevProps) {
-    if (this.activeRef && (prevProps.activeSolution !== this.props.activeSolution)) {
-      this.activeRef.scrollIntoView({ behavior: 'smooth' });
+    if (
+      this.activeRef &&
+      (prevProps.activeSolution !== this.props.activeSolution)
+    ) {
+      this.activeRef.scrollIntoView && this.activeRef.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
