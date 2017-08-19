@@ -56,7 +56,7 @@ const StatusMessage = ({
                   return (
                     <Fader key={1}>
                       <div className='messagePositioner'>
-                        {`Found ${solutions.size} solutions with a length of ${solutions.get(0).size}.`}
+                        {`Found ${solutions.size} solution${solutions.size < 2 ? '' : 's'} with a length of ${solutions.get(0).size}.`}
                       </div>
                     </Fader>
                   );
