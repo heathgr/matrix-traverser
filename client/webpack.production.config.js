@@ -10,6 +10,9 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      matrixTraversalSolverUrl: path.resolve(__dirname, 'src/constants/matrixTraversalSolverUrl.production.js'),
+    },
   },
   output: {
     filename: 'bundle.js',
