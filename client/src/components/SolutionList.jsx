@@ -1,3 +1,5 @@
+/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Style from 'style-it';
@@ -22,11 +24,12 @@ import {
 
 class SolutionList extends Component {
   componentDidUpdate(prevProps) {
-    if (
-      this.activeRef &&
-      (prevProps.activeSolution !== this.props.activeSolution)
-    ) {
-      this.activeRef.scrollIntoView && this.activeRef.scrollIntoView({ behavior: 'smooth' });
+    if (prevProps.activeSolution !== this.props.activeSolution) {
+      const didScroll = this.activeRef && this.activeRef.scrollIntoView && this.activeRef.scrollIntoView({ behavior: 'smooth' });
+
+      if (!didScroll) {
+        console.warn('element.scrollIntoView() is not supported in this browser.');
+      }
     }
   }
 

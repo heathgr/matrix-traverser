@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import { mount } from 'enzyme';
-import { spy, useFakeTimers } from 'sinon';
+import { spy } from 'sinon';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import React from 'react';

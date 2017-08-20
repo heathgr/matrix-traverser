@@ -1,3 +1,9 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+/* eslint import/no-unresolved: 0 */
+/* eslint import/extensions: 0 */
+// the import path to MATRIX_TRAVERSAL_SOLVER_URL is handled by a webpack alias.
+// this can confuse eslint
+
 import axios from 'axios';
 import { takeLatest, put, select } from 'redux-saga/effects';
 import MATRIX_TRAVERSAL_SOLVER_URL from 'matrixTraversalSolverUrl';
