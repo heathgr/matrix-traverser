@@ -10,6 +10,7 @@
     "test:coverage": "nyc npm test",
     "checkup": "scripts/checkup.sh",
     "build": "scripts/build.sh",
+    "deploy": "scripts/deploy.sh",
     "chrome": "nohup /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222 --new-window 'http://localhost:3000' --user-data-dir=.chrome_user_data/ > /dev/null &",
     "remove-templates": "find . -name '*.template' -delete",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose --pedantic"
