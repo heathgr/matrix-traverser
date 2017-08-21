@@ -24,9 +24,14 @@ const Fader = ({ in: inProp, out: outProp, children }) => (
   </Transition>
 );
 
+Fader.defaultProps = {
+  in: false,
+  out: false,
+};
+
 Fader.propTypes = {
-  in: PropTypes.bool.isRequired,
-  out: PropTypes.bool.isRequired,
+  in: PropTypes.bool,
+  out: PropTypes.bool,
 };
 
 export default Fader;
