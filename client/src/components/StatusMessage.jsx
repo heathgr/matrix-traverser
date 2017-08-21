@@ -12,6 +12,7 @@ import {
   LOADED_MESSAGE,
 } from '../constants/statusMessageTypes';
 import PureImmutable from '../helpers/hocs/PureImmutable';
+import Loader from './Loader';
 
 const StatusMessage = ({
   messageType,
@@ -47,7 +48,7 @@ const StatusMessage = ({
                   return (
                     <Fader key={0}>
                       <div className='messagePositioner'>
-                        Loading
+                        <Loader />
                       </div>
                     </Fader>
                   );

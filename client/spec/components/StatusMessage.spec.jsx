@@ -9,6 +9,7 @@ import {
   ERROR_MESSAGE,
 } from '../../src/constants/statusMessageTypes';
 import StatusMessage from '../../src/components/StatusMessage';
+import Loader from '../../src/components/Loader';
 
 describe('<StatusMessage />', () => {
   chai.use(chaiEnzyme());
@@ -22,7 +23,7 @@ describe('<StatusMessage />', () => {
   it('Should display a loading message.', () => {
     expect(testWrapper.contains(
       <div className='messagePositioner'>
-        Loading
+        <Loader />
       </div>
     )).to.equal(true);
   });
