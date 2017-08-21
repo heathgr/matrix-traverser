@@ -1,3 +1,3 @@
-const MATRIX_TRAVERSAL_SOLVER_URL = 'http://localhost:8010/matrix-traversal/us-central1/matrixTraversalSolver';
+const MATRIX_TRAVERSAL_SOLVER_URL = 'https://us-central1-matrix-traversal.cloudfunctions.net/matrixTraversalSolver';
 
 export default MATRIX_TRAVERSAL_SOLVER_URL;
