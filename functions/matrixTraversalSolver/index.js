@@ -37,7 +37,7 @@
 
 /** @module index */
 
-require('@google-cloud/debug-agent').start();
+// require('@google-cloud/debug-agent').start();
 const cors = require('cors');
 const requestValidator = require('./src/requestValidator');
 const solver = require('./src/matrixTraversalSolver');
@@ -68,7 +68,7 @@ const requestHandler = (req, res) => {
   res.status(200).json(result);
 };
 
-const corsHandler = cors(); // TODO make this more secure
+const corsHandler = cors();
 
 const matrixTraversalSolver = (req, res) => {
   corsHandler(req, res, () => {

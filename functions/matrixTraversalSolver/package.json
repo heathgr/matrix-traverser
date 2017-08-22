@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node_modules/.bin/_mocha --recursive spec/*.spec.js spec/**/*.spec.js",
     "deploy": "scripts/deploy.sh",
+    "deployLocal": "scripts/deployLocal.sh",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "author": "Grant Heath",
