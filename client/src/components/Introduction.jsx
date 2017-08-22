@@ -50,7 +50,7 @@ const Introduction = ({ onToggleIntroductionUI }) => (
           <div className='header'>{'Matrix Traverser'}</div>
           <div className='textBox'>
             <div className='paragraph'>
-              {'The Matrix Traverser is a web app that solves an algorithmic problem.  A random matrix of numbers between 0 and 9 is generated.  The problem is solved by calculating the LONGEST path through the matrix that meets the following conditions:'}
+              {'The Matrix Traverser is a web app that solves an algorithmic problem.  A random rectangular matrix of cells with numbers between 0 and 9 is generated.  The problem is solved by calculating the LONGEST path through the matrix that meets the following conditions:'}
             </div>
             <div className='paragraph'>
               <ul className='list'>
