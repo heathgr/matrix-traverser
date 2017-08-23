@@ -9,7 +9,7 @@ It is possible to have multiple valid solutions.
 
 ## Project Goals
 
-I started this project because I thought it would be a good way to put my development skills to the test.  It deals with a complex problem that involves a very large number of combinations.  It can be difficult to compute efficiently.  Devising an algorithm capable of solving this problem was a good way I could challenge myself.
+I started this project because it deals with a very interesting problem.  It is a complex problem that can be difficult to compute efficiently.  Devising an algorithm capable of solving this problem was a good way I could challenge myself.
 
 Additionally, this project was a good opportunity to learn more about the following:
 
@@ -20,13 +20,13 @@ Additionally, this project was a good opportunity to learn more about the follow
 
 ### Complex Data Visualization
 
-I wanted to present the problem and its solutions in a clear and concise way.  I knew this would involve more than a spreadsheet of numbers.  I needed to involve a more sophisticated solution that would rely on dynamically generated SVGs and CSS animations.
+I wanted to present the problem and its solutions in an uncomplicated and efficient way.  To achieve this, I needed something that was more sophisticated than a simple table of numbers.  My answer to this problem involves dynamically generated SVGs and CSS animations.
 
 ## Technologies Used
 
 ### Server Side
 
-As mentioned before, this project relies heavily on Google Cloud Functions.  When the client posts a matrix to an HTTP endpoint, a cloud function is triggered.  This function then calculates the necessary solutions.  Finally, a response containing the computed solutions is sent to the client.
+As mentioned before, this project relies on Google Cloud Functions.  When the client posts a matrix to an HTTP endpoint, a cloud function is triggered.  This function then calculates the necessary solutions.  Finally, a response containing the computed solutions is sent to the client.
 
 ### Client Side
 
@@ -36,6 +36,4 @@ The client was primarily built using the following technologies:
 - Redux
 - Redux Sagas
 
-React was used for DOM generation and manipulation.  Most notably,  it was used to dynamically create SVGs based on the solutions computed by the cloud function.  SVGs were created entirely with React.  No libraries such as D3 where used.
-
-Redux was used to manage the app state.  Asyncronous actions such as user input and HTTP requests were handled through the middleware Redux Sagas.
+React was used for DOM generation and manipulation.  Redux was used to manage the app state.  Asyncronous actions such as user input and HTTP requests were handled through the middleware Redux Sagas.

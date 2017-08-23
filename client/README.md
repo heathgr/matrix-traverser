@@ -1,4 +1,4 @@
-## Running a Local Development Server
+# Running a Local Development Server
 
 To run a local development environment follow these steps:
 
@@ -6,7 +6,7 @@ To run a local development environment follow these steps:
 - While still in the terminal, start Webpack by typing `npm start`.  This will start a Webpack dev server on port 3000.
 - If you want to use the VS Code debugging tools, it is necessary to run a special instance of Chrome.  In the terminal, run this command `npm run chrome`.
 
-## Testing and Linting
+# Testing and Linting
 
 Unit tests can be run by using the following command `npm test`.
 
@@ -14,7 +14,7 @@ ESLint can be run on the project using this command `npm run lint`.
 
 If you want to run ESLint and unit tests with one command, use the following `npm run checkup`.
 
-## Deploying
+# Deploying
 
 A build and deploy can be run using the following command `npm run deploy`.
 
