@@ -2,7 +2,7 @@
 
 Google Cloud functions can be run locally using the Cloud Function Emulator.  To do this, follow these steps:
 
-- If the emulator is not installed, run `npm install -g @google-cloud/functions-emulator`. 
+- If the emulator is not installed, run `npm install -g @google-cloud/functions-emulator`.
 - Make sure the emulator is running by using the following command `functions start`.
 - Make sure matrixTraversalSolver is deployed to the emulator by running `npm run deployLocal`.
 
