@@ -22,13 +22,13 @@ Additionally, this project was a good opportunity to learn more about the follow
 
 I wanted to present the problem and its solutions in a clear and concise way.  I knew this would involve more than a spreadsheet of numbers.  I needed to involve a more sophisticated solution that would rely on dynamically generated SVGs and CSS animations.
 
-# Technologies Used
+## Technologies Used
 
-## Server Side
+### Server Side
 
 As mentioned before, this project relies heavily on Google Cloud Functions.  When the client posts a matrix to an HTTP endpoint, a cloud function is triggered.  This function then calculates the necessary solutions.  Finally, a response containing the computed solutions is sent to the client.
 
-## Client Side
+### Client Side
 
 The client was primarily built using the following technologies:
 
@@ -38,6 +38,4 @@ The client was primarily built using the following technologies:
 
 React was used for DOM generation and manipulation.  Most notably,  it was used to dynamically create SVGs based on the solutions computed by the cloud function.  SVGs were created entirely with React.  No libraries such as D3 where used.
 
-Redux was used to manage the app state.  Redux is a simple, easily testable, and powerful way to manage app state.
-
-Redux Sagas were used to handle user actions, HTTP posts, and HTTP responses.  Redux Sagas are a fantastic way to manage asynchronous actions and events.
+Redux was used to manage the app state.  Asyncronous actions such as user input and HTTP requests were handled through the middleware Redux Sagas.
